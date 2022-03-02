@@ -1,4 +1,5 @@
-import { StyleProp, StyleSheet, Text, TextStyle, View } from 'react-native'
+import { StyleProp, StyleSheet, TextStyle,  } from 'react-native'
+import { View, Text } from "../Themed"
 import React, { FC } from 'react'
 
 interface Props {
@@ -10,7 +11,7 @@ interface Props {
 const SubContainer: FC<Props> = ({ textStyle, title, text }) => {
     return (
         <View style={styles.subContainer}>
-            <Text style={styles.title}>{title}</Text>
+            <Text style={styles.title} darkColor="#FBF8F1" lightColor='#004552' >{title}</Text>
             <Text style={textStyle}>{text}</Text>
         </View>
     )
@@ -22,14 +23,12 @@ const styles = StyleSheet.create({
     subContainer: {
         alignItems: "center",
         justifyContent: "center",
-        marginVertical: 70
+        marginVertical: 50
     },
     title: {
-        color: "#FBF8F1",
         fontWeight: "bold",
         fontSize: 24,
         textAlign: "center",
         fontFamily: "LexendDeca_700Bold"
-        
     },
 })
