@@ -1,35 +1,24 @@
 import { StyleSheet } from 'react-native';
 import { Text, View } from "../components/Themed";
-import React, { useReducer, useState } from 'react';
+import React, { useState } from 'react';
 import SubContainer from '../components/SubContainer';
 import { LexendDeca_700Bold, useFonts } from '@expo-google-fonts/lexend-deca';
 import Dropdown from '../components/Dropdown';
 import ResetButton from '../components/ResetButton';
 import MainButton from '../components/MainButton';
-import { initialMainState, mainReducer } from '../contexts/Main';
+import { useClicker } from '../components/contexts/useClicker';
 
 const Main = () => {
-
+    
     let [fontsLoaded] = useFonts({
         LexendDeca_700Bold,
     });
 
-    const [state, dispatch] = useReducer(mainReducer, initialMainState)
-    console.log(state);
-    
-
-    const [clickAmt, setClickAmt] = useState(0);
-    const [didHit, setDidHit] = useState(false);
-    const [results, setResults] = useState({ BtnColor: "", text: "" });
+    const { state, dispatch } = useClicker();
+    const { count, odds } = state;
 
     if (!fontsLoaded) {
         return <View><Text>LOADING..</Text></View>
-    }
-
-    const resetAll = () => {
-        setClickAmt(0);
-        setDidHit(false);
-        setResults({ BtnColor: "", text: "" });
     }
 
     return (
@@ -37,9 +26,8 @@ const Main = () => {
 
             <Dropdown />
 
-
             <SubContainer
-                text={`${state.count}`}
+                text={`${count}`}
                 textStyle={styles.clickAmnt}
                 title={`Times Clicked`}
             />
@@ -47,12 +35,12 @@ const Main = () => {
             <MainButton />
 
             <SubContainer
-                text={`${state.odds * 100}%`}
+                text={`${odds * 100}%`}
                 textStyle={styles.probText}
                 title={`Probability`}
             />
 
-            <ResetButton didHit={didHit} resetAll={resetAll} />
+            <ResetButton  />
 
         </View>
     )

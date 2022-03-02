@@ -1,14 +1,17 @@
 import { Alert, Button, StyleSheet } from 'react-native';
 import { View } from "../../components/Themed"
-import React, { FC } from 'react'
-
-interface Props {
-    didHit: boolean;
-    resetAll: () => void;
-};
+import React from 'react'
+import { useClicker } from '../contexts/useClicker';
+import { ClickerActionKind } from '../../store/clicker';
 
 
-const ResetButton: FC<Props> = ({ didHit, resetAll }) => {
+const ResetButton = () => {
+
+    const { state, dispatch } = useClicker();
+
+    const { didHit } = state;
+
+    const resetAll = () => dispatch!({ type: ClickerActionKind.RESET })
 
     const createTwoButtonAlert = () =>
         Alert.alert(

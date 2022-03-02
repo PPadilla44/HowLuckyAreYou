@@ -1,18 +1,15 @@
 import { StyleSheet } from 'react-native'
 import { Text, View, TouchableOpacity } from "../../components/Themed";
-
-import React, { FC, useReducer } from 'react'
-import { mainReducer, initialMainState, MainActionKind } from '../../contexts/Main';
+import React from 'react'
+import { ClickerActionKind } from '../../store/clicker';
+import { useClicker } from '../contexts/useClicker';
 
 const MainButton = () => {
 
-    const [state, dispatch] = useReducer(mainReducer, initialMainState);
+    const {state, dispatch} = useClicker();
     const { didHit, results } = state;
-    
 
-    const handlePress = () => {
-        dispatch({ type: MainActionKind.INCREASE })
-    }
+    const handlePress = () => dispatch!({ type: ClickerActionKind.INCREASE });
 
     if (didHit) {
         return (
