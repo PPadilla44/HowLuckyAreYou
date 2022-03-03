@@ -1,16 +1,15 @@
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import Navigation from './navigation';
 import { ClickerProvider } from './components/contexts/useClicker';
-import Main from './screens/Main';
+
 
 export default function App() {
-
-
 
   return (
     <SafeAreaProvider>
       <ClickerProvider>
-        <Main />
+        <Navigation />
       </ClickerProvider>
       <StatusBar />
     </SafeAreaProvider>

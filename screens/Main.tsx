@@ -1,15 +1,15 @@
 import { StyleSheet } from 'react-native';
 import { Text, View } from "../components/Themed";
-import React, { useState } from 'react';
+import React from 'react';
 import SubContainer from '../components/SubContainer';
 import { LexendDeca_700Bold, useFonts } from '@expo-google-fonts/lexend-deca';
-import Dropdown from '../components/Dropdown';
 import ResetButton from '../components/ResetButton';
 import MainButton from '../components/MainButton';
 import { useClicker } from '../components/contexts/useClicker';
+import { RootTabScreenProps } from '../types';
 
-const Main = () => {
-    
+const Main = ({  }: RootTabScreenProps<"Main">) => {
+
     let [fontsLoaded] = useFonts({
         LexendDeca_700Bold,
     });
@@ -23,8 +23,6 @@ const Main = () => {
 
     return (
         <View style={styles.container}>
-
-            <Dropdown />
 
             <SubContainer
                 text={`${count}`}
@@ -40,7 +38,7 @@ const Main = () => {
                 title={`Probability`}
             />
 
-            <ResetButton  />
+            <ResetButton />
 
         </View>
     )
@@ -52,7 +50,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: "center",
-        justifyContent: "flex-end",
+        justifyContent: "space-around",
     },
     clickAmnt: {
         fontWeight: "bold",

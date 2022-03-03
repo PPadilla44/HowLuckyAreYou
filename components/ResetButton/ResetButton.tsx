@@ -23,7 +23,7 @@ const ResetButton = () => {
                     onPress: () => console.log("Cancel Pressed"),
                     style: "cancel"
                 },
-                { text: "Yes", onPress: resetAll }
+                { text: "Yes", style: "destructive", onPress: resetAll }
             ]
         );
 
@@ -37,5 +37,5 @@ const ResetButton = () => {
 export default ResetButton
 
 const styles = StyleSheet.create({
-    btn: { position: "absolute", left: 0 }
+    btn: { position: "absolute", left: 0, bottom: 0 }
 })

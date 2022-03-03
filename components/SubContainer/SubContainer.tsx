@@ -22,8 +22,8 @@ export default SubContainer
 const styles = StyleSheet.create({
     subContainer: {
         alignItems: "center",
-        justifyContent: "center",
-        marginVertical: 50
+        justifyContent: "space-between",
+        // marginVertical: 50
     },
     title: {
         fontWeight: "bold",
