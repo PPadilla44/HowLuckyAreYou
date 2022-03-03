@@ -13,8 +13,8 @@ import LinkingConfiguration from './LinkingConfiguration';
 
 export default function Navigation() {
 
-    // const colorScheme = useColorScheme();
-    const colorScheme = "dark";
+    const colorScheme = useColorScheme();
+    // const colorScheme = "light";
 
     return (
         <NavigationContainer
@@ -29,8 +29,8 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function RootNavigator() {
 
-    // const colorScheme = useColorScheme();
-    const colorScheme = "dark";
+    const colorScheme = useColorScheme();
+    // const colorScheme = "light";
 
 
     return (
@@ -44,7 +44,7 @@ function RootNavigator() {
                         <Pressable
                             onPress={() => navigation.navigate('Modal')}
                             style={({ pressed }) => ({
-                                opacity: pressed ? 0.5 : 1,
+                                opacity: pressed ? 0.3 : .6,
                             })}>
                             <Icon
                                 name='gear'
@@ -57,7 +57,7 @@ function RootNavigator() {
             />
             <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
             <Stack.Group screenOptions={{ presentation: 'modal' }}>
-                <Stack.Screen name="Modal" component={Dropdown} options={{ headerTitle: "", headerStyle: { backgroundColor: Colors[colorScheme].background }, headerShadowVisible: false }} />
+                <Stack.Screen name="Modal" component={Dropdown} options={{ headerTitle: "", headerStyle: { backgroundColor: Colors[colorScheme].modal }, headerShadowVisible: false }} />
             </Stack.Group>
         </Stack.Navigator>
     );
