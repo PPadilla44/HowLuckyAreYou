@@ -6,7 +6,7 @@ import { StatusBar } from 'expo-status-bar';
 const Dropdown = () => {
     return (
         <View style={styles.container} darkColor="#252525">
-            {/* <StatusBar style={Platform.OS === 'ios' ? 'light' : 'auto'} /> */}
+            <StatusBar style={Platform.OS === 'ios' ? 'light' : 'auto'} />
             <Text>YEZ</Text>
             <Text>SOME FORM STUDD HERE</Text>
         </View>
