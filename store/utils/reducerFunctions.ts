@@ -1,4 +1,5 @@
-import { ClickerState } from "../clicker"
+import { ClickerState } from "../clicker";
+import { BtnColor } from "../clicker";
 
 export const increment = (state: ClickerState) => {
     console.log("****************");
@@ -16,11 +17,11 @@ export const increment = (state: ClickerState) => {
         const userOdds = tempCount / max;
         let tempResults
         if (userOdds < 1) {
-            tempResults = { BtnColor: "green", text: "YOU ARE REALLY LUCKY" };
+            tempResults = { BtnColor: "lucky" , text: "YOU ARE REALLY LUCKY" };
         } else if (userOdds > 1) {
-            tempResults = { BtnColor: "red", text: "YOU ARE NOT LUCKY" };
+            tempResults = { BtnColor: "unlucky", text: "YOU ARE NOT LUCKY" };
         } else {
-            tempResults = { BtnColor: "blue", text: "YOU ARE normal" };
+            tempResults = { BtnColor: "normal", text: "YOU ARE normal" };
         }
         const newState = {
             ...state,

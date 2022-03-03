@@ -22,5 +22,5 @@ export default {
     shared: {
         text: secondary,
         icon: button
-    }
+    },
 };

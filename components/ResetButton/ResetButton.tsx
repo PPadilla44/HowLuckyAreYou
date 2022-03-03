@@ -1,10 +1,8 @@
 import { Alert, StyleSheet } from 'react-native';
-import { Button } from "react-native-elements"
-import { View } from "../../components/Themed"
-import React from 'react'
+import { Button } from "react-native-elements";
+import { View } from "../../components/Themed";
+import React from 'react';
 import { useClicker } from '../contexts/useClicker';
-import { ClickerActionKind } from '../../store/clicker';
-
 
 const ResetButton = () => {
 
@@ -12,7 +10,7 @@ const ResetButton = () => {
 
     const { didHit } = state;
 
-    const resetAll = () => dispatch!({ type: ClickerActionKind.RESET })
+    const resetAll = () => dispatch!({ type: 'RESET' })
 
     const createTwoButtonAlert = () =>
         Alert.alert(

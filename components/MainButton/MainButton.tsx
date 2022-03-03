@@ -1,26 +1,31 @@
 import { StyleSheet } from 'react-native'
 import { Text, View, TouchableOpacity } from "../../components/Themed";
 import React from 'react'
-import { ClickerActionKind } from '../../store/clicker';
+import { BtnColorObj } from '../../store/clicker';
 import { useClicker } from '../contexts/useClicker';
+import useColorScheme from '../../hooks/useColorScheme';
+import Colors from '../../constants/Colors';
 
 const MainButton = () => {
 
     const {state, dispatch} = useClicker();
     const { didHit, results } = state;
 
-    const handlePress = () => dispatch!({ type: ClickerActionKind.INCREASE });
+    const handlePress = () => dispatch!({ type: 'INCREASE' });
+
+    // const theme = useColorScheme();
+    const theme = "dark";
 
     if (didHit) {
         return (
-            <View style={[styles.btnDone, { backgroundColor: results.BtnColor }]} >
-                <Text style={styles.btnDoneText}>{results.text}</Text>
+            <View style={[styles.btnDone, { backgroundColor: BtnColorObj[results.BtnColor], shadowColor: Colors[theme].text }]} >
+                <Text style={styles.btnText}>{results.text}</Text>
             </View>
         )
     }
 
     return (
-        <TouchableOpacity style={styles.btn} onPress={handlePress} activeOpacity={0.7}>
+        <TouchableOpacity style={[styles.btn, { shadowColor: Colors[theme].text } ]} onPress={handlePress} activeOpacity={0.7}>
             <Text style={styles.btnText}>Test Your Luck</Text>
         </TouchableOpacity>
     )
@@ -35,7 +40,6 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
         borderRadius: 100,
-        shadowColor: '#000000',
         shadowOffset: { width: 0, height: 10 },
         shadowOpacity: 0.1,
         shadowRadius: 3,
@@ -46,7 +50,6 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
         borderRadius: 100,
-        shadowColor: '#000000',
         shadowOffset: { width: 0, height: 10 },
         shadowOpacity: 0.1,
         shadowRadius: 3,
@@ -57,14 +60,5 @@ const styles = StyleSheet.create({
         color: "white",
         fontFamily: "Futura",
         textAlign: "center"
-    },
-    btnDoneText: {
-        fontSize: 24,
-        fontWeight: "bold",
-        color: "black",
-        fontFamily: "Futura",
-        textAlign: "center"
-
-    },
-
+    }
 })
