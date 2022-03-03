@@ -29,6 +29,6 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
         fontSize: 24,
         textAlign: "center",
-        fontFamily: "LexendDeca_700Bold"
+        fontFamily: "Futura"
     },
 })

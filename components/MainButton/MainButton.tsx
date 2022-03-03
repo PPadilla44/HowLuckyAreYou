@@ -55,14 +55,14 @@ const styles = StyleSheet.create({
         fontSize: 24,
         fontWeight: "bold",
         color: "white",
-        fontFamily: "LexendDeca_700Bold",
+        fontFamily: "Futura",
         textAlign: "center"
     },
     btnDoneText: {
         fontSize: 24,
         fontWeight: "bold",
         color: "black",
-        fontFamily: "LexendDeca_700Bold",
+        fontFamily: "Futura",
         textAlign: "center"
 
     },

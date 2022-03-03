@@ -55,12 +55,12 @@ const styles = StyleSheet.create({
     clickAmnt: {
         fontWeight: "bold",
         fontSize: 64,
-        fontFamily: "LexendDeca_700Bold"
+        fontFamily: "Futura"
     },
     probText: {
         fontWeight: "bold",
         fontSize: 48,
         textAlign: "center",
-        fontFamily: "LexendDeca_700Bold"
+        fontFamily: "Futura"
     }
 })
