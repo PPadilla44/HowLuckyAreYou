@@ -1,5 +1,5 @@
-import { Text as DefaultText, View as DefaultView, TouchableOpacity as DefaultTouchableOpacity  } from 'react-native';
-import { Icon as DefaultIcon, IconProps as DefaultIconProps } from 'react-native-elements';
+import { Text as DefaultText, View as DefaultView, TouchableOpacity as DefaultTouchableOpacity } from 'react-native';
+import { Icon as DefaultIcon, IconProps as DefaultIconProps, Input as DefaultInput, InputProps as DefaultInputProps } from 'react-native-elements';
 
 import Colors from '../constants/Colors';
 
@@ -10,10 +10,10 @@ export const useThemeColor = (
     colorName: keyof typeof Colors.light & keyof typeof Colors.dark
 ) => {
     // const theme = useColorScheme();
-    const theme = "dark";
+    const theme = "light";
 
     const colorFromProps = props[theme];
-    
+
     return colorFromProps ? colorFromProps : Colors[theme][colorName]
 }
 
@@ -26,29 +26,37 @@ export type TextProps = ThemeProps & DefaultText['props'];
 export type ViewProps = ThemeProps & DefaultView['props'];
 export type TouchableOpacityProps = ThemeProps & DefaultTouchableOpacity['props'];
 export type IconProps = ThemeProps & DefaultIconProps;
+export type InputProps = ThemeProps & DefaultInputProps;
 
 export const Text = (props: TextProps) => {
     const { style, lightColor, darkColor, ...otherProps } = props;
-    const color = useThemeColor({ light: lightColor, dark: darkColor}, "text");
+    const color = useThemeColor({ light: lightColor, dark: darkColor }, "text");
 
-    return <DefaultText style={[{color}, style]} {...otherProps} />
+    return <DefaultText style={[{ color, fontFamily: "Futura" }, style]} {...otherProps} />
 }
 
 export const View = (props: ViewProps) => {
     const { style, lightColor, darkColor, ...otherProps } = props;
     const backgroundColor = useThemeColor({ light: lightColor, dark: darkColor }, "background");
 
-    return <DefaultView style={[{backgroundColor}, style]}  {...otherProps} />
+    return <DefaultView style={[{ backgroundColor }, style]}  {...otherProps} />
 }
 
 export const TouchableOpacity = (props: TouchableOpacityProps) => {
     const { style, lightColor, darkColor, ...otherProps } = props;
     const backgroundColor = useThemeColor({ light: lightColor, dark: darkColor }, "button");
-    return <DefaultTouchableOpacity style={[{backgroundColor}, style]} {...otherProps} />
+    return <DefaultTouchableOpacity style={[{ backgroundColor }, style]} {...otherProps} />
 }
 
 export const Icon = (props: IconProps) => {
     const { style, lightColor, darkColor, ...otherProps } = props;
     const color = useThemeColor({ light: lightColor, dark: darkColor }, "icon");
-    return <DefaultIcon tvParallaxProperties={undefined} color={color} {...otherProps}  />
+    return <DefaultIcon tvParallaxProperties={undefined} color={color} {...otherProps} />
+}
+
+export const Input = (props: InputProps) => {
+    const { style, lightColor, darkColor, ...otherProps } = props;
+    const backgroundColor = useThemeColor({ light: lightColor, dark: darkColor }, "input");
+    const color = useThemeColor({ light: lightColor, dark: darkColor }, "text");
+    return <DefaultInput style={[{backgroundColor, color }, style]} {...otherProps} />
 }

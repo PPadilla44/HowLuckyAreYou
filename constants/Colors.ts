@@ -9,6 +9,7 @@ export default {
         modal: "white",
         icon: button,
         button: secondary,
+        input: "#E6E6E6"
         // tabIconSelected: button,
     },
     dark: {
@@ -17,6 +18,7 @@ export default {
         modal: "#252525",
         icon: button,
         button: secondary,
+        input: "#808080"
         // tabIconSelected: tintColorDark,
     },
     shared: {

@@ -14,7 +14,7 @@ const MainButton = () => {
     const handlePress = () => dispatch!({ type: 'INCREASE' });
 
     // const theme = useColorScheme();
-    const theme = "dark";
+    const theme = "light";
 
     if (didHit) {
         return (

@@ -14,7 +14,7 @@ import LinkingConfiguration from './LinkingConfiguration';
 export default function Navigation() {
 
     // const colorScheme = useColorScheme();
-    const colorScheme = "dark";
+    const colorScheme = "light";
 
     return (
         <NavigationContainer
@@ -30,7 +30,7 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 function RootNavigator() {
 
     // const colorScheme = useColorScheme();
-    const colorScheme = "dark";
+    const colorScheme = "light";
 
 
     return (
