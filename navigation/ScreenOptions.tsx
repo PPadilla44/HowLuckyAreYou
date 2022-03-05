@@ -13,7 +13,7 @@ export const MainScreenOptions = (colorScheme: "light" | "dark", navigation: Nat
 
 export const ModalScreenOptions = (colorScheme: "light" | "dark", navigation: NativeStackNavigationProp<RootStackParamList>) => ({
     headerTitle: "",
-    headerStyle: { backgroundColor: Colors[colorScheme].background },
+    headerStyle: { backgroundColor: Colors[colorScheme].modal },
     headerShadowVisible: false,
     headerRight: () => <PressableIcon navigation={navigation} name='globe' type='font-awesome' size={35} />,
 })

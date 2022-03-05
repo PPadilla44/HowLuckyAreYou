@@ -1,6 +1,6 @@
-import { Text as DefaultText, View as DefaultView, TouchableOpacity as DefaultTouchableOpacity, ScrollViewProps as dScrollViewProps } from 'react-native';
-import { Icon as DefaultIcon, IconProps as DefaultIconProps, Input as DefaultInput, InputProps as DefaultInputProps } from 'react-native-elements';
-import { ScrollView as DefaultScrollView, NativeViewGestureHandlerProps } from  "react-native-gesture-handler";
+import { Text as DefaultText, View as DefaultView, ScrollViewProps as dScrollViewProps } from 'react-native';
+import { Icon as DefaultIcon, IconProps as DefaultIconProps, Input as DefaultInput, InputProps as DefaultInputProps, ButtonGroup as DButtonGroup, ButtonGroupProps as DButtonGroupProps } from 'react-native-elements';
+import { ScrollView as DefaultScrollView, NativeViewGestureHandlerProps, TouchableOpacity as DefaultTouchableOpacity } from "react-native-gesture-handler";
 
 import Colors from '../constants/Colors';
 
@@ -15,7 +15,7 @@ export const useThemeColor = (
 
     const colorFromProps = props[theme];
 
-    return colorFromProps ? colorFromProps : Colors[theme][colorName]
+    return { colorFromProps: colorFromProps ? colorFromProps : Colors[theme][colorName], theme }
 }
 
 type ThemeProps = {
@@ -28,43 +28,64 @@ export type ViewProps = ThemeProps & DefaultView['props'];
 export type TouchableOpacityProps = ThemeProps & DefaultTouchableOpacity['props'];
 export type IconProps = ThemeProps & DefaultIconProps;
 export type InputProps = ThemeProps & DefaultInputProps;
-export type ScrollViewProps = ThemeProps & NativeViewGestureHandlerProps & dScrollViewProps
+export type ScrollViewProps = ThemeProps & NativeViewGestureHandlerProps & dScrollViewProps;
+export type ButtonGroupProps = ThemeProps & DButtonGroupProps;
 
 export const Text = (props: TextProps) => {
     const { style, lightColor, darkColor, ...otherProps } = props;
-    const color = useThemeColor({ light: lightColor, dark: darkColor }, "text");
+    const color = useThemeColor({ light: lightColor, dark: darkColor }, "text").colorFromProps;
 
     return <DefaultText style={[{ color, fontFamily: "Futura" }, style]} {...otherProps} />
 }
 
 export const View = (props: ViewProps) => {
     const { style, lightColor, darkColor, ...otherProps } = props;
-    const backgroundColor = useThemeColor({ light: lightColor, dark: darkColor }, "background");
+    const backgroundColor = useThemeColor({ light: lightColor, dark: darkColor }, "background").colorFromProps;
 
     return <DefaultView style={[{ backgroundColor }, style]}  {...otherProps} />
 }
 
 export const TouchableOpacity = (props: TouchableOpacityProps) => {
-    const { style, lightColor, darkColor, ...otherProps } = props;
-    const backgroundColor = useThemeColor({ light: lightColor, dark: darkColor }, "button");
-    return <DefaultTouchableOpacity style={[{ backgroundColor }, style]} {...otherProps} />
+    const { style, containerStyle, lightColor, darkColor, ...otherProps } = props;
+    const backgroundColor = useThemeColor({ light: lightColor, dark: darkColor }, "button").colorFromProps;
+    const borderColor = useThemeColor({ }, "text").colorFromProps;
+    return <DefaultTouchableOpacity style={[{ backgroundColor, borderColor }, style]} containerStyle={[{ backgroundColor, borderColor }, containerStyle]} {...otherProps} />
 }
 
 export const Icon = (props: IconProps) => {
     const { style, lightColor, darkColor, ...otherProps } = props;
-    const color = useThemeColor({ light: lightColor, dark: darkColor }, "icon");
+    const color = useThemeColor({ light: lightColor, dark: darkColor }, "icon").colorFromProps;
     return <DefaultIcon tvParallaxProperties={undefined} color={color} {...otherProps} />
 }
 
 export const Input = (props: InputProps) => {
     const { style, lightColor, darkColor, ...otherProps } = props;
-    const backgroundColor = useThemeColor({ light: lightColor, dark: darkColor }, "input");
-    const color = useThemeColor({ light: lightColor, dark: darkColor }, "text");
-    return <DefaultInput style={[{backgroundColor, color }, style]} {...otherProps} />
+    const { colorFromProps, theme } = useThemeColor({ light: lightColor, dark: darkColor }, "input");
+    const backgroundColor = colorFromProps;
+    const color = useThemeColor({ light: lightColor, dark: darkColor }, "text").colorFromProps;
+    return (
+
+        <>
+            <DefaultInput
+                style={[{ backgroundColor: "transparent", color }, style]}
+                keyboardAppearance={theme}
+                {...otherProps}
+            />
+            <View style={{ backgroundColor, width: "100%", height: "100%", opacity: .5, position: "absolute", borderRadius: 15, zIndex: -10 }} />
+        </>
+    )
+    // return <DefaultInput style={[{backgroundColor: "transparent", color }, style]} keyboardAppearance={theme} {...otherProps} />
 }
 
 export const ScrollView = (props: ScrollViewProps) => {
-    const { style, darkColor, lightColor, ...otherProps  } = props;
-    const backgroundColor = useThemeColor({ light: lightColor, dark: darkColor }, "background");
-    return <DefaultScrollView style={[{backgroundColor}, style]} {...otherProps} />
+    const { style, darkColor, lightColor, ...otherProps } = props;
+    const backgroundColor = useThemeColor({ light: lightColor, dark: darkColor }, "background").colorFromProps;
+    return <DefaultScrollView style={[{ backgroundColor }, style]} {...otherProps} />
+}
+
+export const ButtonGroup = (props: ButtonGroupProps) => {
+    const { containerStyle, darkColor, lightColor, ...otherProps } = props;
+    const color = useThemeColor({ light: lightColor, dark: darkColor }, "input").colorFromProps;
+    
+    return <DButtonGroup containerStyle={[{ backgroundColor: color, borderColor: color }, containerStyle]}  {...otherProps} />
 }

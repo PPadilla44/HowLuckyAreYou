@@ -12,6 +12,6 @@ const styles = StyleSheet.create({
         flex: 1,
         height: 1,
         backgroundColor: Colors.light.input,
-        opacity: .5
+        opacity: .4
     }
 })

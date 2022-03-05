@@ -1,9 +1,11 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet } from 'react-native'
 import React, { FC } from 'react'
-import { Swipeable, TouchableOpacity } from 'react-native-gesture-handler'
+import { Swipeable } from 'react-native-gesture-handler'
 import { OddsItemInterface } from '../../types'
 import RightSwipe from './RightSwipe'
-import LeftSwipe from './LeftSwipe/LeftSwipe'
+import LeftSwipe from './LeftSwipe/LeftSwipe';
+import { Text, TouchableOpacity } from "../Themed"
+import Colors from '../../constants/Colors'
 
 interface Props {
     item: OddsItemInterface
@@ -17,7 +19,7 @@ const OddsItem: FC<Props> = ({ item }) => {
             onSwipeableRightOpen={() => alert('Swipe from right')}
             onSwipeableLeftOpen={() => alert('Swipe from left')}
         >
-            <TouchableOpacity onPress={() => alert("Pressed")} style={styles.item}>
+            <TouchableOpacity lightColor='white' darkColor={Colors.dark.modal} onPress={() => alert("Pressed")}  style={styles.item} activeOpacity={.8}>
                 <Text style={styles.baseTxt}>{item.name}</Text>
                 <Text style={styles.baseTxt}>{item.odds} </Text>
             </TouchableOpacity>
@@ -31,7 +33,6 @@ const styles = StyleSheet.create({
     item: {
         paddingHorizontal: 30,
         paddingVertical: 20,
-        backgroundColor: 'white',
         flexDirection: "row",
         justifyContent: "space-between"
     },

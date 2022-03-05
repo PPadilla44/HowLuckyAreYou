@@ -1,5 +1,5 @@
-import { Platform, StyleSheet, TouchableOpacity } from 'react-native';
-import { View, Text, Icon, ScrollView } from "../components/Themed"
+import { Platform, StyleSheet } from 'react-native';
+import { View, Text, Icon, ScrollView, TouchableOpacity } from "../components/Themed"
 import React from 'react'
 import { StatusBar } from 'expo-status-bar';
 import { OddsItemInterface, RootTabScreenProps } from '../types';
@@ -22,7 +22,7 @@ const Dropdown = ({ }: RootTabScreenProps<"Modal">) => {
         <View style={styles.container}  darkColor="#252525">
             <StatusBar style={Platform.OS === 'ios' ? 'light' : 'auto'} />
 
-            <ScrollView >
+            <ScrollView darkColor="#252525" >
 
                 <ModalForm />
 
@@ -42,17 +42,19 @@ const Dropdown = ({ }: RootTabScreenProps<"Modal">) => {
             </ScrollView>
 
             <TouchableOpacity
+                lightColor='white'
+                darkColor={Colors.dark.modal}
                 onPress={() => alert("Settings")}
                 style={{
-                    backgroundColor: "white",
                     borderBottomWidth: 1,
                     borderTopWidth: 1,
                     borderLeftWidth: 1,
                     borderRightWidth: 1,
-                    borderColor: Colors.dark.modal,
+                    borderRadius: 15,
+                }}
+                containerStyle={{
                     width: 50,
                     height: 50,
-                    borderRadius: 20,
                     position: "absolute",
                     right: 10,
                     bottom: "5%",
@@ -63,7 +65,8 @@ const Dropdown = ({ }: RootTabScreenProps<"Modal">) => {
                 <Icon
                     name='tune'
                     size={40}
-                    color={Colors.dark.modal}
+                    lightColor={Colors.dark.modal}
+                    darkColor='white'
                 />
             </TouchableOpacity>
         </View>

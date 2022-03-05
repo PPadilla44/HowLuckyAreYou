@@ -25,7 +25,7 @@ const MainButton = () => {
     }
 
     return (
-        <TouchableOpacity style={[styles.btn, { shadowColor: Colors[theme].text } ]} onPress={handlePress} activeOpacity={0.7}>
+        <TouchableOpacity containerStyle={[styles.btn, {shadowColor: Colors[theme].text} ]} onPress={handlePress} activeOpacity={0.7}>
             <Text style={styles.btnText}>Test Your Luck</Text>
         </TouchableOpacity>
     )

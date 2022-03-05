@@ -1,40 +1,50 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 import React from 'react';
-import { Input } from '../Themed';
+import { Input, View } from '../Themed';
 import TwoButtonGroup from '../TwoButtonGroup';
 import SaveTryButtons from '../SaveTryButtons';
-import Colors from '../../constants/Colors';
 import PercentIcon from '../UI/TextAsIcon';
 
 
 const ModalForm = () => {
     return (
-        <View style={{borderBottomWidth: 1, borderColor: "black", paddingBottom: 15}}>
+        <View style={{ paddingBottom: 15, backgroundColor: "transparent" }}>
 
-            <Input
-                style={styles.input}
-                errorStyle={{ textAlign: "center", fontFamily: "Futura" }}
-                // errorMessage={"Unsaved Changed"}
-                inputContainerStyle={styles.inputContainer}
-                keyboardAppearance="light"
-                keyboardType="numeric"
-                rightIcon={<PercentIcon />}
-                rightIconContainerStyle={{ height: 52, marginLeft: 10 }}
-                placeholder="1.0"
-            />
+
+            <View style={{
+                height: 52,
+                marginBottom: 20,
+                flexDirection: "row",
+                marginHorizontal: 10,
+                backgroundColor: "transparent"
+            }}>
+                <View style={{flex: 1,
+                backgroundColor: "transparent"
+                }}>
+
+                    <Input
+                        style={styles.input}
+                        inputContainerStyle={styles.inputContainer}
+                        keyboardType="numeric"
+                        placeholder="1.0"
+                    />
+                </View>
+                <View style={{ height: 52, marginLeft: 10, backgroundColor: "transparent"}}>
+                    <PercentIcon />
+                </View>
+            </View>
 
             <TwoButtonGroup />
 
-            <Input
-                placeholder='Title'
-                style={[styles.input, { fontSize: 24 }]}
-                errorStyle={{ textAlign: "center", fontFamily: "Futura" }}
-                // errorMessage={"Unsaved Changed"}
-                inputContainerStyle={styles.inputContainer}
-                keyboardAppearance="light"
-                keyboardType='ascii-capable'
-                maxLength={30}
-            />
+            <View style={[{ marginHorizontal: 10, height: 52, marginBottom: 25, backgroundColor: "transparent" }]}>
+                <Input
+                    placeholder='Title'
+                    style={[styles.input, { fontSize: 24 }]}
+                    inputContainerStyle={styles.inputContainer}
+                    keyboardType='ascii-capable'
+                    maxLength={30}
+                />
+            </View>
 
             <SaveTryButtons />
 
@@ -58,6 +68,8 @@ const styles = StyleSheet.create({
     },
     percent: {
         fontSize: 48,
-        fontWeight: "bold"
-    }
+        fontWeight: "bold",
+        flexGrow: 1
+    },
+
 })

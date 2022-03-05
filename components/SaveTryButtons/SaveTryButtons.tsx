@@ -10,13 +10,22 @@ const SaveTryButtons = () => {
 
     return (
         <View style={styles.container}>
-            
-            <TouchableOpacity style={styles.saveBtn}>
-                <Text style={styles.saveText }>Save</Text>
+
+            <TouchableOpacity containerStyle={styles.saveBtn}>
+                <Text style={styles.saveText}>Save</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity lightColor={Colors.light.input} style={[styles.tryBtn, { backgroundColor: showTry ? Colors.light.input : "transparent" } ]}>
-                <Text style={[styles.tryText, showTry ? {} : { color: Colors.dark.input, opacity: .5 } ]} >Try</Text>
+            <TouchableOpacity
+                lightColor={showTry ? Colors.light.input : "transparent" }
+                darkColor={showTry ? Colors.dark.input : "transparent" }
+                containerStyle={styles.tryBtn}
+            >
+                <Text
+                    lightColor={showTry ? "" : Colors.dark.input}
+                    darkColor={showTry ? "" : Colors.dark.text}
+                    style={[styles.tryText, { opacity: showTry ? 1 : .5 }]} >
+                    Try
+                </Text>
             </TouchableOpacity>
 
 
@@ -29,7 +38,8 @@ export default SaveTryButtons
 const styles = StyleSheet.create({
     container: {
         flexDirection: "row",
-        height: 52,
+        height: 60,
+        backgroundColor: "transparent",
     },
     tryBtn: {
         flex: 2,
@@ -40,7 +50,7 @@ const styles = StyleSheet.create({
         fontSize: 36,
         fontWeight: "bold"
     },
-    saveBtn:{
+    saveBtn: {
         flex: 1,
         alignItems: "center",
         justifyContent: "center",

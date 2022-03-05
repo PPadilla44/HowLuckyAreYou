@@ -1,6 +1,7 @@
 import { StyleSheet } from 'react-native'
 import React, { useState } from 'react'
-import { ButtonGroup } from 'react-native-elements'
+import { ButtonGroup } from '../Themed'
+import Colors from '../../constants/Colors';
 
 const TwoButtonGroup = () => {
 
@@ -33,7 +34,6 @@ export default TwoButtonGroup
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: "#E0E0E0",
         padding: 2,
         height: 32,
         borderRadius: 9,
@@ -42,6 +42,7 @@ const styles = StyleSheet.create({
     },
     button: {
         borderRadius: 7,
+        opacity: .5
     },
     text: {
         fontFamily: "Futura",
@@ -50,7 +51,8 @@ const styles = StyleSheet.create({
         color: "black"
     },
     selectedButton: {
-        backgroundColor: "white"
+        backgroundColor: "white",
+        opacity: 1
     },
     selectedText: {
         color: "black"
