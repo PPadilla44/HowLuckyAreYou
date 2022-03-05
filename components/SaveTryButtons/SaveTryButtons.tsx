@@ -30,7 +30,6 @@ const styles = StyleSheet.create({
     container: {
         flexDirection: "row",
         height: 52,
-        marginBottom: 30
     },
     tryBtn: {
         flex: 2,

@@ -9,7 +9,7 @@ import PercentIcon from '../UI/TextAsIcon';
 
 const ModalForm = () => {
     return (
-        <View>
+        <View style={{borderBottomWidth: 1, borderColor: "black", paddingBottom: 15}}>
 
             <Input
                 style={styles.input}
@@ -38,7 +38,6 @@ const ModalForm = () => {
 
             <SaveTryButtons />
 
-            <Text style={{ fontSize: 18, fontWeight: "bold", textAlign: "center", color: Colors.dark.input, opacity: .5 }}>Saved Odds</Text>
         </View>
     )
 }

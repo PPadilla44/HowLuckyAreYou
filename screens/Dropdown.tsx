@@ -1,11 +1,10 @@
-import { Platform, StyleSheet,TouchableOpacity } from 'react-native';
-import { View, Text, Icon } from "../components/Themed"
+import { Platform, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, Icon, ScrollView } from "../components/Themed"
 import React from 'react'
 import { StatusBar } from 'expo-status-bar';
 import { OddsItemInterface, RootTabScreenProps } from '../types';
 import Colors from '../constants/Colors';
 import ModalForm from '../components/ModalForm';
-import { BaseButton, FlatList } from "react-native-gesture-handler"
 import { Separator } from '../components/UI';
 import OddsItem from '../components/OddsItem';
 
@@ -20,36 +19,51 @@ const Dropdown = ({ }: RootTabScreenProps<"Modal">) => {
     ]
 
     return (
-        <View style={styles.container} darkColor="#252525">
+        <View style={styles.container}  darkColor="#252525">
             <StatusBar style={Platform.OS === 'ios' ? 'light' : 'auto'} />
 
-            <ModalForm />
+            <ScrollView >
 
-            <FlatList
-                data={data}
-                renderItem={({ item }) => <OddsItem item={item} />}
-                keyExtractor={(item) => item.id}
-                ItemSeparatorComponent={() => <Separator />} />
+                <ModalForm />
+
+                {
+                    data.map((item, i) => {
+                        return (
+                            <React.Fragment key={i}>
+                                <OddsItem item={item} />
+                                <Separator />
+                            </React.Fragment>
+                        )
+                    })
+                }
+                {/* Empty Space */}
+                <OddsItem item={{ id: "999", name: "", odds: "" }} />
+
+            </ScrollView>
 
             <TouchableOpacity
-            onPress={() => alert("Settings")}
-            style={{
-                backgroundColor: "black",
-                width: 50,
-                height: 50,
-                borderRadius: 20,
-                position: "absolute",
-                right: 10,
-                bottom: 35,
-                alignItems: "center",
-                justifyContent: "center"
-            }} >
+                onPress={() => alert("Settings")}
+                style={{
+                    backgroundColor: "white",
+                    borderBottomWidth: 1,
+                    borderTopWidth: 1,
+                    borderLeftWidth: 1,
+                    borderRightWidth: 1,
+                    borderColor: Colors.dark.modal,
+                    width: 50,
+                    height: 50,
+                    borderRadius: 20,
+                    position: "absolute",
+                    right: 10,
+                    bottom: "5%",
+                    alignItems: "center",
+                    justifyContent: "center"
+                }} >
 
                 <Icon
-                    name='dashboard-customize'
-                    // type=''
+                    name='tune'
                     size={40}
-                    color={'white'}
+                    color={Colors.dark.modal}
                 />
             </TouchableOpacity>
         </View>
