@@ -33,7 +33,6 @@ function RootNavigator() {
     // const colorScheme = useColorScheme();
     const colorScheme = "dark";
 
-
     return (
         <Stack.Navigator>
             <Stack.Screen name="Root" component={Main} options={({ navigation }: RootTabScreenProps<'Main'>) => MainScreenOptions(colorScheme, navigation)} />

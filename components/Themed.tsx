@@ -41,15 +41,15 @@ export const Text = (props: TextProps) => {
 export const View = (props: ViewProps) => {
     const { style, lightColor, darkColor, ...otherProps } = props;
     const backgroundColor = useThemeColor({ light: lightColor, dark: darkColor }, "background").colorFromProps;
-
-    return <DefaultView style={[{ backgroundColor }, style]}  {...otherProps} />
+    const shadowColor = useThemeColor({  }, "text").colorFromProps;
+    return <DefaultView style={[{ backgroundColor, shadowColor }, style]}  {...otherProps} />
 }
 
 export const TouchableOpacity = (props: TouchableOpacityProps) => {
     const { style, containerStyle, lightColor, darkColor, ...otherProps } = props;
     const backgroundColor = useThemeColor({ light: lightColor, dark: darkColor }, "button").colorFromProps;
-    const borderColor = useThemeColor({ }, "text").colorFromProps;
-    return <DefaultTouchableOpacity style={[{ backgroundColor, borderColor }, style]} containerStyle={[{ backgroundColor, borderColor }, containerStyle]} {...otherProps} />
+    const oppositeColor = useThemeColor({ }, "text").colorFromProps;
+    return <DefaultTouchableOpacity style={[{ backgroundColor, borderColor: oppositeColor, shadowColor: oppositeColor }, style]} containerStyle={[{ backgroundColor, borderColor: oppositeColor }, containerStyle]} {...otherProps} />
 }
 
 export const Icon = (props: IconProps) => {
