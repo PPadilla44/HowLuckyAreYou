@@ -1,6 +1,9 @@
-import Separator from "./Separator"
-import TextAsIcon from "./TextAsIcon"
+import Separator from "./Separator";
+import TextAsIcon from "./TextAsIcon";
+import SettingsIcon from "./SettingsIcon";
+
 export {
     Separator,
-    TextAsIcon
+    TextAsIcon,
+    SettingsIcon
 }

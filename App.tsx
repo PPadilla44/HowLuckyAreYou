@@ -8,7 +8,7 @@ import useColorScheme from './hooks/useColorScheme';
 export default function App() {
 
   // const theme = useColorScheme();
-  const theme = "light";
+  const theme = "dark";
 
   return (
     <SafeAreaProvider>
