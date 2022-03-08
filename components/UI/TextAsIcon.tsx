@@ -3,10 +3,10 @@ import React from 'react'
 import { Text } from '../Themed'
 
 
-const TextAsIcon = () => {
+const TextAsIcon = ({text}: {text: string}) => {
     return (
         <Text style={styles.icon} >
-            {`%`}
+            {text}
         </Text>
     )
 }

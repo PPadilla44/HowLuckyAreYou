@@ -1,12 +1,13 @@
 import { StyleSheet } from 'react-native';
 import React, { FC, useState } from 'react';
-import { Input, View } from '../Themed';
+import { Input, Text, TouchableOpacity, View } from '../Themed';
 import TwoButtonGroup from '../TwoButtonGroup';
 import SaveTryButtons from '../SaveTryButtons';
-import PercentIcon from '../UI/TextAsIcon';
+import TextAsIcon from '../UI/TextAsIcon';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../types';
 import { useClicker } from '../contexts/useClicker';
+import Colors from '../../constants/Colors';
 
 interface Props {
     navigation: NativeStackNavigationProp<RootStackParamList>
@@ -14,29 +15,29 @@ interface Props {
 
 const ModalForm: FC<Props> = ({ navigation }) => {
 
-    const {state, dispatch} = useClicker();
+    const { state, dispatch } = useClicker();
 
     const [formData, setFormData] = useState({ oddsString: `${state.oddsString}`, title: state.title, isValid: false });
 
     const handleChanges = (data: {}) => {
-        const tempForm = {...formData, ...data};
+        const tempForm = { ...formData, ...data };
         const { oddsString, title } = tempForm;
-        
-        if(parseFloat(oddsString) > 100) {
+
+        if (parseFloat(oddsString) > 100) {
             return
         }
 
         if (oddsString.length > 0 && title.length > 0) {
-            setFormData({...tempForm, isValid: true})
+            setFormData({ ...tempForm, isValid: true })
         } else {
-            setFormData({...tempForm, isValid: false})
+            setFormData({ ...tempForm, isValid: false })
         }
 
     }
 
     const handleTry = () => {
         console.log("Running TRY");
-        dispatch!({ type: "UPDATE", payload: { title: formData.title, oddsString: formData.oddsString  } })
+        dispatch!({ type: "UPDATE", payload: { title: formData.title, oddsString: formData.oddsString } })
         navigation.goBack();
         setFormData(d => ({ ...d, isValid: false }))
 
@@ -52,7 +53,9 @@ const ModalForm: FC<Props> = ({ navigation }) => {
         <View style={styles.container}>
 
             <View style={styles.topRow}>
-                <View style={styles.percentWrapper}>
+
+
+                {/* <View style={styles.percentWrapper}>
                     <Input
                         style={styles.input}
                         inputContainerStyle={styles.inputContainer}
@@ -64,8 +67,43 @@ const ModalForm: FC<Props> = ({ navigation }) => {
                     />
                 </View>
                 <View style={styles.percentIconContainer}>
-                    <PercentIcon />
+                    <TextAsIcon text={'%'} />
+                </View> */}
+                <View style={{ flex: 1, backgroundColor: "transparent" }}>
+                    <Input
+                        keyboardType="number-pad"
+                        style={styles.input}
+                        inputContainerStyle={styles.inputContainer}
+                        placeholder='1'
+                        maxLength={2}
+                    />
                 </View>
+                <View style={{ marginHorizontal: 10, backgroundColor: "transparent", height: 52 }}>
+                    <TextAsIcon text={'/'} />
+                </View>
+                <View style={{ flex: 2, backgroundColor: "transparent" }}>
+                    <Input
+                        keyboardType="number-pad"
+                        style={styles.input}
+                        inputContainerStyle={styles.inputContainer}
+                        placeholder='10'
+                        maxLength={3}
+                    />
+                </View>
+                <TouchableOpacity darkColor={Colors.light.input} lightColor={Colors.dark.modal} containerStyle={{
+                    alignSelf: "center",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    height: 35,
+                    marginHorizontal: 10,
+                    borderRadius: 5,
+                    width: 52,
+
+                }}
+                >
+                    <Text darkColor={Colors.dark.modal} lightColor={Colors.light.input} style={{ fontSize: 18, fontWeight: "bold" }}>BIL</Text>
+                </TouchableOpacity>
+
             </View>
 
             <TwoButtonGroup />
