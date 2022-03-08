@@ -1,7 +1,6 @@
 import { StyleSheet } from 'react-native'
 import React, { useState } from 'react'
 import { ButtonGroup } from '../Themed'
-import Colors from '../../constants/Colors';
 
 const TwoButtonGroup = () => {
 

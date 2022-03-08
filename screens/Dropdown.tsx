@@ -8,7 +8,7 @@ import { SettingsIcon } from '../components/UI';
 import OddsList from '../components/OddsList';
 
 
-const Dropdown = ({ }: RootTabScreenProps<"Modal">) => {
+const Dropdown = (props: RootTabScreenProps<"Modal">) => {
 
     return (
         <View style={styles.container} darkColor="#252525">
@@ -16,7 +16,7 @@ const Dropdown = ({ }: RootTabScreenProps<"Modal">) => {
 
             <ScrollView darkColor="#252525" >
 
-                <ModalForm />
+                <ModalForm navigation={props.navigation} />
 
                 <OddsList />
 

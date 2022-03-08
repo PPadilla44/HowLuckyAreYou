@@ -10,7 +10,7 @@ import { RootTabScreenProps } from '../types';
 const Main = ({  }: RootTabScreenProps<"Main">) => {
 
     const { state, dispatch } = useClicker();
-    const { count, odds } = state;
+    const { count, oddsString, title } = state;
 
     return (
         <View style={styles.container}>
@@ -24,9 +24,9 @@ const Main = ({  }: RootTabScreenProps<"Main">) => {
             <MainButton />
 
             <SubContainer
-                text={`${odds * 100}%`}
+                text={`${oddsString}%`}
                 textStyle={styles.probText}
-                title={`Probability`}
+                title={title}
             />
 
             <ResetButton />

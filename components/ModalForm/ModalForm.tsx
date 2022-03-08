@@ -1,12 +1,53 @@
 import { StyleSheet } from 'react-native';
-import React from 'react';
+import React, { FC, useState } from 'react';
 import { Input, View } from '../Themed';
 import TwoButtonGroup from '../TwoButtonGroup';
 import SaveTryButtons from '../SaveTryButtons';
 import PercentIcon from '../UI/TextAsIcon';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../../types';
+import { useClicker } from '../contexts/useClicker';
 
+interface Props {
+    navigation: NativeStackNavigationProp<RootStackParamList>
+}
 
-const ModalForm = () => {
+const ModalForm: FC<Props> = ({ navigation }) => {
+
+    const {state, dispatch} = useClicker();
+
+    const [formData, setFormData] = useState({ oddsString: `${state.oddsString}`, title: state.title, isValid: false });
+
+    const handleChanges = (data: {}) => {
+        const tempForm = {...formData, ...data};
+        const { oddsString, title } = tempForm;
+        
+        if(parseFloat(oddsString) > 100) {
+            return
+        }
+
+        if (oddsString.length > 0 && title.length > 0) {
+            setFormData({...tempForm, isValid: true})
+        } else {
+            setFormData({...tempForm, isValid: false})
+        }
+
+    }
+
+    const handleTry = () => {
+        console.log("Running TRY");
+        dispatch!({ type: "UPDATE", payload: { title: formData.title, oddsString: formData.oddsString  } })
+        navigation.goBack();
+        setFormData(d => ({ ...d, isValid: false }))
+
+    }
+    const handleSave = () => {
+        console.log("Running SAVE");
+        console.log(formData);
+        setFormData(d => ({ ...d, isValid: false }))
+
+    }
+
     return (
         <View style={styles.container}>
 
@@ -17,6 +58,9 @@ const ModalForm = () => {
                         inputContainerStyle={styles.inputContainer}
                         keyboardType="numeric"
                         placeholder="1.0"
+                        maxLength={10}
+                        value={formData.oddsString}
+                        onChangeText={oddsString => handleChanges({ oddsString })}
                     />
                 </View>
                 <View style={styles.percentIconContainer}>
@@ -33,10 +77,12 @@ const ModalForm = () => {
                     inputContainerStyle={styles.inputContainer}
                     keyboardType='ascii-capable'
                     maxLength={30}
+                    value={formData.title}
+                    onChangeText={title => handleChanges({ title })}
                 />
             </View>
 
-            <SaveTryButtons />
+            <SaveTryButtons showTry={formData.isValid} handleTry={handleTry} handleSave={handleSave} />
 
         </View>
     )

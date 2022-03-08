@@ -1,24 +1,34 @@
 import { StyleSheet } from 'react-native';
-import React, { useState } from 'react';
+import React, { FC } from 'react';
 import { Text, TouchableOpacity, View } from "../Themed";
 import Colors from '../../constants/Colors';
 
-const SaveTryButtons = () => {
+
+interface Props {
+    showTry: boolean
+    handleTry: () => void;
+    handleSave: () => void;
+}
 
 
-    const [showTry, setShowTry] = useState(false);
+const SaveTryButtons: FC<Props> = ({ showTry, handleSave, handleTry }) => {
+
+    console.log(showTry);
+    
 
     return (
         <View style={styles.container}>
 
-            <TouchableOpacity containerStyle={styles.saveBtn}>
+            <TouchableOpacity containerStyle={styles.saveBtn} onPress={handleSave}>
                 <Text style={styles.saveText}>Save</Text>
             </TouchableOpacity>
 
             <TouchableOpacity
-                lightColor={showTry ? Colors.light.input : "transparent" }
-                darkColor={showTry ? Colors.dark.input : "transparent" }
+                lightColor={showTry ? Colors.light.input : "transparent"}
+                darkColor={showTry ? Colors.dark.input : "transparent"}
                 containerStyle={styles.tryBtn}
+                onPress={handleTry}
+                disabled={!showTry}
             >
                 <Text
                     lightColor={showTry ? "" : Colors.dark.input}
