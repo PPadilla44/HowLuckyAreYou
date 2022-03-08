@@ -1,5 +1,4 @@
-import { ClickerState } from "../clicker";
-import { BtnColor } from "../clicker";
+import { ClickerResults, ClickerState } from "../clicker";
 
 export const increment = (state: ClickerState) => {
     console.log("****************");
@@ -15,7 +14,8 @@ export const increment = (state: ClickerState) => {
     if (randomNumFromMax === max) {
         console.log("GOT IT");
         const userOdds = tempCount / max;
-        let tempResults
+        let tempResults : ClickerResults;
+
         if (userOdds < 1) {
             tempResults = { BtnColor: "lucky" , text: "YOU ARE REALLY LUCKY" };
         } else if (userOdds > 1) {

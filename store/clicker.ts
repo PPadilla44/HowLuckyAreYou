@@ -1,6 +1,7 @@
 import { increment } from "./utils/reducerFunctions";
 
-export declare type BtnColor = 'default' | 'lucky' | 'unlucky' | 'normal';
+export type BtnColorName = 'default' | 'lucky' | 'unlucky' | 'normal';
+
 
 export const BtnColorObj = {
     unlucky :  "#830909",
@@ -9,25 +10,29 @@ export const BtnColorObj = {
     default : "#325C99"
 }
 
+export interface ClickerResults {
+    BtnColor: BtnColorName;
+    text: string;
+}
+
 export interface ClickerState {
     count: number;
     odds: number;
     didHit: boolean;
-    results: {
-        BtnColor: BtnColor;
-        text: string;
-    };
+    title: string;
+    results: ClickerResults
 }
 
 export interface Action {
-    type: ClickerActionKind,
-    payload?: any
+    type: ClickerActionKind;
+    payload?: any;
 }
 
 export const initialClickerState: ClickerState = {
     count: 0,
     odds: .1,
     didHit: false,
+    title: "What Are The Odds?",
     results: {
         BtnColor: "default",
         text: ""
@@ -37,14 +42,10 @@ export const initialClickerState: ClickerState = {
 // ACTIONS
 export declare type ClickerActionKind = 'INCREASE' | 'RESET';
 
-// export enum ClickerActionKind {
-//     INCREASE = "INCREASE",
-//     RESET = "RESET"
-// }
-
 // REDUCER
-function reducer(state: ClickerState = initialClickerState, action: Action) {
+function reducer(state: ClickerState ,  action: Action): ClickerState {
     const { type, payload } = action;
+    
     switch (type) {
         case "INCREASE":
             return increment(state)
