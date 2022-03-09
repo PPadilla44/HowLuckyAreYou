@@ -1,4 +1,4 @@
-import { increment, updateOdds } from "./utils/reducerFunctions";
+import { increment, reset, updateOdds } from "./utils/reducerFunctions";
 
 export type BtnColorName = 'default' | 'lucky' | 'unlucky' | 'normal';
 
@@ -58,7 +58,7 @@ function reducer(state: ClickerState ,  action: Action): ClickerState {
         case "INCREASE":
             return increment(state);
         case "RESET":
-            return {...initialClickerState};
+            return reset(state);
         case "UPDATE":
             return updateOdds(state, payload)
         default:
