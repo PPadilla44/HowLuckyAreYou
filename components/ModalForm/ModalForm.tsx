@@ -8,6 +8,8 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../types';
 import { useClicker } from '../contexts/useClicker';
 import Colors from '../../constants/Colors';
+import PercentInput from './PercentInput';
+import FractionInput from './FractionInput';
 
 interface Props {
     navigation: NativeStackNavigationProp<RootStackParamList>
@@ -54,55 +56,9 @@ const ModalForm: FC<Props> = ({ navigation }) => {
 
             <View style={styles.topRow}>
 
+                {/* <PercentInput oddsString={formData.oddsString} changeText={handleChanges} /> */}
 
-                {/* <View style={styles.percentWrapper}>
-                    <Input
-                        style={styles.input}
-                        inputContainerStyle={styles.inputContainer}
-                        keyboardType="numeric"
-                        placeholder="1.0"
-                        maxLength={10}
-                        value={formData.oddsString}
-                        onChangeText={oddsString => handleChanges({ oddsString })}
-                    />
-                </View>
-                <View style={styles.percentIconContainer}>
-                    <TextAsIcon text={'%'} />
-                </View> */}
-                <View style={{ flex: 1, backgroundColor: "transparent" }}>
-                    <Input
-                        keyboardType="number-pad"
-                        style={styles.input}
-                        inputContainerStyle={styles.inputContainer}
-                        placeholder='1'
-                        maxLength={2}
-                    />
-                </View>
-                <View style={{ marginHorizontal: 10, backgroundColor: "transparent", height: 52 }}>
-                    <TextAsIcon text={'/'} />
-                </View>
-                <View style={{ flex: 2, backgroundColor: "transparent" }}>
-                    <Input
-                        keyboardType="number-pad"
-                        style={styles.input}
-                        inputContainerStyle={styles.inputContainer}
-                        placeholder='10'
-                        maxLength={3}
-                    />
-                </View>
-                <TouchableOpacity darkColor={Colors.light.input} lightColor={Colors.dark.modal} containerStyle={{
-                    alignSelf: "center",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    height: 35,
-                    marginHorizontal: 10,
-                    borderRadius: 5,
-                    width: 52,
-
-                }}
-                >
-                    <Text darkColor={Colors.dark.modal} lightColor={Colors.light.input} style={{ fontSize: 18, fontWeight: "bold" }}>BIL</Text>
-                </TouchableOpacity>
+                <FractionInput />
 
             </View>
 
