@@ -56,9 +56,9 @@ const ModalForm: FC<Props> = ({ navigation }) => {
 
             <View style={styles.topRow}>
 
-                {/* <PercentInput oddsString={formData.oddsString} changeText={handleChanges} /> */}
+                <PercentInput oddsString={formData.oddsString} changeText={handleChanges} />
 
-                <FractionInput />
+                {/* <FractionInput /> */}
 
             </View>
 

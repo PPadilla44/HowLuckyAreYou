@@ -1,21 +1,23 @@
 import { ClickerResults, ClickerState } from "../clicker";
+import Fraction from "fraction.js";
 
 export const increment = (state: ClickerState): ClickerState => {
 
     const tempCount = state.count + 1;
 
-    const max = 1 / (state.oddsNum);
 
-    const randomNumFromMax = Math.ceil(Math.random() * max);
+    const { denominator , numerator } = state.fraction;
 
+    const randomNumFromMax = Math.ceil(Math.random() * denominator);
 
-    if (randomNumFromMax === max) {
-        const userOdds = tempCount / max;
+    if (randomNumFromMax <= numerator) {
+        const max =  denominator - numerator;
+
         let tempResults : ClickerResults;
 
-        if (userOdds < 1) {
+        if (tempCount < max) {
             tempResults = { BtnColor: "lucky" , text: "YOU ARE REALLY LUCKY" };
-        } else if (userOdds > 1) {
+        } else if (tempCount > max) {
             tempResults = { BtnColor: "unlucky", text: "YOU ARE NOT LUCKY" };
         } else {
             tempResults = { BtnColor: "normal", text: "YOU ARE normal" };
@@ -38,9 +40,11 @@ export const increment = (state: ClickerState): ClickerState => {
 
 export const updateOdds = (state: ClickerState, {title, oddsString}: {title: string, oddsString: string}): ClickerState => {
     
-    const oddsNum = parseFloat(oddsString) / 100;
+    const fractionWhole = new Fraction(oddsString);
     
-    const tempState: ClickerState = {...state, title, oddsNum, oddsString};
+    const fraction = { denominator: fractionWhole.d, numerator: fractionWhole.n };
+
+    const tempState: ClickerState = {...state, title, fraction, oddsString};
 
     console.log(tempState);
 

@@ -17,8 +17,11 @@ export interface ClickerResults {
 
 export interface ClickerState {
     count: number;
-    oddsNum: number;
     oddsString: string;
+    fraction: {
+        denominator: number;
+        numerator: number;
+    };
     didHit: boolean;
     title: string;
     results: ClickerResults
@@ -31,8 +34,11 @@ export interface Action {
 
 export const initialClickerState: ClickerState = {
     count: 0,
-    oddsNum: .10,
-    oddsString: "10",
+    oddsString: "25",
+    fraction: {
+        numerator: 1,
+        denominator: 4
+    },
     didHit: false,
     title: "What Are The Odds?",
     results: {
