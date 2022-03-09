@@ -1,23 +1,21 @@
 import { StyleSheet } from 'react-native'
-import React, { useState } from 'react'
+import React, { Dispatch, FC, SetStateAction } from 'react'
 import { ButtonGroup } from '../Themed'
 
-const TwoButtonGroup = () => {
+interface Props {
+    buttons: any[];
+    selectedIndex: number;
+    setSelectedIndex: Dispatch<SetStateAction<number>>;
+}
 
-    const [selectedIndex, setSelectedIndex] = useState(0);
+const TwoButtonGroup: FC<Props> = ({ buttons, selectedIndex, setSelectedIndex }) => {
 
-    const updateIndex = (newIndex: number) => {
-        setSelectedIndex(newIndex)
-    }
-    const button1 = "Percentage";
-    const button2 = "Fraction";
 
-    const buttons = [button1, button2];
 
     return (
         <ButtonGroup
             buttons={buttons}
-            onPress={updateIndex}
+            onPress={(newIndex: number) => setSelectedIndex(newIndex)}
             selectedIndex={selectedIndex}
             containerStyle={styles.container}
             buttonStyle={styles.button} 

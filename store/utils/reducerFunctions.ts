@@ -37,7 +37,7 @@ export const increment = (state: ClickerState): ClickerState => {
     }
 }
 
-export const updateOdds = (state: ClickerState, {title, oddsString}: {title: string, oddsString: string}): ClickerState => {
+export const updateOddsPercent = (state: ClickerState, {title, oddsString}: {title: string, oddsString: string}): ClickerState => {
     
     const oddsNum = parseFloat(oddsString) / 100;
     
@@ -48,6 +48,15 @@ export const updateOdds = (state: ClickerState, {title, oddsString}: {title: str
     const tempState: ClickerState = {...state, title, fraction, oddsString};
     const newState: ClickerState = reset(tempState);
 
+    return newState;
+}
+
+export const updateOddsFraction = (state: ClickerState, { title, numerator, denominator }: {title: string,numerator: number, denominator: number }): ClickerState => {
+    const decimalNum = numerator / denominator;
+    const oddsString = `${decimalNum}`.substring(0, 10);
+    const fraction = { numerator, denominator };
+    const tempState: ClickerState = { ...state, title, fraction, oddsString  };
+    const newState: ClickerState = reset(tempState);
     return newState;
 }
 
