@@ -1,6 +1,11 @@
-import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
-import { CompositeScreenProps, NavigatorScreenParams } from '@react-navigation/native';
+import { NavigatorScreenParams } from '@react-navigation/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
+
+export interface OddsItemInterface {
+    id: string
+    name: string
+    odds: string
+}
 
 declare global {
     namespace ReactNavigation {
@@ -22,6 +27,7 @@ export type RootStackScreenProps<Screen extends keyof RootStackParamList> = Nati
 
 export type RootTabParamList = {
     Main: undefined;
+    Modal: undefined;
 };
 
 export type RootTabScreenProps<Screen extends keyof RootTabParamList> = NativeStackScreenProps<RootStackParamList>;

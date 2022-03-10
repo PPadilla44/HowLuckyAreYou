@@ -1,6 +1,7 @@
-import { increment } from "./utils/reducerFunctions";
+import { increment, reset, updateOddsFraction, updateOddsPercent } from "./utils/reducerFunctions";
 
-export declare type BtnColor = 'default' | 'lucky' | 'unlucky' | 'normal';
+export type BtnColorName = 'default' | 'lucky' | 'unlucky' | 'normal';
+
 
 export const BtnColorObj = {
     unlucky :  "#830909",
@@ -9,25 +10,37 @@ export const BtnColorObj = {
     default : "#325C99"
 }
 
+export interface ClickerResults {
+    BtnColor: BtnColorName;
+    text: string;
+}
+
 export interface ClickerState {
     count: number;
-    odds: number;
-    didHit: boolean;
-    results: {
-        BtnColor: BtnColor;
-        text: string;
+    oddsString: string;
+    fraction: {
+        denominator: number;
+        numerator: number;
     };
+    didHit: boolean;
+    title: string;
+    results: ClickerResults
 }
 
 export interface Action {
-    type: ClickerActionKind,
-    payload?: any
+    type: ClickerActionKind;
+    payload?: any;
 }
 
 export const initialClickerState: ClickerState = {
     count: 0,
-    odds: .1,
+    oddsString: "25",
+    fraction: {
+        numerator: 1,
+        denominator: 4
+    },
     didHit: false,
+    title: "What Are The Odds?",
     results: {
         BtnColor: "default",
         text: ""
@@ -35,21 +48,21 @@ export const initialClickerState: ClickerState = {
 }
 
 // ACTIONS
-export declare type ClickerActionKind = 'INCREASE' | 'RESET';
-
-// export enum ClickerActionKind {
-//     INCREASE = "INCREASE",
-//     RESET = "RESET"
-// }
+export declare type ClickerActionKind = 'INCREASE' | 'RESET' | 'UPDATE_PERCENT' | 'UPDATE_FRACTION';
 
 // REDUCER
-function reducer(state: ClickerState = initialClickerState, action: Action) {
+function reducer(state: ClickerState ,  action: Action): ClickerState {
     const { type, payload } = action;
+    
     switch (type) {
         case "INCREASE":
-            return increment(state)
+            return increment(state);
         case "RESET":
-            return {...initialClickerState}
+            return reset(state);
+        case "UPDATE_PERCENT":
+            return updateOddsPercent(state, payload);
+        case "UPDATE_FRACTION":
+            return updateOddsFraction(state, payload)
         default:
             return state;
     }

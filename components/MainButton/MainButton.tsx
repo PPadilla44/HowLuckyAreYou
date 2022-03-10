@@ -13,19 +13,16 @@ const MainButton = () => {
 
     const handlePress = () => dispatch!({ type: 'INCREASE' });
 
-    // const theme = useColorScheme();
-    const theme = "dark";
-
     if (didHit) {
         return (
-            <View style={[styles.btnDone, { backgroundColor: BtnColorObj[results.BtnColor], shadowColor: Colors[theme].text }]} >
+            <View style={[styles.btnDone, { backgroundColor: BtnColorObj[results.BtnColor]}]} >
                 <Text style={styles.btnText}>{results.text}</Text>
             </View>
         )
     }
 
     return (
-        <TouchableOpacity style={[styles.btn, { shadowColor: Colors[theme].text } ]} onPress={handlePress} activeOpacity={0.7}>
+        <TouchableOpacity containerStyle={styles.btn} onPress={handlePress} activeOpacity={0.7}>
             <Text style={styles.btnText}>Test Your Luck</Text>
         </TouchableOpacity>
     )
