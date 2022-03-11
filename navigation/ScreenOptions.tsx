@@ -8,12 +8,12 @@ export const MainScreenOptions = (colorScheme: "light" | "dark", navigation: Nat
     headerTitle: "",
     headerStyle: { backgroundColor: Colors[colorScheme].background },
     headerShadowVisible: false,
-    headerRight: () => <PressableIcon navigation={navigation} name='gear' type='evilicon' size={40} />,
+    headerRight: () => <PressableIcon callBack={() => navigation.navigate('Modal')} name='gear' type='evilicon' size={40} />,
 })
 
 export const ModalScreenOptions = (colorScheme: "light" | "dark", navigation: NativeStackNavigationProp<RootStackParamList>) => ({
     headerTitle: "",
     headerStyle: { backgroundColor: Colors[colorScheme].modal },
     headerShadowVisible: false,
-    headerRight: () => <PressableIcon navigation={navigation} name='globe' type='font-awesome' size={35} />,
+    headerRight: () => <PressableIcon callBack={() => console.log("GLOBE")} name='globe' type='font-awesome' size={35} />,
 })
