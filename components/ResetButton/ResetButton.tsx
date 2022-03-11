@@ -29,6 +29,7 @@ const ResetButton = () => {
     return (
         <View style={[styles.btn, { opacity: didHit ? 1 : 0.5 }]}>
             <Button
+                testID='ResetBtn'
                 title='Reset'
                 onPress={createTwoButtonAlert}
                 titleStyle={{ color: didHit ? "#830909" : "gray", fontFamily: "Futura"  }} 

@@ -11,7 +11,7 @@ export interface Props {
 
 const SubContainer: FC<Props> = ({ textStyle, title, text }) => {
     return (
-        <View style={styles.subContainer}>
+        <View testID='SubContainer' style={styles.subContainer}>
             <Text testID='title' style={styles.title}>{title}</Text>
             <Text testID='text' style={textStyle}>{text}</Text>
         </View>

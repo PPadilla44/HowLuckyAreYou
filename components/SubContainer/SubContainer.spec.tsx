@@ -1,8 +1,5 @@
-import React from "react";
-import { cleanup, render, RenderAPI } from "@testing-library/react-native"
-import "@testing-library/jest-native";
+import { cleanup, render, RenderAPI } from "@testing-library/react-native";
 import SubContainer, { Props } from "./SubContainer";
-import { Text } from "../Themed";
 
 describe('<SubContainer/>', () => {
 
@@ -23,10 +20,6 @@ describe('<SubContainer/>', () => {
         wrapper = render(<SubContainer {...props} />);
     })
 
-    it("renders correctly", () => {
-        expect(wrapper.toJSON()).toMatchSnapshot();
-    });
-    
     it("renders props", () => {
         expect(wrapper.container.props).toEqual(props);
     });
@@ -34,11 +27,11 @@ describe('<SubContainer/>', () => {
     it("renders texts", () => {
         const title = wrapper.getByTestId("title");
         expect(title.props.children).toBe("TEST TITLE");
-
+        
         const text = wrapper.getByTestId("text")
         expect(text.props.children).toBe("TEST TEXT");
     });
-
+    
     it("render style from text style props", () => {
         const text = wrapper.getByTestId("text");
         expect(text).toHaveStyle({
@@ -46,9 +39,13 @@ describe('<SubContainer/>', () => {
             fontSize: 64,
             fontFamily: "Futura"
         });
-
+        
     });
-
+    
+    it("renders correctly", () => {
+        expect(wrapper.toJSON()).toMatchSnapshot();
+    });
+    
     it("updates correctly", () => {
         const newComponent = (
             <SubContainer 
