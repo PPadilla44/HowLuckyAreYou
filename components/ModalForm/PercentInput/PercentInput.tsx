@@ -24,7 +24,7 @@ const PercentInput: FC<Props> = ({ changeText, oddsString }) => {
                 />
             </View>
             <View style={styles.percentIconContainer}>
-                <TextAsIcon text={'%'} />
+                <TextAsIcon style={{fontSize: 48, fontWeight: "bold"}} text={'%'} />
             </View>
         </>
     )

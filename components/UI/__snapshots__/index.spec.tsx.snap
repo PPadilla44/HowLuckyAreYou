@@ -1,0 +1,113 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SettingsIcon /> Matches Snapshot 1`] = `
+<RNGestureHandlerButton
+  collapsable={false}
+  exclusive={true}
+  onGestureEvent={[Function]}
+  onGestureHandlerEvent={[Function]}
+  onGestureHandlerStateChange={[Function]}
+  onHandlerStateChange={[Function]}
+  rippleColor={0}
+  style={
+    Array [
+      Object {
+        "backgroundColor": "#252525",
+        "borderColor": "white",
+      },
+      Object {
+        "alignItems": "center",
+        "bottom": "5%",
+        "height": 50,
+        "justifyContent": "center",
+        "position": "absolute",
+        "right": 10,
+        "width": 50,
+      },
+    ]
+  }
+  testID="settingsBtn"
+>
+  <View
+    accessible={true}
+    style={
+      Object {
+        "backgroundColor": "#252525",
+        "borderBottomWidth": 1,
+        "borderColor": "white",
+        "borderLeftWidth": 1,
+        "borderRadius": 15,
+        "borderRightWidth": 1,
+        "borderTopWidth": 1,
+        "opacity": 1,
+        "shadowColor": "white",
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "overflow": "hidden",
+        }
+      }
+    >
+      <View
+        testID="settingsIcon"
+      >
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "backgroundColor": "transparent",
+              "justifyContent": "center",
+            }
+          }
+        >
+          <Text
+            allowFontScaling={false}
+            style={
+              Array [
+                Object {
+                  "color": "white",
+                  "fontSize": 40,
+                },
+                Object {
+                  "backgroundColor": "transparent",
+                },
+                Object {
+                  "fontFamily": "material",
+                  "fontStyle": "normal",
+                  "fontWeight": "normal",
+                },
+                Object {},
+              ]
+            }
+            testID="iconIcon"
+          >
+            
+          </Text>
+        </View>
+      </View>
+    </View>
+  </View>
+</RNGestureHandlerButton>
+`;
+
+exports[`<TextAsIcon /> Matches Snapshot 1`] = `
+<Text
+  style={
+    Array [
+      Object {
+        "color": "white",
+        "fontFamily": "Futura",
+      },
+      Object {
+        "fontSize": 48,
+        "fontWeight": "bold",
+      },
+    ]
+  }
+>
+  $
+</Text>
+`;

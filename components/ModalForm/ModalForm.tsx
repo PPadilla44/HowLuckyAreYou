@@ -1,9 +1,8 @@
 import { StyleSheet } from 'react-native';
 import React, { FC, useState } from 'react';
-import { Input, Text, TouchableOpacity, View } from '../Themed';
+import { Input, View } from '../Themed';
 import TwoButtonGroup from '../TwoButtonGroup';
 import SaveTryButtons from '../SaveTryButtons';
-import TextAsIcon from '../UI/TextAsIcon';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../types';
 import { useClicker } from '../contexts/useClicker';

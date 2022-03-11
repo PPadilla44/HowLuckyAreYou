@@ -28,7 +28,7 @@ const FractionInput: FC<Props> = ({ denominator, numerator, handleChanges }) => 
                 />
             </View>
             <View style={{ marginHorizontal: 10, backgroundColor: "transparent", height: 52 }}>
-                <TextAsIcon text={'/'} />
+                <TextAsIcon style={{ fontSize: 48, fontWeight: "bold" }} text={'/'} />
             </View>
             <View style={{ flex: 2, backgroundColor: "transparent" }}>
                 <Input

@@ -22,7 +22,7 @@ const Dropdown = (props: RootTabScreenProps<"Modal">) => {
 
             </ScrollView>
 
-            <SettingsIcon />
+            <SettingsIcon callBack={() => alert("Settings")} />
 
         </View>
     )
