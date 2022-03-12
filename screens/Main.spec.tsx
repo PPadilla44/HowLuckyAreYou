@@ -49,7 +49,7 @@ describe('<Main />', () => {
         const alert = jest.spyOn(Alert, "alert");
         const count = wrapper.getByText("0");
         const mainBtn = wrapper.getByTestId("MainBtn");
-        const resetBtn = wrapper.getByTestId("ResetBtn");
+        const resetBtn = wrapper.getByTestId("resetBtn");
 
         fireEvent.press(mainBtn);
         expect(count.props.children).toBe(`1`);
@@ -67,7 +67,7 @@ describe('<Main />', () => {
         const alert = jest.spyOn(Alert, "alert");
         const count = wrapper.getByText("0");
         const mainBtn = wrapper.getByTestId("MainBtn");
-        const resetBtn = wrapper.getByTestId("ResetBtn");
+        const resetBtn = wrapper.getByTestId("resetBtn");
 
         fireEvent.press(mainBtn);
         expect(count.props.children).toBe(`1`);

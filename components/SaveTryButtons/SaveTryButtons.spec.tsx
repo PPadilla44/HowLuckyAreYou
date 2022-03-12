@@ -1,10 +1,11 @@
-import { cleanup, render, RenderAPI, fireEvent } from "@testing-library/react-native";
+import { render, RenderAPI, fireEvent } from "@testing-library/react-native";
 import SaveTryButtons from "./SaveTryButtons";
 
 describe('<SaveTryButtons />', () => {
     
     const saveMock = jest.fn();
     const tryMock = jest.fn();
+
 
     let wrapper: RenderAPI;
     beforeEach(() => {
