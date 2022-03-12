@@ -1,4 +1,4 @@
-import { Pressable, StyleSheet } from 'react-native'
+import { Pressable } from 'react-native'
 import React, { FC } from 'react'
 import { Icon } from '../Themed'
 
@@ -12,11 +12,13 @@ interface Props {
 const PressableIcon: FC<Props> = ({ callBack, name, size, type }) => {
     return (
         <Pressable
+            testID='pressableIconBtn'
             onPress={callBack}
             style={({ pressed }) => ({
-                opacity: pressed ? 0.3 : 1,
+                opacity: pressed ? 0.3 : 1
             })}>
             <Icon
+                testID='pressableIcon'
                 name={name}
                 type={type}
                 size={size}
@@ -26,5 +28,3 @@ const PressableIcon: FC<Props> = ({ callBack, name, size, type }) => {
 }
 
 export default PressableIcon
-
-const styles = StyleSheet.create({})
