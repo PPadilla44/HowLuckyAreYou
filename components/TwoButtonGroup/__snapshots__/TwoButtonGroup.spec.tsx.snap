@@ -1,0 +1,130 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<TwoButtonGroup /> should match snapshot 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "#808080",
+      "borderColor": "#808080",
+      "borderRadius": 9,
+      "borderWidth": 1,
+      "flexDirection": "row",
+      "height": 32,
+      "marginBottom": 20,
+      "marginHorizontal": 10,
+      "marginTop": 0,
+      "marginVertical": 5,
+      "overflow": "hidden",
+      "padding": 2,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "borderRightColor": "transparent",
+        "borderRightWidth": 1,
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      accessible={true}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "flex": 1,
+          "opacity": 1,
+        }
+      }
+      testID="buttonGroupItem"
+    >
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "backgroundColor": "white",
+            "borderRadius": 7,
+            "flex": 1,
+            "justifyContent": "center",
+            "opacity": 1,
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "color": "black",
+              "fontFamily": "Futura",
+              "fontSize": 15,
+              "fontWeight": "bold",
+            }
+          }
+          testID="buttonGroupItemText"
+        >
+          First
+        </Text>
+      </View>
+    </View>
+  </View>
+  <View
+    style={
+      Object {
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      accessible={true}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "flex": 1,
+          "opacity": 1,
+        }
+      }
+      testID="buttonGroupItem"
+    >
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "borderRadius": 7,
+            "flex": 1,
+            "justifyContent": "center",
+            "opacity": 0.5,
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "color": "black",
+              "fontFamily": "Futura",
+              "fontSize": 15,
+              "fontWeight": "bold",
+            }
+          }
+          testID="buttonGroupItemText"
+        >
+          Second
+        </Text>
+      </View>
+    </View>
+  </View>
+</View>
+`;
