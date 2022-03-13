@@ -35,7 +35,7 @@ const ModalForm: FC<Props> = ({ navigation }) => {
         const tempForm = { ...formData, ...data };
         const { oddsString, title } = tempForm;
 
-        if (parseFloat(oddsString) > 100) {
+        if ( isNaN( parseFloat(oddsString) ) || parseFloat(oddsString) > 100) {
             return
         }
         if (oddsString.length > 0 && title.length > 0) {
@@ -48,6 +48,10 @@ const ModalForm: FC<Props> = ({ navigation }) => {
     const handleFractionChanges = (data: { denominator?: string, numerator?: string }) => {
         const tempForm = { ...formData, ...data };
         const { denominator, numerator, title } = tempForm;
+
+        if( isNaN( parseFloat(denominator) ) || isNaN( parseFloat(numerator) ) ) {
+            return
+        }
 
         if (denominator.length > 0 && numerator.length > 0 && title.length > 0) {
             setFormData({ ...tempForm, isValid: true })
@@ -82,7 +86,7 @@ const ModalForm: FC<Props> = ({ navigation }) => {
     }
 
     return (
-        <View style={styles.container}>
+        <View testID='modalForm' style={styles.container}>
 
             <View style={styles.topRow}>
                 {

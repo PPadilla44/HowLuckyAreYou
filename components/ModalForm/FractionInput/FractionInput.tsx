@@ -17,6 +17,7 @@ const FractionInput: FC<Props> = ({ denominator, numerator, handleChanges }) => 
 
             <View style={{ flex: 1, backgroundColor: "transparent" }}>
                 <Input
+                    testID='numeratorInput'
                     keyboardType="number-pad"
                     style={styles.input}
                     inputContainerStyle={styles.inputContainer}
@@ -31,6 +32,7 @@ const FractionInput: FC<Props> = ({ denominator, numerator, handleChanges }) => 
             </View>
             <View style={{ flex: 2, backgroundColor: "transparent" }}>
                 <Input
+                    testID='denominatorInput'
                     keyboardType="number-pad"
                     style={styles.input}
                     inputContainerStyle={styles.inputContainer}

@@ -14,6 +14,7 @@ const PercentInput: FC<Props> = ({ changeText, oddsString }) => {
         <>
             <View style={styles.percentWrapper}>
                 <Input
+                    testID='percentInput'
                     style={styles.input}
                     inputContainerStyle={styles.inputContainer}
                     keyboardType="numeric"

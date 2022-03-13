@@ -63,7 +63,7 @@ Array [
               "textAlign": "center",
             }
           }
-          testID="RNE__Input__text-input"
+          testID="percentInput"
           underlineColorAndroid="transparent"
           value="25"
         />

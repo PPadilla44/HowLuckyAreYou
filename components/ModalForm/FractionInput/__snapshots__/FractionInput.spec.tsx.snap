@@ -63,7 +63,7 @@ Array [
               "textAlign": "center",
             }
           }
-          testID="RNE__Input__text-input"
+          testID="numeratorInput"
           underlineColorAndroid="transparent"
           value="5"
         />
@@ -191,7 +191,7 @@ Array [
               "textAlign": "center",
             }
           }
-          testID="RNE__Input__text-input"
+          testID="denominatorInput"
           underlineColorAndroid="transparent"
           value="1"
         />
