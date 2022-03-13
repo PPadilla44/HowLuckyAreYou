@@ -13,14 +13,14 @@ const MainButton = () => {
 
     if (didHit) {
         return (
-            <View testID='MainBtnResults' style={[styles.btnDone, { backgroundColor: BtnColorObj[results.BtnColor]}]} >
+            <View testID='mainBtnResults' style={[styles.btnDone, { backgroundColor: BtnColorObj[results.BtnColor]}]} >
                 <Text style={styles.btnText}>{results.text}</Text>
             </View>
         )
     }
 
     return (
-        <TouchableOpacity testID='MainBtn' containerStyle={styles.btn} onPress={handlePress} activeOpacity={0.7}>
+        <TouchableOpacity testID='mainBtn' containerStyle={styles.btn} onPress={handlePress} activeOpacity={0.7}>
             <Text style={styles.btnText}>Test Your Luck</Text>
         </TouchableOpacity>
     )

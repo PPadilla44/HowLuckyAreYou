@@ -1,10 +1,10 @@
 import { StyleSheet } from 'react-native'
-import React, { FC, useState } from 'react'
+import React, { FC } from 'react'
 import { TextAsIcon } from '../../UI'
 import { TouchableOpacity, View, Text, Input } from '../../Themed'
 import Colors from '../../../constants/Colors'
 
-interface Props {
+export interface Props {
     denominator: string;
     numerator: string;
     handleChanges: (data: {}) => void;
@@ -24,7 +24,6 @@ const FractionInput: FC<Props> = ({ denominator, numerator, handleChanges }) => 
                     maxLength={2}
                     value={numerator}
                     onChangeText={numerator => handleChanges({ numerator })}
-
                 />
             </View>
             <View style={{ marginHorizontal: 10, backgroundColor: "transparent", height: 52 }}>
@@ -39,7 +38,6 @@ const FractionInput: FC<Props> = ({ denominator, numerator, handleChanges }) => 
                     maxLength={3}
                     value={denominator}
                     onChangeText={denominator => handleChanges({ denominator })}
-
                 />
             </View>
             <TouchableOpacity darkColor={Colors.light.input} lightColor={Colors.dark.modal} containerStyle={{

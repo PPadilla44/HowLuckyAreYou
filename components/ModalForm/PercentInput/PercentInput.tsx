@@ -4,7 +4,7 @@ import { Input, View } from '../../Themed'
 import { TextAsIcon } from '../../UI'
 
 
-interface Props {
+export interface Props {
     oddsString: string;
     changeText: (data: {}) => void
 }

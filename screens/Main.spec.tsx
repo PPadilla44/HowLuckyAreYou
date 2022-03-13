@@ -39,7 +39,7 @@ describe('<Main />', () => {
 
     it("increases count when main button is pressed", () => {
         const count = wrapper.getByText("0");
-        const mainBtn = wrapper.getByTestId("MainBtn");
+        const mainBtn = wrapper.getByTestId("mainBtn");
         fireEvent.press(mainBtn);
         expect(count.props.children).toBe(`1`);
     });
@@ -48,7 +48,7 @@ describe('<Main />', () => {
     it("resets count when reset button is pressed", () => {
         const alert = jest.spyOn(Alert, "alert");
         const count = wrapper.getByText("0");
-        const mainBtn = wrapper.getByTestId("MainBtn");
+        const mainBtn = wrapper.getByTestId("mainBtn");
         const resetBtn = wrapper.getByTestId("resetBtn");
 
         fireEvent.press(mainBtn);
@@ -66,7 +66,7 @@ describe('<Main />', () => {
     it("canceles alert when reset button is pressed and canceled", () => {
         const alert = jest.spyOn(Alert, "alert");
         const count = wrapper.getByText("0");
-        const mainBtn = wrapper.getByTestId("MainBtn");
+        const mainBtn = wrapper.getByTestId("mainBtn");
         const resetBtn = wrapper.getByTestId("resetBtn");
 
         fireEvent.press(mainBtn);
