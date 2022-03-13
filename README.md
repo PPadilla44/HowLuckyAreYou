@@ -1,4 +1,4 @@
-<h1 align="center">Welcome to What Are The Odds? 👋</h1>
+<h1 align="center">What Are The Odds?</h1>
 <p>
   <img alt="Version" src="https://img.shields.io/badge/version-1.0.0-blue.svg?cacheSeconds=2592000" />
 </p>
