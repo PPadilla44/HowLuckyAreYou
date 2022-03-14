@@ -3,7 +3,7 @@ import { View, Text } from "../Themed";
 import React, { FC } from 'react';
 import Colors from "../../constants/Colors";
 
-interface Props {
+export interface Props {
     textStyle: StyleProp<TextStyle>
     title: string,
     text: string
@@ -11,9 +11,9 @@ interface Props {
 
 const SubContainer: FC<Props> = ({ textStyle, title, text }) => {
     return (
-        <View style={styles.subContainer}>
-            <Text style={styles.title}>{title}</Text>
-            <Text style={textStyle}>{text}</Text>
+        <View testID='SubContainer' style={styles.subContainer}>
+            <Text testID='title' style={styles.title}>{title}</Text>
+            <Text testID='text' style={textStyle}>{text}</Text>
         </View>
     )
 }

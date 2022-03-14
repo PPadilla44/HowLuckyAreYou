@@ -1,18 +1,23 @@
 import { StyleSheet } from 'react-native'
-import React from 'react'
+import React, { FC } from 'react'
 import { Icon, TouchableOpacity } from '../Themed'
 import Colors from '../../constants/Colors'
 
-const SettingsIcon = () => {
+interface Props {
+    callBack: () => any;
+}
+
+const SettingsIcon: FC<Props> = ({ callBack }) => {
     return (
         <TouchableOpacity
+            testID='settingsBtn'
             lightColor='white'
             darkColor={Colors.dark.modal}
-            onPress={() => alert("Settings")}
+            onPress={callBack}
             style={styles.btn}
             containerStyle={styles.container} >
-
             <Icon
+                testID='settingsIcon'
                 name='tune'
                 size={40}
                 lightColor={Colors.dark.modal}

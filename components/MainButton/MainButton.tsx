@@ -3,8 +3,6 @@ import { Text, View, TouchableOpacity } from "../../components/Themed";
 import React from 'react'
 import { BtnColorObj } from '../../store/clicker';
 import { useClicker } from '../contexts/useClicker';
-import useColorScheme from '../../hooks/useColorScheme';
-import Colors from '../../constants/Colors';
 
 const MainButton = () => {
 
@@ -15,14 +13,14 @@ const MainButton = () => {
 
     if (didHit) {
         return (
-            <View style={[styles.btnDone, { backgroundColor: BtnColorObj[results.BtnColor]}]} >
+            <View testID='mainBtnResults' style={[styles.btnDone, { backgroundColor: BtnColorObj[results.BtnColor]}]} >
                 <Text style={styles.btnText}>{results.text}</Text>
             </View>
         )
     }
 
     return (
-        <TouchableOpacity containerStyle={styles.btn} onPress={handlePress} activeOpacity={0.7}>
+        <TouchableOpacity testID='mainBtn' containerStyle={styles.btn} onPress={handlePress} activeOpacity={0.7}>
             <Text style={styles.btnText}>Test Your Luck</Text>
         </TouchableOpacity>
     )

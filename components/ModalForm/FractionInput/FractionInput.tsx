@@ -1,10 +1,10 @@
 import { StyleSheet } from 'react-native'
-import React, { FC, useState } from 'react'
+import React, { FC } from 'react'
 import { TextAsIcon } from '../../UI'
 import { TouchableOpacity, View, Text, Input } from '../../Themed'
 import Colors from '../../../constants/Colors'
 
-interface Props {
+export interface Props {
     denominator: string;
     numerator: string;
     handleChanges: (data: {}) => void;
@@ -17,6 +17,7 @@ const FractionInput: FC<Props> = ({ denominator, numerator, handleChanges }) => 
 
             <View style={{ flex: 1, backgroundColor: "transparent" }}>
                 <Input
+                    testID='numeratorInput'
                     keyboardType="number-pad"
                     style={styles.input}
                     inputContainerStyle={styles.inputContainer}
@@ -24,14 +25,14 @@ const FractionInput: FC<Props> = ({ denominator, numerator, handleChanges }) => 
                     maxLength={2}
                     value={numerator}
                     onChangeText={numerator => handleChanges({ numerator })}
-
                 />
             </View>
             <View style={{ marginHorizontal: 10, backgroundColor: "transparent", height: 52 }}>
-                <TextAsIcon text={'/'} />
+                <TextAsIcon style={{ fontSize: 48, fontWeight: "bold" }} text={'/'} />
             </View>
             <View style={{ flex: 2, backgroundColor: "transparent" }}>
                 <Input
+                    testID='denominatorInput'
                     keyboardType="number-pad"
                     style={styles.input}
                     inputContainerStyle={styles.inputContainer}
@@ -39,7 +40,6 @@ const FractionInput: FC<Props> = ({ denominator, numerator, handleChanges }) => 
                     maxLength={3}
                     value={denominator}
                     onChangeText={denominator => handleChanges({ denominator })}
-
                 />
             </View>
             <TouchableOpacity darkColor={Colors.light.input} lightColor={Colors.dark.modal} containerStyle={{

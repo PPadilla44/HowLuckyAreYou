@@ -12,7 +12,8 @@ const ResetButton = () => {
 
     const resetAll = () => dispatch!({ type: 'RESET' })
 
-    const createTwoButtonAlert = () =>
+    const createTwoButtonAlert = () => (
+
         Alert.alert(
             "Reset",
             "Are you sure you would like to reset?",
@@ -24,16 +25,17 @@ const ResetButton = () => {
                 },
                 { text: "Yes", style: "destructive", onPress: resetAll }
             ]
-        );
+        ));
 
     return (
-        <View style={[styles.btn, { opacity: didHit ? 1 : 0.5 }]}>
+        <View testID='resetWrapper' style={[styles.btn, { opacity: didHit ? 1 : 0.5 }]}>
             <Button
+                testID='resetBtn'
                 title='Reset'
                 onPress={createTwoButtonAlert}
-                titleStyle={{ color: didHit ? "#830909" : "gray", fontFamily: "Futura"  }} 
+                titleStyle={{ color: didHit ? "#830909" : "gray", fontFamily: "Futura" }}
                 buttonStyle={{ backgroundColor: undefined }}
-                />
+            />
         </View>
     )
 }

@@ -13,17 +13,15 @@ interface Props {
 
 const SaveTryButtons: FC<Props> = ({ showTry, handleSave, handleTry }) => {
 
-    console.log(showTry);
-    
-
     return (
         <View style={styles.container}>
 
-            <TouchableOpacity containerStyle={styles.saveBtn} onPress={handleSave}>
+            <TouchableOpacity testID='saveBtn' containerStyle={styles.saveBtn} onPress={handleSave}>
                 <Text style={styles.saveText}>Save</Text>
             </TouchableOpacity>
 
             <TouchableOpacity
+                testID='tryBtn'
                 lightColor={showTry ? Colors.light.input : "transparent"}
                 darkColor={showTry ? Colors.dark.input : "transparent"}
                 containerStyle={styles.tryBtn}
@@ -37,7 +35,6 @@ const SaveTryButtons: FC<Props> = ({ showTry, handleSave, handleTry }) => {
                     Try
                 </Text>
             </TouchableOpacity>
-
 
         </View>
     )

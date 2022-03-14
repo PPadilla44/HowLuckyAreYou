@@ -1,27 +1,31 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import { StyleSheet, Text } from 'react-native'
+import React, { FC } from 'react'
 import Colors from '../../../constants/Colors';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
+interface Props {
+    callback: () => any;
+}
 
-const LeftSwipe = () => {
+const LeftSwipe: FC<Props> = ({ callback }) => {
     return (
-        <View style={styles.Btn}>
-            <Text style={styles.Txt}>
+        <TouchableOpacity testID='leftSwipeBtn' onPress={callback} containerStyle={styles.btn}>
+            <Text style={styles.txt}>
                 Share
             </Text>
-        </View>
+        </TouchableOpacity>
     );
 };
 
 export default LeftSwipe
 
 const styles = StyleSheet.create({
-    Btn: {
+    btn: {
         backgroundColor: Colors.shared.text,
         justifyContent: 'center',
         alignItems: "flex-start"
     },
-    Txt: {
+    txt: {
         color: 'white',
         fontWeight: '600',
         paddingHorizontal: 30,

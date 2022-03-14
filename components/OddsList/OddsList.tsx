@@ -1,16 +1,13 @@
 import { StyleSheet } from 'react-native'
-import React from 'react'
+import React, { FC } from 'react'
 import { OddsItemInterface } from '../../types'
 import OddsItem from '../OddsItem'
 
-const OddsList = () => {
+interface Props {
+    data: OddsItemInterface[];
+}
 
-    const data: OddsItemInterface[] = [
-        { id: "1", name: "Lottery", odds: "1/42 BIL" },
-        { id: "2", name: "Hair Loss", odds: "2/3" },
-        { id: "3", name: "Random", odds: "1.02%" },
-        { id: "4", name: "My Odds", odds: "1/4" }
-    ]
+const OddsList: FC<Props> = ({ data }) => {
 
     return (
         <>
@@ -30,5 +27,3 @@ const OddsList = () => {
 }
 
 export default OddsList
-
-const styles = StyleSheet.create({})

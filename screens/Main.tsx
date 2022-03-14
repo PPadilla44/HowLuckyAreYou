@@ -1,13 +1,14 @@
 import { StyleSheet } from 'react-native';
-import { Text, View } from "../components/Themed";
-import React, { useState } from 'react';
+import { View } from "../components/Themed";
+import React, { FC, useState } from 'react';
 import SubContainer from '../components/SubContainer';
 import ResetButton from '../components/ResetButton';
 import MainButton from '../components/MainButton';
 import { useClicker } from '../components/contexts/useClicker';
 import { RootTabScreenProps } from '../types';
 
-const Main = ({ }: RootTabScreenProps<"Main">) => {
+
+const Main : FC<RootTabScreenProps<"Main">> = ({ }) => {
 
     const { state, dispatch } = useClicker();
     const { count, oddsString, title, fraction } = state;
@@ -16,7 +17,7 @@ const Main = ({ }: RootTabScreenProps<"Main">) => {
     const [fractionPref, setFractionPref] = useState(false);
 
     return (
-        <View style={styles.container}>
+        <View testID='Main' style={styles.container}>
 
             <SubContainer
                 text={`${count}`}

@@ -1,0 +1,113 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SubContainer/> renders correctly 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "backgroundColor": "black",
+        "shadowColor": "white",
+      },
+      Object {
+        "alignItems": "center",
+        "justifyContent": "space-between",
+      },
+    ]
+  }
+  testID="SubContainer"
+>
+  <Text
+    style={
+      Array [
+        Object {
+          "color": "white",
+          "fontFamily": "Futura",
+        },
+        Object {
+          "color": "#325C99",
+          "fontFamily": "Futura",
+          "fontSize": 24,
+          "fontWeight": "bold",
+          "textAlign": "center",
+        },
+      ]
+    }
+    testID="title"
+  >
+    TEST TITLE
+  </Text>
+  <Text
+    style={
+      Array [
+        Object {
+          "color": "white",
+          "fontFamily": "Futura",
+        },
+        Object {
+          "fontFamily": "Futura",
+          "fontSize": 64,
+          "fontWeight": "bold",
+        },
+      ]
+    }
+    testID="text"
+  >
+    TEST TEXT
+  </Text>
+</View>
+`;
+
+exports[`<SubContainer/> updates correctly 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "backgroundColor": "black",
+        "shadowColor": "white",
+      },
+      Object {
+        "alignItems": "center",
+        "justifyContent": "space-between",
+      },
+    ]
+  }
+  testID="SubContainer"
+>
+  <Text
+    style={
+      Array [
+        Object {
+          "color": "white",
+          "fontFamily": "Futura",
+        },
+        Object {
+          "color": "#325C99",
+          "fontFamily": "Futura",
+          "fontSize": 24,
+          "fontWeight": "bold",
+          "textAlign": "center",
+        },
+      ]
+    }
+    testID="title"
+  >
+    new title
+  </Text>
+  <Text
+    style={
+      Array [
+        Object {
+          "color": "white",
+          "fontFamily": "Futura",
+        },
+        Object {
+          "backgroundColor": "red",
+        },
+      ]
+    }
+    testID="text"
+  >
+    new text
+  </Text>
+</View>
+`;

@@ -14,12 +14,12 @@ interface Props {
 const OddsItem: FC<Props> = ({ item }) => {
     return (
         <Swipeable
-            renderLeftActions={() => <LeftSwipe />}
-            renderRightActions={() => <RightSwipe />}
-            onSwipeableRightOpen={() => alert('Swipe from right')}
-            onSwipeableLeftOpen={() => alert('Swipe from left')}
+            renderLeftActions={() => <LeftSwipe callback={() => console.log("LEFTSWIPE")} />}
+            renderRightActions={() => <RightSwipe callback={() => console.log("LEFTSWIPE")} />}
+            // onSwipeableRightOpen={() => alert('Swipe from right')}
+            // onSwipeableLeftOpen={() => alert('Swipe from left')}
         >
-            <TouchableOpacity lightColor='white' darkColor={Colors.dark.modal} onPress={() => alert("Pressed")}  style={styles.item} activeOpacity={.8}>
+            <TouchableOpacity testID='oddsItemBtn' lightColor='white' darkColor={Colors.dark.modal} onPress={() => console.log("Pressed")} containerStyle={styles.item} activeOpacity={.8}>
                 <Text style={styles.baseTxt}>{item.name}</Text>
                 <Text style={styles.baseTxt}>{item.odds} </Text>
             </TouchableOpacity>

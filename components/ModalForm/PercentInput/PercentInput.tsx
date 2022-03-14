@@ -4,7 +4,7 @@ import { Input, View } from '../../Themed'
 import { TextAsIcon } from '../../UI'
 
 
-interface Props {
+export interface Props {
     oddsString: string;
     changeText: (data: {}) => void
 }
@@ -14,6 +14,7 @@ const PercentInput: FC<Props> = ({ changeText, oddsString }) => {
         <>
             <View style={styles.percentWrapper}>
                 <Input
+                    testID='percentInput'
                     style={styles.input}
                     inputContainerStyle={styles.inputContainer}
                     keyboardType="numeric"
@@ -24,7 +25,7 @@ const PercentInput: FC<Props> = ({ changeText, oddsString }) => {
                 />
             </View>
             <View style={styles.percentIconContainer}>
-                <TextAsIcon text={'%'} />
+                <TextAsIcon style={{fontSize: 48, fontWeight: "bold"}} text={'%'} />
             </View>
         </>
     )

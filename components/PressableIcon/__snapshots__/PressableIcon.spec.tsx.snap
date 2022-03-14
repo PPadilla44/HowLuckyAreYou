@@ -1,0 +1,70 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<PressableIcon Matches Snapshot 1`] = `
+<View
+  accessible={true}
+  collapsable={false}
+  focusable={true}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "opacity": 1,
+    }
+  }
+  testID="pressableIconBtn"
+>
+  <View
+    style={
+      Object {
+        "overflow": "hidden",
+      }
+    }
+  >
+    <View
+      testID="pressableIcon"
+    >
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "backgroundColor": "transparent",
+            "justifyContent": "center",
+          }
+        }
+      >
+        <Text
+          allowFontScaling={false}
+          style={
+            Array [
+              Object {
+                "color": "#007AFF",
+                "fontSize": 40,
+              },
+              Object {
+                "backgroundColor": "transparent",
+              },
+              Object {
+                "fontFamily": "evilicons",
+                "fontStyle": "normal",
+                "fontWeight": "normal",
+              },
+              Object {},
+            ]
+          }
+          testID="iconIcon"
+        >
+          
+        </Text>
+      </View>
+    </View>
+  </View>
+</View>
+`;

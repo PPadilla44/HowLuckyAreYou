@@ -1,26 +1,30 @@
-import { StyleSheet } from 'react-native';
-import React from 'react';
-import { View, Text } from '../../Themed';
+import { StyleSheet, Text } from 'react-native';
+import React, { FC } from 'react';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
-const RightSwipe = () => {
+interface Props {
+    callback: () => any;
+}
+
+const RightSwipe: FC<Props> = ({ callback }) => {
     return (
-        <View style={styles.Btn} >
-            <Text style={styles.Txt}>
+        <TouchableOpacity testID='rightSwipeBtn' onPress={callback} containerStyle={styles.btn}>
+            <Text style={styles.txt}>
                 Delete
             </Text>
-        </View>
+        </TouchableOpacity>
     );
 };
 
 export default RightSwipe
 
 const styles = StyleSheet.create({
-    Btn: {
+    btn: {
         backgroundColor: 'red',
         justifyContent: 'center',
         alignItems: 'flex-end',
     },
-    Txt: {
+    txt: {
         color: 'white',
         fontWeight: 'bold',
         paddingHorizontal: 30,
