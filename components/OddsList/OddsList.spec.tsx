@@ -44,8 +44,4 @@ describe('<OddsList />', () => {
         expect(fourS).toHaveTextContent("");
     });
 
-    it('should match snapshot', () => {
-        expect(wrapper.toJSON()).toMatchSnapshot();
-    });
-
 });

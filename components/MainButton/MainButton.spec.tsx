@@ -30,7 +30,4 @@ describe('<MainButton', () => {
         wrapper.getByTestId("mainBtnResults");
     });
 
-    it('should match snapshot', () => {
-        expect(wrapper.toJSON()).toMatchSnapshot();
-    });
 })

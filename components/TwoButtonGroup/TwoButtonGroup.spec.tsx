@@ -46,7 +46,5 @@ describe('<TwoButtonGroup />', () => {
         expect(setStateMock).toHaveBeenCalledWith(0);
     });
 
-    test('should match snapshot', () => {
-        expect(wrapper.toJSON()).toMatchSnapshot();
-    })
+
 })

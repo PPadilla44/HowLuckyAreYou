@@ -41,8 +41,4 @@ describe('<FractionInput />', () => {
         expect(mockFn).toBeCalledTimes(2)
     });
 
-    it('should match snapshot', () => {
-        expect(wrapper.toJSON()).toMatchSnapshot();
-    });
-
 })

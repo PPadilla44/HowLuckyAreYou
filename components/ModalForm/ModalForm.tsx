@@ -35,10 +35,11 @@ const ModalForm: FC<Props> = ({ navigation }) => {
         const tempForm = { ...formData, ...data };
         const { oddsString, title } = tempForm;
 
-        if ( isNaN( parseFloat(oddsString) ) || parseFloat(oddsString) > 100) {
-            return
-        }
+
         if (oddsString.length > 0 && title.length > 0) {
+            if (isNaN(parseFloat(oddsString)) || parseFloat(oddsString) > 100) {
+                return
+            }
             setFormData({ ...tempForm, isValid: true })
         } else {
             setFormData({ ...tempForm, isValid: false })
@@ -49,12 +50,12 @@ const ModalForm: FC<Props> = ({ navigation }) => {
         const tempForm = { ...formData, ...data };
         const { denominator, numerator, title } = tempForm;
 
-        if( isNaN( parseFloat(denominator) ) || isNaN( parseFloat(numerator) ) ) {
-            return
-        }
 
         if (denominator.length > 0 && numerator.length > 0 && title.length > 0) {
-            if(denominator.length < 4 && numerator.length < 3) {
+            if (isNaN(parseFloat(denominator)) || isNaN(parseFloat(numerator))) {
+                return
+            }
+            if (denominator.length < 4 && numerator.length < 3) {
                 setFormData({ ...tempForm, isValid: true })
             }
         } else {

@@ -47,9 +47,4 @@ describe('<SaveTryButtons />', () => {
         expect(tryMock).toHaveBeenCalled()
     });
 
-
-    it('should match snapshot', () => {
-        expect(wrapper.toJSON()).toMatchSnapshot()
-    });
-
 });

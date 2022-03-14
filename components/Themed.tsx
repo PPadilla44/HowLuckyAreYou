@@ -10,8 +10,7 @@ export const useThemeColor = (
     props: { light?: string; dark?: string },
     colorName: keyof typeof Colors.light & keyof typeof Colors.dark
 ) => {
-    // const theme = useColorScheme();
-    const theme = "dark";
+    const theme = useColorScheme();
 
     const colorFromProps = props[theme];
 
@@ -74,7 +73,6 @@ export const Input = (props: InputProps) => {
             <View style={{ backgroundColor, width: "100%", height: "100%", opacity: .5, position: "absolute", borderRadius: 15, zIndex: -10 }} />
         </>
     )
-    // return <DefaultInput style={[{backgroundColor: "transparent", color }, style]} keyboardAppearance={theme} {...otherProps} />
 }
 
 export const ScrollView = (props: ScrollViewProps) => {

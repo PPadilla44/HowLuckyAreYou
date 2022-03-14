@@ -26,8 +26,5 @@ describe('<PressableIcon', () => {
         expect(mockFn).toBeCalled();
     });
 
-    it("Matches Snapshot", () => {
-        expect(wrapper.toJSON()).toMatchSnapshot();
-    });
 
 });
