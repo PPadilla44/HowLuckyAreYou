@@ -3,7 +3,7 @@
   <img alt="Version" src="https://img.shields.io/badge/version-1.0.0-blue.svg?cacheSeconds=2592000" />
 </p>
 
-> React Native clicker app that tests you luck against odds by pressing a button until you hit those odds
+> React Native clicker app that tests your luck by pressing a button until you hit a probability
 
 ## Install
 
