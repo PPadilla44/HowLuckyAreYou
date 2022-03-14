@@ -53,7 +53,7 @@ export const updateOddsPercent = (state: ClickerState, {title, oddsString}: {tit
 
 export const updateOddsFraction = (state: ClickerState, { title, numerator, denominator }: {title: string,numerator: number, denominator: number }): ClickerState => {
     const decimalNum = numerator / denominator;
-    const oddsString = `${decimalNum}`.substring(0, 10);
+    const oddsString = `${decimalNum * 100}`.substring(0, 10);
     const fraction = { numerator, denominator };
     const tempState: ClickerState = { ...state, title, fraction, oddsString  };
     const newState: ClickerState = reset(tempState);
@@ -61,5 +61,5 @@ export const updateOddsFraction = (state: ClickerState, { title, numerator, deno
 }
 
 export const reset = (state: ClickerState): ClickerState => {
-    return { ...state, count:0 , didHit: false, results: { BtnColor: "default", text: "Test Your Luck" } }
+    return { ...state, count:0 , didHit: false, results: { BtnColor: "default", text: "" } }
 }
