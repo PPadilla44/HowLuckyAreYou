@@ -93,10 +93,10 @@ const ModalForm: FC<Props> = ({ navigation }) => {
 
             <View style={styles.topRow}>
                 {
-                    buttons[selectedIndex] === percentButton ?
-                        <PercentInput oddsString={formData.oddsString} changeText={handleChanges} />
-                        :
+                    selectedIndex ?
                         <FractionInput denominator={formData.denominator} numerator={formData.numerator} handleChanges={handleFractionChanges} />
+                        :
+                        <PercentInput oddsString={formData.oddsString} changeText={handleChanges} />
                 }
 
             </View>
