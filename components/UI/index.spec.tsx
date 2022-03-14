@@ -15,10 +15,6 @@ describe("<TextAsIcon />", () => {
         expect(text).toHaveStyle({ fontSize: 48, fontWeight: "bold"});
     });
 
-    it("Matches Snapshot", () => {
-        expect(wrapper.toJSON()).toMatchSnapshot();
-    });
-
 })
 
 describe("<SettingsIcon />", () => {
@@ -43,8 +39,5 @@ describe("<SettingsIcon />", () => {
         expect(mockFn.mock.calls.length).toBe(1);
     });
 
-    it("Matches Snapshot", () => {
-        expect(wrapper.toJSON()).toMatchSnapshot();
-    });
 
 })

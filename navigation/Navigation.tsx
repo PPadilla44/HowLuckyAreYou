@@ -1,7 +1,6 @@
 import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
-import { createNativeStackNavigator, NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as React from 'react';
-import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 import Dropdown from '../screens/Dropdown';
 import Main from '../screens/Main';
@@ -12,8 +11,7 @@ import { MainScreenOptions, ModalScreenOptions } from './ScreenOptions';
 
 export default function Navigation() {
 
-    // const colorScheme = useColorScheme();
-    const colorScheme = "dark";
+    const colorScheme = useColorScheme();
 
     return (
         <NavigationContainer
@@ -30,8 +28,7 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function RootNavigator() {
 
-    // const colorScheme = useColorScheme();
-    const colorScheme = "dark";
+    const colorScheme = useColorScheme();
 
     return (
         <Stack.Navigator>

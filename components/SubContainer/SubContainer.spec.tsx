@@ -42,10 +42,6 @@ describe('<SubContainer/>', () => {
         
     });
     
-    it("renders correctly", () => {
-        expect(wrapper.toJSON()).toMatchSnapshot();
-    });
-    
     it("updates correctly", () => {
         const newComponent = (
             <SubContainer 
@@ -57,7 +53,6 @@ describe('<SubContainer/>', () => {
             />
         )
         wrapper.update(newComponent)
-        expect(wrapper.toJSON()).toMatchSnapshot()
     })
     
 })

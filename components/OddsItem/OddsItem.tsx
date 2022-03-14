@@ -16,10 +16,8 @@ const OddsItem: FC<Props> = ({ item }) => {
         <Swipeable
             renderLeftActions={() => <LeftSwipe callback={() => console.log("LEFTSWIPE")} />}
             renderRightActions={() => <RightSwipe callback={() => console.log("LEFTSWIPE")} />}
-            // onSwipeableRightOpen={() => alert('Swipe from right')}
-            // onSwipeableLeftOpen={() => alert('Swipe from left')}
         >
-            <TouchableOpacity testID='oddsItemBtn' lightColor='white' darkColor={Colors.dark.modal} onPress={() => console.log("Pressed")} containerStyle={styles.item} activeOpacity={.8}>
+            <TouchableOpacity testID='oddsItemBtn' lightColor='white' darkColor={Colors.dark.modal} onPress={() => console.log("Pressed")} style={styles.item} containerStyle={styles.itemContainer} activeOpacity={.8}>
                 <Text style={styles.baseTxt}>{item.name}</Text>
                 <Text style={styles.baseTxt}>{item.odds} </Text>
             </TouchableOpacity>
@@ -30,11 +28,13 @@ const OddsItem: FC<Props> = ({ item }) => {
 export default OddsItem
 
 const styles = StyleSheet.create({
-    item: {
+    itemContainer: {
         paddingHorizontal: 30,
         paddingVertical: 20,
+    },
+    item: {
         flexDirection: "row",
-        justifyContent: "space-between"
+        justifyContent: "space-between",
     },
     baseTxt: {
         fontSize: 24

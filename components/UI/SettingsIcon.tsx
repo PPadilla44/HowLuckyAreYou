@@ -11,17 +11,14 @@ const SettingsIcon: FC<Props> = ({ callBack }) => {
     return (
         <TouchableOpacity
             testID='settingsBtn'
-            lightColor='white'
-            darkColor={Colors.dark.modal}
             onPress={callBack}
             style={styles.btn}
             containerStyle={styles.container} >
             <Icon
                 testID='settingsIcon'
                 name='tune'
-                size={40}
-                lightColor={Colors.dark.modal}
-                darkColor='white'
+                size={45}
+                color="white"
             />
         </TouchableOpacity>
     )
@@ -31,18 +28,16 @@ export default SettingsIcon
 
 const styles = StyleSheet.create({
     btn: {
-        borderBottomWidth: 1,
-        borderTopWidth: 1,
-        borderLeftWidth: 1,
-        borderRightWidth: 1,
-        borderRadius: 15,
+        backgroundColor: "transparent",
     },
     container: {
-        width: 50,
-        height: 50,
+        width: 55,
+        height: 55,
         position: "absolute",
         right: 10,
         bottom: "5%",
+        borderRadius: 20,
+        backgroundColor: Colors.shared.text,
         alignItems: "center",
         justifyContent: "center"
     }

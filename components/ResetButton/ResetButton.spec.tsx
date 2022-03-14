@@ -65,9 +65,6 @@ describe('<ResetButton />', () => {
 
     });
 
-    it('should match snapshot', () => {
-        expect(wrapper.toJSON()).toMatchSnapshot();
-    });
 
 
 });

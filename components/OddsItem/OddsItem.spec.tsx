@@ -37,8 +37,6 @@ describe('<OddsItem />', () => {
         expect(wrapper.getByTestId("oddsItemBtn")).toHaveStyle({
             paddingHorizontal: 30,
             paddingVertical: 20,
-            flexDirection: "row",
-            justifyContent: "space-between",
         });
 
         expect(wrapper.container.findAllByType(Text)[0]).toHaveStyle({
@@ -47,10 +45,6 @@ describe('<OddsItem />', () => {
         expect(wrapper.container.findAllByType(Text)[1]).toHaveStyle({
             fontSize: 24
         })
-    });
-
-    it('should match snapshot', () => {
-        expect(wrapper.toJSON()).toMatchSnapshot();
     });
 
 

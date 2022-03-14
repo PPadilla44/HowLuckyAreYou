@@ -1,5 +1,5 @@
 import { cleanup, fireEvent, render, RenderAPI } from "@testing-library/react-native";
-import { TouchableOpacity, View } from "../../Themed";
+import { View } from "../../Themed";
 import { TextAsIcon } from "../../UI";
 import PercentInput, { Props } from "./PercentInput";
 
@@ -38,8 +38,5 @@ describe('<PercentInput />', () => {
         expect(mockFn).toBeCalledTimes(1);
     });
 
-    it('should match snapshot', () => {
-        expect(wrapper.toJSON()).toMatchSnapshot();
-    });
 
 })
