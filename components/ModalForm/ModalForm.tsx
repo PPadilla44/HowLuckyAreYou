@@ -54,7 +54,9 @@ const ModalForm: FC<Props> = ({ navigation }) => {
         }
 
         if (denominator.length > 0 && numerator.length > 0 && title.length > 0) {
-            setFormData({ ...tempForm, isValid: true })
+            if(denominator.length < 4 && numerator.length < 3) {
+                setFormData({ ...tempForm, isValid: true })
+            }
         } else {
             setFormData({ ...tempForm, isValid: false })
         }

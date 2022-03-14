@@ -5,23 +5,21 @@ import FractionInput from "./FractionInput";
 import ModalForm from "./ModalForm";
 import PercentInput from "./PercentInput";
 
-const createTestProps = (props: Object) => ({
-    navigation: {
-        navigate: jest.fn()
-    },
-    ...props
-});
 
 describe('<ModalForm />', () => {
-
+    
+    const goBack = jest.fn();
     let wrapper: RenderAPI;
     let props: any;
-    let state: ClickerState;
 
     afterEach(cleanup)
 
     beforeEach(() => {
-        props = createTestProps({});
+        props = {
+            navigation: {
+                goBack
+            }
+        }
         wrapper = render(
             <ClickerProvider>
                 <ModalForm {...props} />
@@ -52,7 +50,7 @@ describe('<ModalForm />', () => {
         fireEvent.changeText(pInput, "50.00");
         wrapper.getByDisplayValue("50.00");
     });
-    
+
     it('should handle typing and values in Title', () => {
         const tInput = wrapper.getByPlaceholderText("Title");
         fireEvent.changeText(tInput, "Changed");
@@ -66,11 +64,74 @@ describe('<ModalForm />', () => {
         fireEvent.changeText(pInput, "this shouldnt work");
         wrapper.getByDisplayValue(oddsString);
     });
-    
-    
-    it.todo('should handle correct typing and values in FractionInput');
-    it.todo('should handle incorrect values in FractionInput')
-    it.todo('should handle pressing try button');
+
+
+    it('should handle correct typing and values in FractionInput', () => {
+        const [button1, button2] = wrapper.getAllByTestId("buttonGroupItem");
+        fireEvent.press(button2);
+        const fractionComponent = wrapper.container.findByType(FractionInput);
+        expect(fractionComponent).toHaveProp("denominator");
+        expect(fractionComponent).toHaveProp("numerator");
+        const denominator = fractionComponent.props.denominator;
+        const numerator = fractionComponent.props.numerator;
+        expect(denominator).toBeTruthy();
+        expect(numerator).toBeTruthy();
+        const nInput = wrapper.getByDisplayValue(numerator);
+        const dInput = wrapper.getByDisplayValue(denominator);
+        fireEvent.changeText(nInput, "5");
+        wrapper.getByDisplayValue("5");
+        fireEvent.changeText(dInput, "10");
+        wrapper.getByDisplayValue("10");
+    });
+
+    it('should handle incorrect values in FractionInput', () => {
+        const [button1, button2] = wrapper.getAllByTestId("buttonGroupItem");
+        fireEvent.press(button2);
+        const fractionComponent = wrapper.container.findByType(FractionInput);
+        const denominator = fractionComponent.props.denominator;
+        const numerator = fractionComponent.props.numerator;
+        const nInput = wrapper.getByDisplayValue(numerator);
+        const dInput = wrapper.getByDisplayValue(denominator);
+        fireEvent.changeText(nInput, "this shouldnt work");
+        wrapper.getByDisplayValue(numerator);
+        fireEvent.changeText(dInput, "this shouldnt work");
+        wrapper.getByDisplayValue(denominator);
+        fireEvent.changeText(nInput, "100");
+        fireEvent.changeText(dInput, "1000");
+        wrapper.getByDisplayValue(numerator);
+        wrapper.getByDisplayValue(denominator);
+    });
+
+    it('should handle submission as pecent with try button', () => {
+        const tryBtn = wrapper.getByTestId("tryBtn");
+        expect(tryBtn).toBeDisabled();
+        const tInput = wrapper.getByPlaceholderText("Title");
+        fireEvent.changeText(tInput, "Changed");
+        const pInput = wrapper.getByTestId("percentInput");
+        fireEvent.changeText(pInput, "50.00");
+        expect(tryBtn).toBeEnabled();
+        fireEvent.press(tryBtn);
+        expect(goBack).toBeCalled();
+        expect(tryBtn).toBeDisabled();
+    });
+
+    it('should handle submission as fraction with try button', () => {
+        const [button1, button2] = wrapper.getAllByTestId("buttonGroupItem");
+        fireEvent.press(button2);
+        const tryBtn = wrapper.getByTestId("tryBtn");
+        expect(tryBtn).toBeDisabled();
+        const tInput = wrapper.getByPlaceholderText("Title");
+        fireEvent.changeText(tInput, "Changed");
+        const nInput = wrapper.getByTestId("numeratorInput");
+        const dInput = wrapper.getByTestId("denominatorInput");
+        fireEvent.changeText(nInput, "5");
+        fireEvent.changeText(dInput, "10");
+        expect(tryBtn).toBeEnabled();
+        fireEvent.press(tryBtn);
+        expect(goBack).toBeCalled();
+        expect(tryBtn).toBeDisabled();
+    });
+
     it.todo('should handle pressing save button');
 
 })
