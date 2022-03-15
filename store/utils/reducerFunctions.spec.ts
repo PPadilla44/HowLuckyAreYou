@@ -81,7 +81,7 @@ describe('reset()', () => {
 });
 
 describe('updateOddsFraction()', () => {
-    expect(updateOddsFraction(initialClickerState, {title: "TITLE", denominator: 2, numerator: 1})).toEqual({
+    expect(updateOddsFraction(initialClickerState, {title: "TITLE", denominator: 2, numerator: 1, multiplier: "1"})).toEqual({
         ...initialClickerState,
         oddsString: "50",
         title: "TITLE",

@@ -49,11 +49,9 @@ const ModalForm: FC<Props> = ({ navigation }) => {
     }
 
     const handleFractionChanges = (data: { denominator?: string, numerator?: string, multiplier?: string }) => {
-        console.log("RUNNIONG");
         
         const tempForm = { ...formData, ...data };
         const { denominator, numerator, title } = tempForm;
-        console.log(tempForm);
 
 
         if (denominator.length > 0 && numerator.length > 0 && title.length > 0) {

@@ -97,7 +97,7 @@ describe('<ModalForm />', () => {
         fireEvent.changeText(dInput, "this shouldnt work");
         wrapper.getByDisplayValue(denominator);
         fireEvent.changeText(nInput, "100");
-        fireEvent.changeText(dInput, "1000");
+        fireEvent.changeText(dInput, "10000");
         wrapper.getByDisplayValue(numerator);
         wrapper.getByDisplayValue(denominator);
     });

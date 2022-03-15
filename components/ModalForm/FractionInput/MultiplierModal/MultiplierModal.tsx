@@ -1,5 +1,5 @@
 import { Alert, Modal, Pressable, StyleSheet } from 'react-native'
-import React, { FC, useState } from 'react'
+import React, { FC } from 'react'
 import { Picker } from '@react-native-picker/picker';
 import { Text, View } from "../../../Themed"
 import Colors from '../../../../constants/Colors';
@@ -26,6 +26,7 @@ const MultiplierModal: FC<Props> = ({ modalVisible, setModalVisible, mult, handl
             <View darkColor={Colors.light.input} style={styles.centeredView}>
                 <View darkColor={Colors.light.input} style={styles.modalView}>
                     <Text style={{ color: "black", textAlign: "center", fontSize: 20, fontWeight: "bold" }}>Select A Multiplier</Text>
+                    <Text style={{ color: "black", textAlign: "center", fontSize: 15}}>Applies To Denominator</Text>
                     <Picker
                         selectedValue={mult}
                         onValueChange={(multiplier, index) => handleChanges({multiplier})}
