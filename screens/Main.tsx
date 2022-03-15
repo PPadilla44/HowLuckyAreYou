@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { ActivityIndicator, StyleSheet } from 'react-native';
 import { ButtonGroup, View } from "../components/Themed";
 import React, { FC, useState } from 'react';
 import SubContainer from '../components/SubContainer';
@@ -12,7 +12,7 @@ import Colors from '../constants/Colors';
 const Main: FC<RootTabScreenProps<"Main">> = ({ }) => {
 
     const { state, dispatch } = useClicker();
-    const { count, oddsString, title, fraction, multiplier } = state;
+    const { count, oddsString, title, fraction, multiplier, loading } = state;
     const { numerator, denominator } = fraction;
 
     const [fractionPref, setFractionPref] = useState(0);
@@ -60,6 +60,8 @@ const Main: FC<RootTabScreenProps<"Main">> = ({ }) => {
             </View>
 
             <ResetButton />
+
+            { loading && <ActivityIndicator style={{ position: "absolute", left: 50, top: 0 }}  size={"large"} />  }
 
         </View>
     )

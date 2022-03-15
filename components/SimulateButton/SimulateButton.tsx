@@ -1,5 +1,5 @@
 import { Pressable, StyleSheet } from 'react-native'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Colors from '../../constants/Colors'
 import { Text } from '../Themed'
 import { useClicker } from '../contexts/useClicker'
@@ -7,10 +7,19 @@ import { useClicker } from '../contexts/useClicker'
 const SimulateButton = () => {
 
     const { state, dispatch } = useClicker();
+    const [pressed, setPressed] = useState(false);
 
     const simulate = () => {
-        dispatch!({ type: 'SIMULATE' })
-    }
+        dispatch!({ type: "SET_LOADING" });
+        setPressed(true);
+    };
+
+    useEffect(() => {
+        if (pressed) {
+            dispatch!({ type: "SIMULATE" });
+            setPressed(false);
+        }
+    }, [pressed])
 
     return (
         <Pressable onPress={simulate}
@@ -18,8 +27,13 @@ const SimulateButton = () => {
                 opacity: pressed ? 0.3 : 1
             })}
             disabled={state.didHit}
-            >
-            <Text style={styles.simText} >Simulate</Text>
+        >
+            {
+                state.loading ?
+                    <Text style={[styles.simText, { color: "red" }]} >Simulating</Text>
+                    :
+                    <Text style={styles.simText} >Simulate</Text>
+            }
         </Pressable>
     )
 }

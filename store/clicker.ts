@@ -25,7 +25,8 @@ export interface ClickerState {
     multiplier: string
     didHit: boolean;
     title: string;
-    results: ClickerResults
+    results: ClickerResults;
+    loading: boolean;
 }
 
 export interface Action {
@@ -46,11 +47,12 @@ export const initialClickerState: ClickerState = {
     results: {
         BtnColor: "default",
         text: ""
-    }
+    },
+    loading: false
 }
 
 // ACTIONS
-export declare type ClickerActionKind = 'INCREASE' | 'RESET' | 'UPDATE_PERCENT' | 'UPDATE_FRACTION' | "SIMULATE";
+export declare type ClickerActionKind = 'INCREASE' | 'RESET' | 'UPDATE_PERCENT' | 'UPDATE_FRACTION' | "SIMULATE" | "SET_LOADING";
 
 // REDUCER
 function reducer(state: ClickerState ,  action: Action): ClickerState {
@@ -67,6 +69,8 @@ function reducer(state: ClickerState ,  action: Action): ClickerState {
             return updateOddsFraction(state, payload);
         case "SIMULATE":
             return simulate(state)
+        case "SET_LOADING":
+            return { ...state, loading: true };
         default:
             return state;
     }

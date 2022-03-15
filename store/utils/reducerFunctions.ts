@@ -2,7 +2,8 @@ import { ClickerResults, ClickerState } from "../clicker";
 import Fraction from "fraction.js";
 
 export const simulate = (state: ClickerState): ClickerState => {
-
+    console.log("SIMMING");
+    
     const { denominator, numerator } = state.fraction;
 
     const newDeno = multiplierToNum(state.multiplier) * denominator;
@@ -28,11 +29,12 @@ export const simulate = (state: ClickerState): ClickerState => {
         tempResults = { BtnColor: "normal", text: "YOU ARE normal" };
     }
 
-    const newState = {
+    const newState: ClickerState = {
         ...state,
         count: tempCount,
         results: tempResults,
-        didHit: true
+        didHit: true,
+        loading: false
     }
 
     return newState
@@ -60,7 +62,7 @@ export const increment = (state: ClickerState): ClickerState => {
         } else {
             tempResults = { BtnColor: "normal", text: "YOU ARE normal" };
         }
-        const newState = {
+        const newState: ClickerState = {
             ...state,
             count: tempCount,
             results: tempResults,
@@ -104,7 +106,7 @@ export const updateOddsFraction = (state: ClickerState, { title, numerator, deno
 }
 
 export const reset = (state: ClickerState): ClickerState => {
-    return { ...state, count: 0, didHit: false, results: { BtnColor: "default", text: "" } }
+    return { ...state, count: 0, didHit: false, results: { BtnColor: "default", text: "" }, loading: false }
 }
 
 const multiplierToNum = (mult: string): number => {
