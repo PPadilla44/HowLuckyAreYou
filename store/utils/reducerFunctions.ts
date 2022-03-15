@@ -3,6 +3,8 @@ import Fraction from "fraction.js";
 
 export const increment = (state: ClickerState): ClickerState => {
 
+    // TODO
+    // ADD MULTIPLIER LOGIC
     const tempCount = state.count + 1;
 
     const { denominator , numerator } = state.fraction;
@@ -51,11 +53,11 @@ export const updateOddsPercent = (state: ClickerState, {title, oddsString}: {tit
     return newState;
 }
 
-export const updateOddsFraction = (state: ClickerState, { title, numerator, denominator }: {title: string,numerator: number, denominator: number }): ClickerState => {
+export const updateOddsFraction = (state: ClickerState, { title, numerator, denominator, multiplier }: {title: string,numerator: number, denominator: number, multiplier: string }): ClickerState => {
     const decimalNum = numerator / denominator;
     const oddsString = `${decimalNum * 100}`.substring(0, 10);
     const fraction = { numerator, denominator };
-    const tempState: ClickerState = { ...state, title, fraction, oddsString  };
+    const tempState: ClickerState = { ...state, title, fraction, oddsString, multiplier };
     const newState: ClickerState = reset(tempState);
     return newState;
 }

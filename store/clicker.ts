@@ -22,6 +22,7 @@ export interface ClickerState {
         denominator: number;
         numerator: number;
     };
+    multiplier: string;
     didHit: boolean;
     title: string;
     results: ClickerResults
@@ -39,6 +40,7 @@ export const initialClickerState: ClickerState = {
         numerator: 1,
         denominator: 4
     },
+    multiplier: "1",
     didHit: false,
     title: "What Are The Odds?",
     results: {

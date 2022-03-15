@@ -12,7 +12,7 @@ import Colors from '../constants/Colors';
 const Main: FC<RootTabScreenProps<"Main">> = ({ }) => {
 
     const { state, dispatch } = useClicker();
-    const { count, oddsString, title, fraction } = state;
+    const { count, oddsString, title, fraction, multiplier } = state;
     const { numerator, denominator } = fraction;
 
     const [fractionPref, setFractionPref] = useState(0);
@@ -33,7 +33,7 @@ const Main: FC<RootTabScreenProps<"Main">> = ({ }) => {
                 <SubContainer
                     text={
                         fractionPref ?
-                            `${numerator} / ${denominator}`
+                            `${numerator} / ${denominator} ${multiplier}`
                             :
                             `${oddsString}%`
                     }

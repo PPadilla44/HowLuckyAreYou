@@ -22,7 +22,8 @@ const ModalForm: FC<Props> = ({ navigation }) => {
         title: state.title,
         denominator: `${state.fraction.denominator}`,
         numerator: `${state.fraction.numerator}`,
-        isValid: false
+        isValid: false,
+        multiplier: state.multiplier,
     });
 
     const [selectedIndex, setSelectedIndex] = useState(0);
@@ -32,6 +33,7 @@ const ModalForm: FC<Props> = ({ navigation }) => {
 
 
     const handleChanges = (data: {}) => {
+
         const tempForm = { ...formData, ...data };
         const { oddsString, title } = tempForm;
 
@@ -46,16 +48,19 @@ const ModalForm: FC<Props> = ({ navigation }) => {
         }
     }
 
-    const handleFractionChanges = (data: { denominator?: string, numerator?: string }) => {
+    const handleFractionChanges = (data: { denominator?: string, numerator?: string, multiplier?: string }) => {
+        console.log("RUNNIONG");
+        
         const tempForm = { ...formData, ...data };
         const { denominator, numerator, title } = tempForm;
+        console.log(tempForm);
 
 
         if (denominator.length > 0 && numerator.length > 0 && title.length > 0) {
             if (isNaN(parseFloat(denominator)) || isNaN(parseFloat(numerator))) {
                 return
             }
-            if (denominator.length < 4 && numerator.length < 3) {
+            if (denominator.length < 5 && numerator.length < 3) {
                 setFormData({ ...tempForm, isValid: true })
             }
         } else {
@@ -75,6 +80,7 @@ const ModalForm: FC<Props> = ({ navigation }) => {
                 title: formData.title,
                 denominator: parseFloat(formData.denominator),
                 numerator: parseFloat(formData.numerator),
+                multiplier: formData.multiplier
             }
             dispatch!({ type: "UPDATE_FRACTION", payload })
         }
@@ -94,9 +100,16 @@ const ModalForm: FC<Props> = ({ navigation }) => {
             <View style={styles.topRow}>
                 {
                     selectedIndex ?
-                        <FractionInput denominator={formData.denominator} numerator={formData.numerator} handleChanges={handleFractionChanges} />
+                        <FractionInput
+                            denominator={formData.denominator}
+                            numerator={formData.numerator}
+                            multiplier={formData.multiplier}
+                            handleChanges={handleFractionChanges}
+                            />
                         :
-                        <PercentInput oddsString={formData.oddsString} changeText={handleChanges} />
+                        <PercentInput
+                            oddsString={formData.oddsString}
+                            changeText={handleChanges} />
                 }
 
             </View>
