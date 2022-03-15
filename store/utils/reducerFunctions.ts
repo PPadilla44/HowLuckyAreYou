@@ -3,16 +3,16 @@ import Fraction from "fraction.js";
 
 export const increment = (state: ClickerState): ClickerState => {
 
-    // TODO
-    // ADD MULTIPLIER LOGIC
     const tempCount = state.count + 1;
 
     const { denominator , numerator } = state.fraction;
 
-    const randomNumFromMax = Math.ceil(Math.random() * denominator);
+    const newDeno = multiplierToNum(state.multiplier) * denominator;
+
+    const randomNumFromMax = Math.ceil(Math.random() * newDeno);
 
     if (randomNumFromMax <= numerator) {
-        const max =  (denominator - numerator) + 1;
+        const max =  (newDeno - numerator) + 1;
 
         let tempResults : ClickerResults;
 
@@ -54,7 +54,11 @@ export const updateOddsPercent = (state: ClickerState, {title, oddsString}: {tit
 }
 
 export const updateOddsFraction = (state: ClickerState, { title, numerator, denominator, multiplier }: {title: string,numerator: number, denominator: number, multiplier: string }): ClickerState => {
-    const decimalNum = numerator / denominator;
+    
+    const multNum = multiplierToNum(multiplier) * denominator;
+    
+    const decimalNum = numerator / multNum;
+    
     const oddsString = `${decimalNum * 100}`.substring(0, 10);
     const fraction = { numerator, denominator };
     const tempState: ClickerState = { ...state, title, fraction, oddsString, multiplier };
@@ -64,4 +68,17 @@ export const updateOddsFraction = (state: ClickerState, { title, numerator, deno
 
 export const reset = (state: ClickerState): ClickerState => {
     return { ...state, count:0 , didHit: false, results: { BtnColor: "default", text: "" } }
+}
+
+const multiplierToNum = (mult: string):number => {
+    switch (mult) {
+        case "B":
+            return 1000000000;
+        case "M":
+            return 1000000;
+        case "10":
+            return 10
+        default:
+            return 1
+    }
 }

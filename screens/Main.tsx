@@ -32,10 +32,13 @@ const Main: FC<RootTabScreenProps<"Main">> = ({ }) => {
 
                 <SubContainer
                     text={
-                        fractionPref ?
+                        multiplier === "B" || multiplier === "M" ?
                             `${numerator} / ${denominator} ${multiplier}`
                             :
-                            `${oddsString}%`
+                            fractionPref ?
+                                `${numerator} / ${denominator} x ${multiplier}`
+                                :
+                                `${oddsString}%`
                     }
                     textStyle={styles.probText}
                     title={title}
@@ -44,12 +47,15 @@ const Main: FC<RootTabScreenProps<"Main">> = ({ }) => {
                 <ButtonGroup
                     buttons={["Percent", "Fraction"]}
                     onPress={(newIndex: number) => setFractionPref(newIndex)}
-                    selectedIndex={fractionPref}
+                    selectedIndex={multiplier === "B" || multiplier === "M" ? 1 : fractionPref}
                     containerStyle={styles.btnContainer}
                     buttonStyle={styles.btn}
                     textStyle={styles.btnText}
                     selectedButtonStyle={styles.selectedBtn}
                     selectedTextStyle={styles.btnSelectedText}
+                    disabled={multiplier === "B" || multiplier === "M"}
+                    disabledSelectedTextStyle={{ color: Colors.shared.icon }}
+                    disabledSelectedStyle={{ backgroundColor: "transparent" }}
                 />
             </View>
 
