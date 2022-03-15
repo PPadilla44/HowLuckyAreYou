@@ -1,23 +1,60 @@
 import { ClickerResults, ClickerState } from "../clicker";
 import Fraction from "fraction.js";
 
+export const simulate = (state: ClickerState): ClickerState => {
+
+    const { denominator, numerator } = state.fraction;
+
+    const newDeno = multiplierToNum(state.multiplier) * denominator;
+
+    let randomNumFromMax = Math.ceil(Math.random() * newDeno);
+    let tempCount = state.count + 1;
+
+
+    while (randomNumFromMax > numerator) {
+        randomNumFromMax = Math.ceil(Math.random() * newDeno);
+        tempCount++;
+    }
+
+    const max = (newDeno - numerator) + 1;
+
+    let tempResults: ClickerResults;
+
+    if (tempCount < max) {
+        tempResults = { BtnColor: "lucky", text: "YOU ARE LUCKY" };
+    } else if (tempCount > max) {
+        tempResults = { BtnColor: "unlucky", text: "YOU ARE UNLUCKY" };
+    } else {
+        tempResults = { BtnColor: "normal", text: "YOU ARE normal" };
+    }
+
+    const newState = {
+        ...state,
+        count: tempCount,
+        results: tempResults,
+        didHit: true
+    }
+
+    return newState
+}
+
 export const increment = (state: ClickerState): ClickerState => {
 
     const tempCount = state.count + 1;
 
-    const { denominator , numerator } = state.fraction;
+    const { denominator, numerator } = state.fraction;
 
     const newDeno = multiplierToNum(state.multiplier) * denominator;
 
     const randomNumFromMax = Math.ceil(Math.random() * newDeno);
 
     if (randomNumFromMax <= numerator) {
-        const max =  (newDeno - numerator) + 1;
+        const max = (newDeno - numerator) + 1;
 
-        let tempResults : ClickerResults;
+        let tempResults: ClickerResults;
 
         if (tempCount < max) {
-            tempResults = { BtnColor: "lucky" , text: "YOU ARE LUCKY" };
+            tempResults = { BtnColor: "lucky", text: "YOU ARE LUCKY" };
         } else if (tempCount > max) {
             tempResults = { BtnColor: "unlucky", text: "YOU ARE UNLUCKY" };
         } else {
@@ -39,26 +76,26 @@ export const increment = (state: ClickerState): ClickerState => {
     }
 }
 
-export const updateOddsPercent = (state: ClickerState, {title, oddsString}: {title: string, oddsString: string}): ClickerState => {
-    
+export const updateOddsPercent = (state: ClickerState, { title, oddsString }: { title: string, oddsString: string }): ClickerState => {
+
     const oddsNum = parseFloat(oddsString) / 100;
-    
+
     const fractionWhole = new Fraction(oddsNum);
 
     const fraction = { denominator: fractionWhole.d, numerator: fractionWhole.n };
 
-    const tempState: ClickerState = {...state, title, fraction, oddsString};
+    const tempState: ClickerState = { ...state, title, fraction, oddsString };
     const newState: ClickerState = reset(tempState);
 
     return newState;
 }
 
-export const updateOddsFraction = (state: ClickerState, { title, numerator, denominator, multiplier }: {title: string,numerator: number, denominator: number, multiplier: string }): ClickerState => {
-    
+export const updateOddsFraction = (state: ClickerState, { title, numerator, denominator, multiplier }: { title: string, numerator: number, denominator: number, multiplier: string }): ClickerState => {
+
     const multNum = multiplierToNum(multiplier) * denominator;
-    
+
     const decimalNum = numerator / multNum;
-    
+
     const oddsString = `${decimalNum * 100}`.substring(0, 10);
     const fraction = { numerator, denominator };
     const tempState: ClickerState = { ...state, title, fraction, oddsString, multiplier };
@@ -67,10 +104,10 @@ export const updateOddsFraction = (state: ClickerState, { title, numerator, deno
 }
 
 export const reset = (state: ClickerState): ClickerState => {
-    return { ...state, count:0 , didHit: false, results: { BtnColor: "default", text: "" } }
+    return { ...state, count: 0, didHit: false, results: { BtnColor: "default", text: "" } }
 }
 
-const multiplierToNum = (mult: string):number => {
+const multiplierToNum = (mult: string): number => {
     switch (mult) {
         case "B":
             return 1000000000;
