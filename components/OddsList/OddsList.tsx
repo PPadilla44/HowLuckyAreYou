@@ -1,4 +1,3 @@
-import { StyleSheet } from 'react-native'
 import React, { FC } from 'react'
 import { OddsItemInterface } from '../../types'
 import OddsItem from '../OddsItem'
@@ -21,7 +20,7 @@ const OddsList: FC<Props> = ({ data }) => {
                 })
             }
             {/* Empty Space */}
-            <OddsItem item={{ id: "999", name: "", odds: "" }} />
+            <OddsItem item={{ id: "999", title: "", displayOdds: "", multiplier: "1" }} />
         </>
     )
 }

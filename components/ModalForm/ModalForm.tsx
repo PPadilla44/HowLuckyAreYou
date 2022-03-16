@@ -8,6 +8,8 @@ import { RootStackParamList } from '../../types';
 import { useClicker } from '../contexts/useClicker';
 import PercentInput from './PercentInput';
 import FractionInput from './FractionInput';
+import AsyncStorage from "@react-native-async-storage/async-storage"
+import { useOddsItems } from '../contexts/useOddsItems';
 
 interface Props {
     navigation: NativeStackNavigationProp<RootStackParamList>
@@ -16,6 +18,8 @@ interface Props {
 const ModalForm: FC<Props> = ({ navigation }) => {
 
     const { state, dispatch } = useClicker();
+    const { state: oState, dispatch: oDispatch } = useOddsItems();
+    
 
     const [formData, setFormData] = useState({
         oddsString: state.oddsString,
@@ -53,7 +57,7 @@ const ModalForm: FC<Props> = ({ navigation }) => {
                 return
             }
 
-            setFormData({ ...tempForm,  isValid: true })
+            setFormData({ ...tempForm, isValid: true })
         } else {
             setFormData({ ...tempForm, isValid: false })
         }
@@ -97,9 +101,18 @@ const ModalForm: FC<Props> = ({ navigation }) => {
         navigation.goBack();
     }
 
-    const handleSave = () => {
-        console.log("Running SAVE");
-        console.log(formData);
+    const handleSave = async () => {
+        try {
+            const tempData = { ...formData, id: `${formData.title}-${1}-${formData.oddsString}`, displayOdds: formData.oddsString,  }
+            const jsonValue = JSON.stringify(tempData);
+            await AsyncStorage.setItem(`$@OddsItem-${tempData.id}`, jsonValue)
+            // TODO
+            // DISPATCH 
+            console.log("SAVEc");
+            
+        } catch (e) {
+            console.log(e);
+        }
         setFormData(d => ({ ...d, isValid: false }))
     }
 

@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 import { ButtonGroup, View } from "../components/Themed";
-import React, { FC, useState } from 'react';
+import React, { FC } from 'react';
 import SubContainer from '../components/SubContainer';
 import ResetButton from '../components/ResetButton';
 import MainButton from '../components/MainButton';
