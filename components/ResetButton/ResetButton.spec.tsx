@@ -18,7 +18,6 @@ describe('<ResetButton />', () => {
 
     afterEach(cleanup)
 
-
     it('should render correctly', () => {
         wrapper.getByText("Reset");
         expect(wrapper.container.children).toHaveLength(1);
@@ -37,7 +36,6 @@ describe('<ResetButton />', () => {
         alert.mockClear()
     });
 
-
     it('should call and reset color when confirm reset it pressed', () => {
         const alert = jest.spyOn(Alert, "alert");
         fireEvent.press(wrapper.getByTestId("resetBtn"));
@@ -49,22 +47,5 @@ describe('<ResetButton />', () => {
         expect(wrapper.getByText("Reset")).toHaveStyle({ color: "gray" });
         alert.mockClear()
     });
-
-    it("canceles alert when reset button is pressed and canceled", () => {
-        const alert = jest.spyOn(Alert, "alert");
-        const logging = jest.spyOn(console, "log")
-        const resetBtn = wrapper.getByTestId("resetBtn");
-
-        fireEvent.press(resetBtn);
-        expect(alert).toHaveBeenCalled();
-
-        act(() => {
-            alert?.mock?.calls?.[0]?.[2]?.[0].onPress!();
-        });
-        expect(logging).toBeCalled()
-
-    });
-
-
 
 });

@@ -1,4 +1,4 @@
-import { ActivityIndicator, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { ButtonGroup, View } from "../components/Themed";
 import React, { FC, useState } from 'react';
 import SubContainer from '../components/SubContainer';
@@ -60,8 +60,6 @@ const Main: FC<RootTabScreenProps<"Main">> = ({ }) => {
             </View>
 
             <ResetButton />
-
-            { loading && <ActivityIndicator style={{ position: "absolute", left: 50, top: 0 }}  size={"large"} />  }
 
         </View>
     )

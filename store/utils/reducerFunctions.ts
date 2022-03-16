@@ -1,45 +1,6 @@
 import { ClickerResults, ClickerState } from "../clicker";
 import Fraction from "fraction.js";
 
-export const simulate = (state: ClickerState): ClickerState => {
-    console.log("SIMMING");
-    
-    const { denominator, numerator } = state.fraction;
-
-    const newDeno = multiplierToNum(state.multiplier) * denominator;
-
-    let randomNumFromMax = Math.ceil(Math.random() * newDeno);
-    let tempCount = state.count + 1;
-
-
-    while (randomNumFromMax > numerator) {
-        randomNumFromMax = Math.ceil(Math.random() * newDeno);
-        tempCount++;
-    }
-
-    const max = (newDeno - numerator) + 1;
-
-    let tempResults: ClickerResults;
-
-    if (tempCount < max) {
-        tempResults = { BtnColor: "lucky", text: "YOU ARE LUCKY" };
-    } else if (tempCount > max) {
-        tempResults = { BtnColor: "unlucky", text: "YOU ARE UNLUCKY" };
-    } else {
-        tempResults = { BtnColor: "normal", text: "YOU ARE normal" };
-    }
-
-    const newState: ClickerState = {
-        ...state,
-        count: tempCount,
-        results: tempResults,
-        didHit: true,
-        loading: false
-    }
-
-    return newState
-}
-
 export const increment = (state: ClickerState): ClickerState => {
 
     const tempCount = state.count + 1;
@@ -66,7 +27,7 @@ export const increment = (state: ClickerState): ClickerState => {
             ...state,
             count: tempCount,
             results: tempResults,
-            didHit: true
+            didHit: true,
         }
 
         return newState

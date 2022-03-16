@@ -1,4 +1,4 @@
-import { increment, reset, simulate, updateOddsFraction, updateOddsPercent } from "./utils/reducerFunctions";
+import { increment, reset, updateOddsFraction, updateOddsPercent } from "./utils/reducerFunctions";
 
 export type BtnColorName = 'default' | 'lucky' | 'unlucky' | 'normal';
 
@@ -48,11 +48,11 @@ export const initialClickerState: ClickerState = {
         BtnColor: "default",
         text: ""
     },
-    loading: false
+    loading: false,
 }
 
 // ACTIONS
-export declare type ClickerActionKind = 'INCREASE' | 'RESET' | 'UPDATE_PERCENT' | 'UPDATE_FRACTION' | "SIMULATE" | "SET_LOADING";
+export declare type ClickerActionKind = 'INCREASE' | 'RESET' | 'UPDATE_PERCENT' | 'UPDATE_FRACTION' | "SET_LOADING";
 
 // REDUCER
 function reducer(state: ClickerState ,  action: Action): ClickerState {
@@ -67,10 +67,8 @@ function reducer(state: ClickerState ,  action: Action): ClickerState {
             return updateOddsPercent(state, payload);
         case "UPDATE_FRACTION":
             return updateOddsFraction(state, payload);
-        case "SIMULATE":
-            return simulate(state)
         case "SET_LOADING":
-            return { ...state, loading: true };
+            return { ...state, loading: payload };
         default:
             return state;
     }
