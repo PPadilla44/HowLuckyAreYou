@@ -36,7 +36,7 @@ const Main: FC<RootTabScreenProps<"Main">> = ({ }) => {
                             `${numerator} / ${denominator} ${multiplier}`
                             :
                             fractionPref ?
-                                `${numerator} / ${denominator} x ${multiplier}`
+                                `${numerator} / ${denominator * parseInt(multiplier)}`
                                 :
                                 `${oddsString}%`
                     }
