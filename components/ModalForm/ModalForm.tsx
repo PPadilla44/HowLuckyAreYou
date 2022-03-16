@@ -26,14 +26,25 @@ const ModalForm: FC<Props> = ({ navigation }) => {
         multiplier: state.multiplier,
     });
 
-    const [selectedIndex, setSelectedIndex] = useState(0);
     const percentButton = "Percentage";
     const fractionButton = "Fraction";
     const buttons = [percentButton, fractionButton];
 
+    const clearForm = () => {
+        const clearedForm = {
+            oddsString: "50",
+            title: formData.title,
+            numerator: "1",
+            denominator: "2",
+            multiplier: "1",
+            isValid: true,
+        }
+        setFormData(clearedForm)
+        return clearedForm;
+    }
 
     const handleChanges = (data: { oddsString?: string, title?: string }) => {
-        
+
         const tempForm = { ...formData, ...data };
         const { oddsString, title } = tempForm;
 
@@ -41,15 +52,15 @@ const ModalForm: FC<Props> = ({ navigation }) => {
             if (isNaN(parseFloat(oddsString)) || parseFloat(oddsString) > 100) {
                 return
             }
-            
-            setFormData({ ...tempForm, multiplier: "1", isValid: true })
+
+            setFormData({ ...tempForm,  isValid: true })
         } else {
             setFormData({ ...tempForm, isValid: false })
         }
     }
 
     const handleFractionChanges = (data: { denominator?: string, numerator?: string, multiplier?: string }) => {
-        
+
         const tempForm = { ...formData, ...data };
         const { denominator, numerator, title } = tempForm;
 
@@ -66,14 +77,7 @@ const ModalForm: FC<Props> = ({ navigation }) => {
     }
 
     const handleTry = () => {
-        if (buttons[selectedIndex] == percentButton) {
-            const payload = {
-                title: formData.title,
-                oddsString: formData.oddsString,
-                multiplier: formData.multiplier
-            }
-            dispatch!({ type: "UPDATE_PERCENT", payload })
-        } else {
+        if (state.fractionPref) {
             const payload = {
                 title: formData.title,
                 denominator: parseFloat(formData.denominator),
@@ -81,6 +85,13 @@ const ModalForm: FC<Props> = ({ navigation }) => {
                 multiplier: formData.multiplier
             }
             dispatch!({ type: "UPDATE_FRACTION", payload })
+        } else {
+            const payload = {
+                title: formData.title,
+                oddsString: formData.oddsString,
+                multiplier: formData.multiplier
+            }
+            dispatch!({ type: "UPDATE_PERCENT", payload })
         }
         setFormData(d => ({ ...d, isValid: false }))
         navigation.goBack();
@@ -97,7 +108,7 @@ const ModalForm: FC<Props> = ({ navigation }) => {
 
             <View style={styles.topRow}>
                 {
-                    selectedIndex ?
+                    state.fractionPref ?
                         <FractionInput
                             denominator={formData.denominator}
                             numerator={formData.numerator}
@@ -106,13 +117,12 @@ const ModalForm: FC<Props> = ({ navigation }) => {
                         />
                         :
                         <PercentInput
-                            multiplier={formData.multiplier}
                             oddsString={formData.oddsString}
                             changeText={handleChanges} />
                 }
             </View>
 
-            <TwoButtonGroup buttons={buttons} selectedIndex={selectedIndex} setSelectedIndex={setSelectedIndex} />
+            <TwoButtonGroup clearForm={clearForm} buttons={buttons} />
 
             <View style={styles.titleContainer}>
                 <Input

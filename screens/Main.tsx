@@ -12,10 +12,8 @@ import Colors from '../constants/Colors';
 const Main: FC<RootTabScreenProps<"Main">> = ({ }) => {
 
     const { state, dispatch } = useClicker();
-    const { count, oddsString, title, fraction, multiplier, loading } = state;
+    const { count, oddsString, title, fraction, multiplier, fractionPref } = state;
     const { numerator, denominator } = fraction;
-
-    const [fractionPref, setFractionPref] = useState(0);
 
     return (
         <View testID='Main' style={styles.container}>
@@ -46,7 +44,7 @@ const Main: FC<RootTabScreenProps<"Main">> = ({ }) => {
 
                 <ButtonGroup
                     buttons={["Percent", "Fraction"]}
-                    onPress={(newIndex: number) => setFractionPref(newIndex)}
+                    onPress={(newIndex: number) => dispatch!({type: "SET_FRACTIONPREF", payload: newIndex})}
                     selectedIndex={multiplier === "B" || multiplier === "M" ? 1 : fractionPref}
                     containerStyle={styles.btnContainer}
                     buttonStyle={styles.btn}

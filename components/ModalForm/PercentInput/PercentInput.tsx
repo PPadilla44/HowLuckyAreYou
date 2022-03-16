@@ -6,12 +6,9 @@ import { TextAsIcon } from '../../UI'
 
 export interface Props {
     oddsString: string;
-    multiplier: string;
     changeText: (data: {}) => void;
 }
-const PercentInput: FC<Props> = ({ changeText, oddsString, multiplier }) => {
-    console.log(multiplier);
-    
+const PercentInput: FC<Props> = ({ changeText, oddsString }) => {
 
     return (
         <>
@@ -21,9 +18,9 @@ const PercentInput: FC<Props> = ({ changeText, oddsString, multiplier }) => {
                     style={styles.input}
                     inputContainerStyle={styles.inputContainer}
                     keyboardType="numeric"
-                    placeholder={multiplier === "M" || multiplier === "B" ? "Too Long" : "1.0"}
+                    placeholder={"1.0"}
                     maxLength={10}
-                    value={multiplier === "M" || multiplier === "B" ? "" : oddsString}
+                    value={oddsString}
                     onChangeText={oddsString => changeText({ oddsString })}
                 />
             </View>
