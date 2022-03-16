@@ -32,27 +32,26 @@ const ModalForm: FC<Props> = ({ navigation }) => {
     const buttons = [percentButton, fractionButton];
 
 
-    const handleChanges = (data: {}) => {
-
+    const handleChanges = (data: { oddsString?: string, title?: string }) => {
+        
         const tempForm = { ...formData, ...data };
         const { oddsString, title } = tempForm;
-
 
         if (oddsString.length > 0 && title.length > 0) {
             if (isNaN(parseFloat(oddsString)) || parseFloat(oddsString) > 100) {
                 return
             }
-            setFormData({ ...tempForm, isValid: true })
+            
+            setFormData({ ...tempForm, multiplier: "1", isValid: true })
         } else {
             setFormData({ ...tempForm, isValid: false })
         }
     }
 
     const handleFractionChanges = (data: { denominator?: string, numerator?: string, multiplier?: string }) => {
-        
+
         const tempForm = { ...formData, ...data };
         const { denominator, numerator, title } = tempForm;
-
 
         if (denominator.length > 0 && numerator.length > 0 && title.length > 0) {
             if (isNaN(parseFloat(denominator)) || isNaN(parseFloat(numerator))) {
@@ -103,9 +102,10 @@ const ModalForm: FC<Props> = ({ navigation }) => {
                             numerator={formData.numerator}
                             multiplier={formData.multiplier}
                             handleChanges={handleFractionChanges}
-                            />
+                        />
                         :
                         <PercentInput
+                            multiplier={formData.multiplier}
                             oddsString={formData.oddsString}
                             changeText={handleChanges} />
                 }
