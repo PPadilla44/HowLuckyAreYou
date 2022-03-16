@@ -85,9 +85,11 @@ const styles = StyleSheet.create({
         fontFamily: "Futura",
         textAlign: "center",
         height: 52,
+        overflow: "visible"
     },
     inputContainer: {
         borderBottomWidth: 0,
+        overflow: "visible"
     },
 
 

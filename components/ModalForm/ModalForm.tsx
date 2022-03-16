@@ -49,7 +49,7 @@ const ModalForm: FC<Props> = ({ navigation }) => {
     }
 
     const handleFractionChanges = (data: { denominator?: string, numerator?: string, multiplier?: string }) => {
-
+        
         const tempForm = { ...formData, ...data };
         const { denominator, numerator, title } = tempForm;
 
@@ -69,7 +69,8 @@ const ModalForm: FC<Props> = ({ navigation }) => {
         if (buttons[selectedIndex] == percentButton) {
             const payload = {
                 title: formData.title,
-                oddsString: formData.oddsString
+                oddsString: formData.oddsString,
+                multiplier: formData.multiplier
             }
             dispatch!({ type: "UPDATE_PERCENT", payload })
         } else {
@@ -109,7 +110,6 @@ const ModalForm: FC<Props> = ({ navigation }) => {
                             oddsString={formData.oddsString}
                             changeText={handleChanges} />
                 }
-
             </View>
 
             <TwoButtonGroup buttons={buttons} selectedIndex={selectedIndex} setSelectedIndex={setSelectedIndex} />
