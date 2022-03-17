@@ -4,12 +4,21 @@ import { Input, View } from '../Themed';
 import TwoButtonGroup from '../TwoButtonGroup';
 import SaveTryButtons from '../SaveTryButtons';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { RootStackParamList } from '../../types';
+import { OddsItemInterface, RootStackParamList } from '../../types';
 import { useClicker } from '../contexts/useClicker';
 import PercentInput from './PercentInput';
 import FractionInput from './FractionInput';
-import AsyncStorage from "@react-native-async-storage/async-storage"
 import { useOddsItems } from '../contexts/useOddsItems';
+import { addItem } from '../../store/utils/thunkerFunctions';
+
+export function generateUUID(digits = 15) {
+    let str = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVXZ';
+    let uuid = [];
+    for (let i = 0; i < digits; i++) {
+        uuid.push(str[Math.floor(Math.random() * str.length)]);
+    }
+    return uuid.join('');
+}
 
 interface Props {
     navigation: NativeStackNavigationProp<RootStackParamList>
@@ -19,7 +28,6 @@ const ModalForm: FC<Props> = ({ navigation }) => {
 
     const { state, dispatch } = useClicker();
     const { state: oState, dispatch: oDispatch } = useOddsItems();
-    
 
     const [formData, setFormData] = useState({
         oddsString: state.oddsString,
@@ -102,17 +110,26 @@ const ModalForm: FC<Props> = ({ navigation }) => {
     }
 
     const handleSave = async () => {
-        try {
-            const tempData = { ...formData, id: `${formData.title}-${1}-${formData.oddsString}`, displayOdds: formData.oddsString,  }
-            const jsonValue = JSON.stringify(tempData);
-            await AsyncStorage.setItem(`$@OddsItem-${tempData.id}`, jsonValue)
-            // TODO
-            // DISPATCH 
-            console.log("SAVEc");
-            
-        } catch (e) {
-            console.log(e);
+        const payload: OddsItemInterface = {
+            id: `OddsItem-${generateUUID()}`,
+            title: formData.title,
+            multiplier: formData.multiplier,
+            fraction: {
+                denominator: formData.denominator,
+                numerator: formData.numerator,
+            },
+            fractionPref: "1",
         }
+        if (state.fractionPref) {
+            await addItem(oState, oDispatch, payload)
+        } else {
+            await addItem(oState, oDispatch, {
+                ...payload,
+                fraction: undefined,
+                oddsString: formData.oddsString
+            })
+        }
+
         setFormData(d => ({ ...d, isValid: false }))
     }
 

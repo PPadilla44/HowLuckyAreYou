@@ -1,9 +1,8 @@
 import React, { createContext, Dispatch, ReactNode, useContext, useReducer } from 'react';
-import { Action,  } from '../../store/oddsItems';
+import { Action, initialOddsListState, OddsListState,  } from '../../store/oddsItems';
 import oddsItemsReducer from "../../store/oddsItems"
-import { OddsItemInterface } from '../../types';
 
-const OddsItems = createContext<{ state: OddsItemInterface[], dispatch?: Dispatch<Action>  }>({ state: [] });
+const OddsItems = createContext<{ state: OddsListState, dispatch?: Dispatch<Action>  }>({ state: { data: [], fetching:true } });
 
 export const useOddsItems = () => {
     return useContext(OddsItems);
@@ -15,7 +14,7 @@ type Props = {
 
 export const OddsItemsProvider = ({ children }: Props) => {
 
-    const [state, dispatch] = useReducer(oddsItemsReducer, [] );
+    const [state, dispatch] = useReducer(oddsItemsReducer, initialOddsListState );
 
     const providerState = {
         state,

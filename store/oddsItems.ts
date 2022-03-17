@@ -1,8 +1,12 @@
 import { OddsItemInterface } from "../types";
 
+
 // ACTIONS
 export declare type OddsItemsKind =
-    'GET_STATE'
+    'GET_STATE' |
+    'ADD_ITEM' |
+    'SET_FETCHING' |
+    'SET_STATE'
 
 
 export interface Action {
@@ -10,13 +14,29 @@ export interface Action {
     payload?: any;
 }
 
+export interface OddsListState {
+    fetching: boolean,
+    data: OddsItemInterface[]
+};
+
+export const initialOddsListState: OddsListState = {
+    fetching: true,
+    data: []
+}
+
 // REDUCER
-function reducer(state: OddsItemInterface[], action: Action): OddsItemInterface[] {
+function reducer(state: OddsListState, action: Action): OddsListState {
     const { type, payload } = action;
 
     switch (type) {
         case "GET_STATE":
-            return [...state]
+            return { ...state, data: JSON.parse(payload) };
+        case "SET_STATE":
+            return { ...state, data: payload }
+        case "ADD_ITEM":
+            return { ...state, data: [...state.data, payload] };
+        case "SET_FETCHING":
+            return { ...state, fetching: payload }
         default:
             return state;
     }

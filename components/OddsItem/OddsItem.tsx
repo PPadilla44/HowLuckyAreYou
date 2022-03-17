@@ -6,23 +6,22 @@ import RightSwipe from './RightSwipe'
 import LeftSwipe from './LeftSwipe/LeftSwipe';
 import { Text, TouchableOpacity } from "../Themed"
 import Colors from '../../constants/Colors'
-import AsyncStorage from "@react-native-async-storage/async-storage"
+import { removeItem } from '../../store/utils/thunkerFunctions'
+import { useOddsItems } from '../contexts/useOddsItems'
 
 interface Props {
     item: OddsItemInterface
 }
 
-const deleteItem = async (id: string) => {
-    try {
-        await AsyncStorage.removeItem(id)
-    } catch (e) {
-        // remove error
-    }
-
-    console.log('Done.')
-}
 
 const OddsItem: FC<Props> = ({ item }) => {
+
+    const { state, dispatch } = useOddsItems();
+
+    const deleteItem = async (id: string) => {
+        removeItem(state, dispatch, id);
+    }
+
     return (
         <Swipeable
             renderLeftActions={() => <LeftSwipe callback={() => console.log("LEFTSWIPE")} />}
@@ -30,7 +29,7 @@ const OddsItem: FC<Props> = ({ item }) => {
         >
             <TouchableOpacity testID='oddsItemBtn' lightColor='white' darkColor={Colors.dark.modal} onPress={() => console.log("Pressed")} style={styles.item} containerStyle={styles.itemContainer} activeOpacity={.8}>
                 <Text style={styles.baseTxt}>{item.title}</Text>
-                <Text style={styles.baseTxt}>{item.displayOdds} </Text>
+                <Text style={styles.baseTxt}>{item.oddsString} </Text>
             </TouchableOpacity>
         </Swipeable>
     )

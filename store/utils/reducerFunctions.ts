@@ -1,5 +1,9 @@
 import { ClickerResults, ClickerState } from "../clicker";
 import Fraction from "fraction.js";
+import { OddsItemInterface } from "../../types";
+import { OddsListState } from "../oddsItems";
+
+// CLICKER
 
 export const increment = (state: ClickerState): ClickerState => {
 
@@ -82,3 +86,5 @@ const multiplierToNum = (mult: string): number => {
             return 1
     }
 }
+
+// ODDS ITEMS
