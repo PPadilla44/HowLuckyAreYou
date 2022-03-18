@@ -1,4 +1,4 @@
-import { increment, reset, updateOddsFraction, updateOddsPercent } from "./utils/reducerFunctions";
+import { increment, reset, updateDisplay, updateOddsFraction, updateOddsPercent } from "./utils/reducerFunctions";
 
 export type BtnColorName = 'default' | 'lucky' | 'unlucky' | 'normal';
 
@@ -62,7 +62,9 @@ export declare type ClickerActionKind =
 | "SET_LOADING" 
 | "SET_FRACTIONPREF"
 | "SET_MULT"
-| "SET_STATE";
+| "SET_STATE"
+| "SET_DISPLAY"
+;
 
 // REDUCER
 function reducer(state: ClickerState ,  action: Action): ClickerState {
@@ -84,7 +86,9 @@ function reducer(state: ClickerState ,  action: Action): ClickerState {
         case "SET_FRACTIONPREF":
             return { ...state, fractionPref: payload };
         case "SET_MULT":
-            return { ...state, multiplier: payload }
+            return { ...state, multiplier: payload };
+        case "SET_DISPLAY":
+            return updateDisplay(state, payload)
         default:
             return state;
     }

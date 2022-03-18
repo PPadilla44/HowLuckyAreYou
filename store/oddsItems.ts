@@ -34,7 +34,7 @@ function reducer(state: OddsListState, action: Action): OddsListState {
         case "SET_STATE":
             return { ...state, data: payload }
         case "ADD_ITEM":
-            return { ...state, data: [...state.data, payload] };
+            return { ...state, data: [ payload, ...state.data] };
         case "SET_FETCHING":
             return { ...state, fetching: payload }
         default:

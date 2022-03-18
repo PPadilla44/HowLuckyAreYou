@@ -126,11 +126,10 @@ const ModalForm: FC<Props> = ({ navigation }) => {
             await addItem(oState, oDispatch, {
                 ...payload,
                 fraction: undefined,
-                oddsString: formData.oddsString
+                oddsString: formData.oddsString,
+                fractionPref: "0"
             })
         }
-
-        setFormData(d => ({ ...d, isValid: false }))
     }
 
     return (

@@ -8,6 +8,7 @@ interface Props {
 }
 
 const OddsList: FC<Props> = ({ data }) => {
+    
 
     if (data.fetching || !data.data) {
         return <ActivityIndicator size={"large"} />

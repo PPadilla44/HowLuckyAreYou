@@ -51,7 +51,7 @@ export const updateOddsPercent = (state: ClickerState, { title, oddsString }: { 
 
     const fraction = { denominator: fractionWhole.d, numerator: fractionWhole.n };
 
-    const tempState: ClickerState = { ...state, title, fraction, oddsString, fractionPref: 0 };
+    const tempState: ClickerState = { ...state, title, fraction, oddsString, fractionPref: 0, multiplier: "1" };
     const newState: ClickerState = reset(tempState);
 
     return newState;
@@ -72,6 +72,26 @@ export const updateOddsFraction = (state: ClickerState, { title, numerator, deno
 
 export const reset = (state: ClickerState): ClickerState => {
     return { ...state, count: 0, didHit: false, results: { BtnColor: "default", text: "" }, loading: false }
+}
+
+export const updateDisplay = (state: ClickerState, payload: OddsItemInterface): ClickerState => {
+    const fractionPref = parseInt(payload.fractionPref);
+    if (fractionPref) {
+        return updateOddsFraction(state, {
+            title: payload.title,
+            numerator: parseInt(payload.fraction!.numerator),
+            denominator: parseInt(payload.fraction!.denominator),
+            multiplier: payload.multiplier
+        })
+    }
+    if (payload.oddsString) {
+        return updateOddsPercent(state, {
+            title: payload.title,
+            oddsString: payload!.oddsString,
+        })
+    }
+
+    return state;
 }
 
 const multiplierToNum = (mult: string): number => {

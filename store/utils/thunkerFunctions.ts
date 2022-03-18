@@ -6,7 +6,7 @@ import { OddsListState, Action } from "../oddsItems";
 export const addItem = async (state: OddsListState, dispatch: React.Dispatch<Action> | undefined, payload: OddsItemInterface) => {
     try {
         dispatch!({ type: "ADD_ITEM", payload: payload });
-        const jsonValue = JSON.stringify([...state.data, payload]);
+        const jsonValue = JSON.stringify([payload, ...state.data]);
         await AsyncStorage.setItem(`@OddsItems`, jsonValue);
 
     } catch (err) {
