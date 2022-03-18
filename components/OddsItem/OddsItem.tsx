@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native'
-import React, { FC } from 'react'
+import React, { FC, useRef } from 'react'
 import { Swipeable } from 'react-native-gesture-handler'
 import { OddsItemInterface } from '../../types'
 import RightSwipe from './RightSwipe'
@@ -17,15 +17,21 @@ interface Props {
 const OddsItem: FC<Props> = ({ item }) => {
 
     const { state, dispatch } = useOddsItems();
+    const ref = useRef<Swipeable>(null)
 
     const deleteItem = async (id: string) => {
         removeItem(state, dispatch, id);
+        ref.current?.state.dragX.setValue(0)
+        ref.current?.state.rowTranslation.setValue(0);
     }
 
     return (
         <Swipeable
+            ref={ref}
             renderLeftActions={() => <LeftSwipe callback={() => console.log("LEFTSWIPE")} />}
             renderRightActions={() => <RightSwipe callback={() => deleteItem(item.id)} />}
+            overshootRight={false}
+            overshootLeft={false}
         >
             <TouchableOpacity testID='oddsItemBtn' lightColor='white' darkColor={Colors.dark.modal} onPress={() => console.log("Pressed")} style={styles.item} containerStyle={styles.itemContainer} activeOpacity={.8}>
                 <Text style={styles.baseTxt}>{item.title}</Text>

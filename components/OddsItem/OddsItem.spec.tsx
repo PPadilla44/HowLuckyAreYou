@@ -8,8 +8,10 @@ describe('<OddsItem />', () => {
     
     const props : OddsItemInterface = {
         id: "1",
-        name: "test1",
-        odds: "90%"
+        title: "test1",
+        fractionPref: "0",
+        multiplier: "1",
+        oddsString: "90"
     } 
 
     let wrapper: RenderAPI;
@@ -22,7 +24,7 @@ describe('<OddsItem />', () => {
 
     it('should render correctly', () => {
         wrapper.getByText("test1");
-        wrapper.getByText("90%");
+        wrapper.getByText("90");
         expect(wrapper.container.findAllByType(Text)).toHaveLength(2)
         wrapper.getByTestId("oddsItemBtn");
     });
