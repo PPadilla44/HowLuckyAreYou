@@ -21,7 +21,7 @@ const MainButton = () => {
 
     return (
         <TouchableOpacity testID='mainBtn' containerStyle={styles.btn} onPress={handlePress} activeOpacity={0.7}>
-            <Text style={styles.btnText}>Test Your Luck</Text>
+            <Text style={styles.btnText}>What Are The Odds?</Text>
         </TouchableOpacity>
     )
 }
@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
         shadowRadius: 3,
     },
     btnText: {
-        fontSize: 24,
+        fontSize: 32,
         fontWeight: "bold",
         color: "white",
         fontFamily: "Futura",

@@ -6,7 +6,7 @@ import { TextAsIcon } from '../../UI'
 
 export interface Props {
     oddsString: string;
-    changeText: (data: {}) => void
+    changeText: (data: {}) => void;
 }
 const PercentInput: FC<Props> = ({ changeText, oddsString }) => {
 
@@ -18,7 +18,7 @@ const PercentInput: FC<Props> = ({ changeText, oddsString }) => {
                     style={styles.input}
                     inputContainerStyle={styles.inputContainer}
                     keyboardType="numeric"
-                    placeholder="1.0"
+                    placeholder={"1.0"}
                     maxLength={10}
                     value={oddsString}
                     onChangeText={oddsString => changeText({ oddsString })}

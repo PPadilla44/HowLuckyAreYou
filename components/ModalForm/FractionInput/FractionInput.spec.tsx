@@ -9,7 +9,8 @@ describe('<FractionInput />', () => {
     const props : Props = {
         denominator: "1",
         numerator: "5",
-        handleChanges: mockFn
+        handleChanges: mockFn,
+        multiplier: "1"
     }
 
     let wrapper: RenderAPI;
@@ -21,8 +22,8 @@ describe('<FractionInput />', () => {
     });
 
     it('should render correctly', () => {
-        expect(wrapper.container.children).toHaveLength(4);
-        expect(wrapper.container.findAllByType(View)).toHaveLength(5);
+        expect(wrapper.container.children).toHaveLength(5);
+        expect(wrapper.container.findAllByType(View)).toHaveLength(7);
         expect(wrapper.container.findAllByType(TouchableOpacity)).toHaveLength(1);
     });
 

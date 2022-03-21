@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 import { ButtonGroup, View } from "../components/Themed";
-import React, { FC, useState } from 'react';
+import React, { FC } from 'react';
 import SubContainer from '../components/SubContainer';
 import ResetButton from '../components/ResetButton';
 import MainButton from '../components/MainButton';
@@ -12,10 +12,8 @@ import Colors from '../constants/Colors';
 const Main: FC<RootTabScreenProps<"Main">> = ({ }) => {
 
     const { state, dispatch } = useClicker();
-    const { count, oddsString, title, fraction } = state;
+    const { count, oddsString, title, fraction, multiplier, fractionPref } = state;
     const { numerator, denominator } = fraction;
-
-    const [fractionPref, setFractionPref] = useState(0);
 
     return (
         <View testID='Main' style={styles.container}>
@@ -32,10 +30,13 @@ const Main: FC<RootTabScreenProps<"Main">> = ({ }) => {
 
                 <SubContainer
                     text={
-                        fractionPref ?
-                            `${numerator} / ${denominator}`
+                        multiplier === "B" || multiplier === "M" ?
+                            `${numerator} / ${denominator} ${multiplier}`
                             :
-                            `${oddsString}%`
+                            fractionPref ?
+                                `${numerator} / ${denominator * parseInt(multiplier)}`
+                                :
+                                `${oddsString}%`
                     }
                     textStyle={styles.probText}
                     title={title}
@@ -43,13 +44,16 @@ const Main: FC<RootTabScreenProps<"Main">> = ({ }) => {
 
                 <ButtonGroup
                     buttons={["Percent", "Fraction"]}
-                    onPress={(newIndex: number) => setFractionPref(newIndex)}
-                    selectedIndex={fractionPref}
+                    onPress={(newIndex: number) => dispatch!({type: "SET_FRACTIONPREF", payload: newIndex})}
+                    selectedIndex={multiplier === "B" || multiplier === "M" ? 1 : fractionPref}
                     containerStyle={styles.btnContainer}
                     buttonStyle={styles.btn}
                     textStyle={styles.btnText}
                     selectedButtonStyle={styles.selectedBtn}
                     selectedTextStyle={styles.btnSelectedText}
+                    disabled={multiplier === "B" || multiplier === "M"}
+                    disabledSelectedTextStyle={{ color: Colors.shared.icon }}
+                    disabledSelectedStyle={{ backgroundColor: "transparent" }}
                 />
             </View>
 

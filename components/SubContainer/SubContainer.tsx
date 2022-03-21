@@ -13,7 +13,7 @@ const SubContainer: FC<Props> = ({ textStyle, title, text }) => {
     return (
         <View testID='SubContainer' style={styles.subContainer}>
             <Text testID='title' style={styles.title}>{title}</Text>
-            <Text testID='text' style={textStyle}>{text}</Text>
+            <Text testID='text' style={[textStyle, {textAlign: "center"}]}>{text}</Text>
         </View>
     )
 }

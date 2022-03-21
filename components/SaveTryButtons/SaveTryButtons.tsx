@@ -16,7 +16,12 @@ const SaveTryButtons: FC<Props> = ({ showTry, handleSave, handleTry }) => {
     return (
         <View style={styles.container}>
 
-            <TouchableOpacity testID='saveBtn' containerStyle={styles.saveBtn} onPress={handleSave}>
+            <TouchableOpacity testID='saveBtn'
+                disabled={!showTry}
+                lightColor={showTry ? "" : Colors.dark.input}
+                darkColor={showTry ? "" : Colors.dark.input}
+                containerStyle={[styles.saveBtn, { opacity: showTry ? 1 : .5 } ]}
+                onPress={handleSave}>
                 <Text style={styles.saveText}>Save</Text>
             </TouchableOpacity>
 

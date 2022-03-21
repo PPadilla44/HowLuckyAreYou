@@ -1,5 +1,6 @@
 import { cleanup, fireEvent, RenderAPI, render } from "@testing-library/react-native";
 import React from "react";
+import { ClickerProvider } from "../contexts/useClicker";
 import TwoButtonGroup from "./TwoButtonGroup";
 
 describe('<TwoButtonGroup />', () => {
@@ -7,8 +8,6 @@ describe('<TwoButtonGroup />', () => {
 
     const props = {
         buttons: ["First", "Second"],
-        selectedIndex: 0,
-        setSelectedIndex: setStateMock
     }
 
     afterEach(cleanup)
@@ -16,14 +15,15 @@ describe('<TwoButtonGroup />', () => {
     let wrapper: RenderAPI;
     beforeEach(() => {
         wrapper = render(
-            <TwoButtonGroup
-                {...props}
-            />
+            <ClickerProvider>
+                <TwoButtonGroup
+                    {...props}
+                />
+            </ClickerProvider>
         )
     });
 
     it("should render correctly", () => {
-        wrapper.container.findByProps({ selectedIndex: 0 })
         wrapper.getByText("First");
         wrapper.getByText("Second");
         const buttons = wrapper.getAllByTestId("buttonGroupItem");
@@ -38,12 +38,10 @@ describe('<TwoButtonGroup />', () => {
         expect(buttons[1]).toHaveTextContent("Second")
     });
 
-    it('should be able to switch between buttons', () => { 
+    it('should be able to switch between buttons', () => {
         const [button1, button2] = wrapper.getAllByTestId("buttonGroupItem");
         fireEvent.press(button2);
-        expect(setStateMock).toHaveBeenCalledWith(1);
         fireEvent.press(button1);
-        expect(setStateMock).toHaveBeenCalledWith(0);
     });
 
 

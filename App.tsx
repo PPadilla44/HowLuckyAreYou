@@ -1,20 +1,23 @@
-import { StatusBar } from 'expo-status-bar';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import Navigation from './navigation';
 import { ClickerProvider } from './components/contexts/useClicker';
-import useColorScheme from './hooks/useColorScheme';
+import { OddsItemsProvider } from "./components/contexts/useOddsItems"
+import { SettingsProvider } from './components/contexts/useSettings';
 
 
 export default function App() {
 
-  const theme = useColorScheme();
-
   return (
     <SafeAreaProvider>
-      <ClickerProvider>
-        <Navigation />
-      </ClickerProvider>
-      <StatusBar style={theme === 'dark' ? "light" : "dark"} />
+
+      <SettingsProvider>
+        <OddsItemsProvider>
+          <ClickerProvider>
+            <Navigation />
+          </ClickerProvider>
+        </OddsItemsProvider>
+      </SettingsProvider>
+
     </SafeAreaProvider>
   );
 }

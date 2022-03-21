@@ -1,23 +1,30 @@
 import { cleanup, fireEvent, render, RenderAPI } from "@testing-library/react-native";
 import React from "react";
 import { OddsItemInterface } from "../../types";
+import { ClickerProvider } from "../contexts/useClicker";
 import { Text } from "../Themed";
 import OddsItem from "./OddsItem";
 
 describe('<OddsItem />', () => {
-    
-    const props : OddsItemInterface = {
+
+    const props: OddsItemInterface = {
         id: "1",
-        name: "test1",
-        odds: "90%"
-    } 
+        title: "test1",
+        fractionPref: "0",
+        multiplier: "1",
+        oddsString: "90"
+    }
 
     let wrapper: RenderAPI;
 
     afterEach(cleanup)
 
     beforeEach(() => {
-        wrapper = render(<OddsItem item={props} /> )
+        wrapper = render(
+            <ClickerProvider>
+                <OddsItem item={props} />
+            </ClickerProvider>
+        )
     });
 
     it('should render correctly', () => {
@@ -28,9 +35,7 @@ describe('<OddsItem />', () => {
     });
 
     it('should render press on item', () => {
-        const logSpy = jest.spyOn(console, "log");
         fireEvent.press(wrapper.getByTestId("oddsItemBtn"));
-        expect(logSpy).toBeCalled()
     });
 
     it('should render correct styling', () => {

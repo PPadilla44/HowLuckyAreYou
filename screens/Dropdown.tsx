@@ -1,21 +1,26 @@
 import { Platform, StyleSheet } from 'react-native';
 import { View, ScrollView } from "../components/Themed"
-import React from 'react'
+import React, { useEffect } from 'react'
 import { StatusBar } from 'expo-status-bar';
-import { OddsItemInterface, RootTabScreenProps } from '../types';
+import { RootTabScreenProps } from '../types';
 import ModalForm from '../components/ModalForm';
-import { SettingsIcon } from '../components/UI';
 import OddsList from '../components/OddsList';
+import { useOddsItems } from '../components/contexts/useOddsItems';
+import { fetchOddsList } from '../store/utils/thunkerFunctions';
+
 
 
 const Dropdown = (props: RootTabScreenProps<"Modal">) => {
 
-    const data: OddsItemInterface[] = [
-        { id: "1", name: "Lottery", odds: "1/42 BIL" },
-        { id: "2", name: "Hair Loss", odds: "2/3" },
-        { id: "3", name: "Random", odds: "1.02%" },
-        { id: "4", name: "My Odds", odds: "1/4" }
-    ]
+    const { state: oState, dispatch: oDispatch } = useOddsItems();
+
+    const fetch = async () => {
+        await fetchOddsList(oDispatch)
+    }
+
+    useEffect(() => {
+        fetch();
+    }, []);
 
     return (
         <View style={styles.container} darkColor="#252525">
@@ -25,11 +30,9 @@ const Dropdown = (props: RootTabScreenProps<"Modal">) => {
 
                 <ModalForm navigation={props.navigation} />
 
-                <OddsList data={data} />
+                <OddsList data={oState} />
 
             </ScrollView>
-
-            <SettingsIcon callBack={() => alert("Settings")} />
 
         </View>
     )

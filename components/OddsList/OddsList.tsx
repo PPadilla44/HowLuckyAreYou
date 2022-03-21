@@ -1,27 +1,31 @@
-import { StyleSheet } from 'react-native'
 import React, { FC } from 'react'
-import { OddsItemInterface } from '../../types'
+import { ActivityIndicator, View } from 'react-native';
+import { OddsListState } from '../../store/oddsItems';
 import OddsItem from '../OddsItem'
 
 interface Props {
-    data: OddsItemInterface[];
+    data: OddsListState;
 }
 
 const OddsList: FC<Props> = ({ data }) => {
+    
+
+    if (data.fetching || !data.data) {
+        return <ActivityIndicator size={"large"} />
+    }
 
     return (
         <>
             {
-                data.map((item, i) => {
+                data.data.map((item, i) => {
                     return (
                         <React.Fragment key={i}>
+                            <View style={{ backgroundColor: "black", width: "80%", height: 1, alignSelf: "center" }} />
                             <OddsItem item={item} />
                         </React.Fragment>
                     )
                 })
             }
-            {/* Empty Space */}
-            <OddsItem item={{ id: "999", name: "", odds: "" }} />
         </>
     )
 }

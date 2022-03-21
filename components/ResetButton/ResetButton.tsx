@@ -20,7 +20,6 @@ const ResetButton = () => {
             [
                 {
                     text: "No",
-                    onPress: () => console.log("Cancel Pressed"),
                     style: "cancel"
                 },
                 { text: "Yes", style: "destructive", onPress: resetAll }
@@ -33,8 +32,13 @@ const ResetButton = () => {
                 testID='resetBtn'
                 title='Reset'
                 onPress={createTwoButtonAlert}
-                titleStyle={{ color: didHit ? "#830909" : "gray", fontFamily: "Futura" }}
+                titleStyle={{ color: didHit ? "red" : "gray", fontFamily: "Futura" }}
                 buttonStyle={{ backgroundColor: undefined }}
+                disabled={state.loading}
+                disabledStyle={{ backgroundColor: "transparent" }}
+                disabledTitleStyle={{ opacity: .3 }}
+                activeOpacity={.6}
+
             />
         </View>
     )

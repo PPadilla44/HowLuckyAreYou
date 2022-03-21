@@ -4,10 +4,21 @@ import { Input, View } from '../Themed';
 import TwoButtonGroup from '../TwoButtonGroup';
 import SaveTryButtons from '../SaveTryButtons';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { RootStackParamList } from '../../types';
+import { OddsItemInterface, RootStackParamList } from '../../types';
 import { useClicker } from '../contexts/useClicker';
 import PercentInput from './PercentInput';
 import FractionInput from './FractionInput';
+import { useOddsItems } from '../contexts/useOddsItems';
+import { addItem } from '../../store/utils/thunkerFunctions';
+
+export function generateUUID(digits = 15) {
+    let str = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVXZ';
+    let uuid = [];
+    for (let i = 0; i < digits; i++) {
+        uuid.push(str[Math.floor(Math.random() * str.length)]);
+    }
+    return uuid.join('');
+}
 
 interface Props {
     navigation: NativeStackNavigationProp<RootStackParamList>
@@ -16,76 +27,144 @@ interface Props {
 const ModalForm: FC<Props> = ({ navigation }) => {
 
     const { state, dispatch } = useClicker();
+    const { state: oState, dispatch: oDispatch } = useOddsItems();
 
     const [formData, setFormData] = useState({
         oddsString: state.oddsString,
         title: state.title,
         denominator: `${state.fraction.denominator}`,
         numerator: `${state.fraction.numerator}`,
-        isValid: false
+        isValid: true,
+        multiplier: state.multiplier,
     });
 
-    const [selectedIndex, setSelectedIndex] = useState(0);
     const percentButton = "Percentage";
     const fractionButton = "Fraction";
     const buttons = [percentButton, fractionButton];
 
+    const clearForm = () => {
+        const clearedForm = {
+            oddsString: "50",
+            title: formData.title,
+            numerator: "1",
+            denominator: "2",
+            multiplier: "1",
+            isValid: true,
+        }
+        setFormData(clearedForm)
+        return clearedForm;
+    }
 
-    const handleChanges = (data: {}) => {
+    const validatePercent = (data: { oddsString: string, title: string }) => {
+        const { oddsString, title } = data;
+
+        if (oddsString.length < 1 || title.length < 1) {
+            return false;
+        }
+        if (isNaN(parseFloat(oddsString))) {
+            return false
+        }
+        if (parseFloat(oddsString) > 100) {
+            return false
+        }
+        if (oddsString[0] === ".") {
+            return false
+        }
+
+        return true
+    }
+
+    const validateFraction = (data: { denominator: string, numerator: string, multiplier: string, title: string }) => {
+        const { denominator, numerator, title } = data;
+
+        if (denominator.length < 1 && numerator.length < 1 && title.length < 1) {
+            return false;
+        }
+        if (isNaN(parseFloat(denominator)) || isNaN(parseFloat(numerator))) {
+            return false;
+        }
+        if (denominator.length >= 5 && numerator.length >= 3) {
+            return false;
+        }
+        return true
+    }
+
+    const handleChanges = (data: { oddsString?: string, title?: string }) => {
+
         const tempForm = { ...formData, ...data };
         const { oddsString, title } = tempForm;
 
-
-        if (oddsString.length > 0 && title.length > 0) {
-            if (isNaN(parseFloat(oddsString)) || parseFloat(oddsString) > 100) {
-                return
-            }
+        if (validatePercent(tempForm)) {
             setFormData({ ...tempForm, isValid: true })
         } else {
+            if (parseFloat(oddsString) > 100) {
+                return
+            }
+            if (oddsString[0] === ".") {
+                return
+            }
             setFormData({ ...tempForm, isValid: false })
         }
     }
 
-    const handleFractionChanges = (data: { denominator?: string, numerator?: string }) => {
+    const handleFractionChanges = (data: { denominator?: string, numerator?: string, multiplier?: string }) => {
         const tempForm = { ...formData, ...data };
-        const { denominator, numerator, title } = tempForm;
-
-
-        if (denominator.length > 0 && numerator.length > 0 && title.length > 0) {
-            if (isNaN(parseFloat(denominator)) || isNaN(parseFloat(numerator))) {
-                return
-            }
-            if (denominator.length < 4 && numerator.length < 3) {
-                setFormData({ ...tempForm, isValid: true })
-            }
-        } else {
-            setFormData({ ...tempForm, isValid: false })
-        }
+        validateFraction(tempForm) ? setFormData({ ...tempForm, isValid: true }) : setFormData({ ...tempForm, isValid: false })
     }
 
     const handleTry = () => {
-        if (buttons[selectedIndex] == percentButton) {
-            const payload = {
-                title: formData.title,
-                oddsString: formData.oddsString
+        if (state.fractionPref) {
+            if (!validateFraction({ denominator: formData.denominator, multiplier: formData.multiplier, numerator: formData.numerator, title: formData.title })) {
+                return
             }
-            dispatch!({ type: "UPDATE_PERCENT", payload })
-        } else {
             const payload = {
                 title: formData.title,
                 denominator: parseFloat(formData.denominator),
                 numerator: parseFloat(formData.numerator),
+                multiplier: formData.multiplier
             }
             dispatch!({ type: "UPDATE_FRACTION", payload })
+        } else {
+            if (!validatePercent({ oddsString: formData.oddsString, title: formData.title })) {
+                return
+            }
+            const payload = {
+                title: formData.title,
+                oddsString: formData.oddsString,
+                multiplier: formData.multiplier
+            }
+            dispatch!({ type: "UPDATE_PERCENT", payload })
         }
-        setFormData(d => ({ ...d, isValid: false }))
         navigation.goBack();
     }
 
-    const handleSave = () => {
-        console.log("Running SAVE");
-        console.log(formData);
-        setFormData(d => ({ ...d, isValid: false }))
+    const handleSave = async () => {
+        const payload: OddsItemInterface = {
+            id: `OddsItem-${generateUUID()}`,
+            title: formData.title,
+            multiplier: formData.multiplier,
+            fraction: {
+                denominator: formData.denominator,
+                numerator: formData.numerator,
+            },
+            fractionPref: "1",
+        }
+        if (state.fractionPref) {
+            if (!validateFraction({ denominator: formData.denominator, multiplier: formData.multiplier, numerator: formData.numerator, title: formData.title })) {
+                return
+            }
+            await addItem(oState, oDispatch, payload)
+        } else {
+            if (!validatePercent({ oddsString: formData.oddsString, title: formData.title })) {
+                return
+            }
+            await addItem(oState, oDispatch, {
+                ...payload,
+                fraction: undefined,
+                oddsString: formData.oddsString,
+                fractionPref: "0"
+            })
+        }
     }
 
     return (
@@ -93,15 +172,21 @@ const ModalForm: FC<Props> = ({ navigation }) => {
 
             <View style={styles.topRow}>
                 {
-                    selectedIndex ?
-                        <FractionInput denominator={formData.denominator} numerator={formData.numerator} handleChanges={handleFractionChanges} />
+                    state.fractionPref ?
+                        <FractionInput
+                            denominator={formData.denominator}
+                            numerator={formData.numerator}
+                            multiplier={formData.multiplier}
+                            handleChanges={handleFractionChanges}
+                        />
                         :
-                        <PercentInput oddsString={formData.oddsString} changeText={handleChanges} />
+                        <PercentInput
+                            oddsString={formData.oddsString}
+                            changeText={handleChanges} />
                 }
-
             </View>
 
-            <TwoButtonGroup buttons={buttons} selectedIndex={selectedIndex} setSelectedIndex={setSelectedIndex} />
+            <TwoButtonGroup clearForm={clearForm} buttons={buttons} />
 
             <View style={styles.titleContainer}>
                 <Input

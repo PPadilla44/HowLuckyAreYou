@@ -12,7 +12,7 @@ describe('increment()', () => {
                 denominator: 100
             }
         }
-        
+
         expect(increment(state)).toEqual({
             ...state,
             count: 1
@@ -47,7 +47,7 @@ describe('increment()', () => {
         expect(increment(state)).toEqual({
             ...state,
             didHit: true,
-            results: { BtnColor: "lucky" , text: "YOU ARE LUCKY" },
+            results: { BtnColor: "lucky", text: "YOU ARE LUCKY" },
             count: -9
         })
     });
@@ -81,7 +81,7 @@ describe('reset()', () => {
 });
 
 describe('updateOddsFraction()', () => {
-    expect(updateOddsFraction(initialClickerState, {title: "TITLE", denominator: 2, numerator: 1})).toEqual({
+    expect(updateOddsFraction(initialClickerState, { title: "TITLE", denominator: 2, numerator: 1, multiplier: "1" })).toEqual({
         ...initialClickerState,
         oddsString: "50",
         title: "TITLE",
@@ -89,6 +89,8 @@ describe('updateOddsFraction()', () => {
             numerator: 1,
             denominator: 2,
         },
+        multiplier: "1",
+        fractionPref: 1
     })
 });
 

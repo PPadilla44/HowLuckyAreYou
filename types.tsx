@@ -3,8 +3,14 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 export interface OddsItemInterface {
     id: string
-    name: string
-    odds: string
+    title: string;
+    oddsString?: string;
+    fraction?: {
+        denominator: string;
+        numerator: string;
+    };
+    multiplier: string;
+    fractionPref: "0" | "1";
 }
 
 declare global {
@@ -17,6 +23,7 @@ export type RootStackParamList = {
     Root: NavigatorScreenParams<RootTabParamList> | undefined;
     Modal: undefined;
     NotFound: undefined;
+    Settings: undefined;
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> = NativeStackScreenProps<
@@ -28,6 +35,7 @@ export type RootStackScreenProps<Screen extends keyof RootStackParamList> = Nati
 export type RootTabParamList = {
     Main: undefined;
     Modal: undefined;
+    Settings: undefined;
 };
 
 export type RootTabScreenProps<Screen extends keyof RootTabParamList> = NativeStackScreenProps<RootStackParamList>;
