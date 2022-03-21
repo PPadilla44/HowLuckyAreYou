@@ -5,9 +5,10 @@ import useColorScheme from '../hooks/useColorScheme';
 import Dropdown from '../screens/Dropdown';
 import Main from '../screens/Main';
 import NotFoundScreen from '../screens/NotFoundScreen';
+import Settings from '../screens/Settings';
 import { RootStackParamList, RootTabScreenProps } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
-import { MainScreenOptions, ModalScreenOptions } from './ScreenOptions';
+import { MainScreenOptions, ModalScreenOptions, SettingsScreenOptions } from './ScreenOptions';
 
 export default function Navigation() {
 
@@ -33,6 +34,7 @@ function RootNavigator() {
     return (
         <Stack.Navigator>
             <Stack.Screen name="Root" component={Main} options={({ navigation }: RootTabScreenProps<'Main'>) => MainScreenOptions(colorScheme, navigation)} />
+            <Stack.Screen name="Settings" component={Settings} options={({ navigation }: RootTabScreenProps<'Settings'>) => SettingsScreenOptions(colorScheme, navigation)} />
             <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
             <Stack.Group screenOptions={{ presentation: 'modal' }}>
                 <Stack.Screen name="Modal" component={Dropdown} options={({ navigation }: RootTabScreenProps<'Modal'>) => ModalScreenOptions(colorScheme, navigation)} />

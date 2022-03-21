@@ -38,10 +38,8 @@ const OddsItem: FC<Props> = ({ item }) => {
     return (
         <Swipeable
             ref={ref}
-            renderLeftActions={() => <LeftSwipe callback={() => console.log("LEFTSWIPE")} />}
+            // renderLeftActions={() => <LeftSwipe callback={() => console.log("LEFTSWIPE")} />}
             renderRightActions={() => <RightSwipe callback={() => deleteItem(item.id)} />}
-            overshootRight={false}
-            overshootLeft={false}
         >
             <TouchableOpacity testID='oddsItemBtn' lightColor='white' darkColor={Colors.dark.modal} onPress={() => setDisplay(item)} style={styles.item} containerStyle={styles.itemContainer} activeOpacity={.8}>
                 <Text style={styles.baseTxt}>{item.title}</Text>

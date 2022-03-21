@@ -12,6 +12,7 @@ const linking: LinkingOptions<RootStackParamList> = {
                     Main: {
                         screens: {
                             Main: 'Main',
+                            Settings: "Settings"
                         },
                     },
                 },

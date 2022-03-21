@@ -30,6 +30,7 @@ exports[`<LeftSwipe /> should match snapshot 1`] = `
       style={
         Object {
           "color": "white",
+          "fontSize": 24,
           "fontWeight": "600",
           "paddingHorizontal": 30,
           "paddingVertical": 20,
