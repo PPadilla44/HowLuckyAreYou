@@ -2,7 +2,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Appearance } from "react-native";
 import { OddsItemInterface } from "../../types";
 import { OddsListState, Action } from "../oddsItems";
-import { SettingsState, Action as SAction, initialSettingsState, SettingsInterface, AppearanceName  } from "../settings";
+import { SettingsState, Action as SAction, initialSettingsState, SettingsInterface, AppearanceName } from "../settings";
 
 
 export const addItem = async (state: OddsListState, dispatch: React.Dispatch<Action> | undefined, payload: OddsItemInterface) => {
@@ -51,16 +51,14 @@ export const fetchSettings = async (dispatch: React.Dispatch<SAction> | undefine
 
     dispatch!({ type: "SET_FETCHING", payload: true })
     try {
-        await AsyncStorage.clear()
         const data = await AsyncStorage.getItem("@Settings");
 
         if (data) {
-            
             dispatch!({ type: "GET_STATE", payload: data })
         } else {
-            
             dispatch!({ type: "GET_STATE", payload: JSON.stringify(initialSettingsState.data) })
         }
+
     } catch (err) {
         console.log(err);
     } finally {
@@ -70,17 +68,16 @@ export const fetchSettings = async (dispatch: React.Dispatch<SAction> | undefine
 
 export const setAppearance = async (state: SettingsState, dispatch: React.Dispatch<SAction> | undefined, payload: { appearance?: string, fromDevice: boolean }) => {
     try {
-        dispatch!({ type: "SET_APPEARANCE", payload: payload });
-        const newData:SettingsInterface = {
+        const newData: SettingsInterface = {
+            ...state.data,
             appearance: {
-                appearance: payload.appearance ? payload.appearance as AppearanceName : "dark" as AppearanceName,
+                appearance: payload.appearance ? payload.appearance as AppearanceName : Appearance.getColorScheme() as AppearanceName,
                 fromDevice: payload.fromDevice
             }
         }
-        if(payload.fromDevice) {
-            newData.appearance.appearance = Appearance.getColorScheme() as "light" | "dark";
-        }
-        const jsonValue = JSON.stringify({...state.data, appearance: newData.appearance });
+        dispatch!({ type: "SET_APPEARANCE", payload: newData });
+
+        const jsonValue = JSON.stringify(newData);
         await AsyncStorage.setItem(`@Settings`, jsonValue);
     } catch (err) {
         console.log(err);

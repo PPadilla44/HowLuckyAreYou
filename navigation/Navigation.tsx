@@ -1,5 +1,6 @@
 import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { StatusBar } from 'expo-status-bar';
 import * as React from 'react';
 import { useEffect } from 'react';
 import { useSettings } from '../components/contexts/useSettings';
@@ -24,7 +25,7 @@ export default function Navigation() {
     useEffect(() => {
         fetch();
     }, []);
-    
+
 
 
     const theme = state.data.appearance.appearance as "light" | "dark";
@@ -33,18 +34,28 @@ export default function Navigation() {
         <NavigationContainer
             linking={LinkingConfiguration}
             theme={theme === 'dark' ? DarkTheme : DefaultTheme}>
+
             <RootNavigator />
+
+            <StatusBar style={theme === 'dark' ? "light" : "dark"} />
         </NavigationContainer>
     );
 }
 
-
 const Stack = createNativeStackNavigator<RootStackParamList>();
-
 
 function RootNavigator() {
 
-    const { state } = useSettings();
+    const { state, dispatch } = useSettings();
+
+
+    const fetch = async () => {
+        await fetchSettings(dispatch)
+    }
+
+    useEffect(() => {
+        fetch();
+    }, []);
 
     const theme = state.data.appearance.appearance as "light" | "dark";
 
