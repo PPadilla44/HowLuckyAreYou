@@ -4,6 +4,7 @@ import React, { FC, useState } from 'react'
 import CheckBox from './CheckBox'
 import Colors from '../../constants/Colors';
 import { useSettings } from '../contexts/useSettings';
+import { setAppearance } from '../../store/utils/thunkerFunctions';
 
 
 const Radio = () => {
@@ -14,10 +15,9 @@ const Radio = () => {
     
     const handleChange = (index: number, option: string) => {
         if(option === "automatic") {
-            dispatch!({ type: "SET_APPEARANCE", payload: { fromDevice: true } })
-
+            setAppearance(state, dispatch, { fromDevice: true })
         } else {
-            dispatch!({ type: "SET_APPEARANCE", payload: { fromDevice: false, appearance: option } })
+            setAppearance(state, dispatch, { fromDevice: false, appearance: option })
         }
     }
 

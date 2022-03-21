@@ -2,9 +2,10 @@ export type AppearanceName = 'light' | "dark";
 
 
 // ACTIONS
-export declare type SettingsKind = 
-'GET_STATE' |
-'SET_APPEARANCE';
+export declare type SettingsKind =
+    'GET_STATE' |
+    'SET_APPEARANCE' |
+    "SET_FETCHING";
 
 export interface Action {
     type: SettingsKind;
@@ -24,18 +25,20 @@ export interface SettingsState {
 export const initialSettingsState: SettingsState = {
     fetching: true,
     data: {
-        appearance: { fromDevice: false, appearance: "dark"  }
+        appearance: { fromDevice: false, appearance: "dark" }
     }
 }
 
 function reducer(state: SettingsState, action: Action): SettingsState {
     const { type, payload } = action;
 
-    switch(type) {
+    switch (type) {
+        case "SET_FETCHING":
+            return { ...state, fetching: payload};
         case "GET_STATE":
-            return state;
+            return { ...state, data: JSON.parse(payload)  };
         case "SET_APPEARANCE":
-            return { ...state, data: { appearance: { ...payload } }};
+            return { ...state, data: payload };
 
         default:
             return state;

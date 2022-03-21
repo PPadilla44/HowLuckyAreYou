@@ -1,18 +1,31 @@
 import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as React from 'react';
+import { useEffect } from 'react';
 import { useSettings } from '../components/contexts/useSettings';
 import Dropdown from '../screens/Dropdown';
 import Main from '../screens/Main';
 import NotFoundScreen from '../screens/NotFoundScreen';
 import Settings from '../screens/Settings';
+import { fetchSettings } from '../store/utils/thunkerFunctions';
 import { RootStackParamList, RootTabScreenProps } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
 import { MainScreenOptions, ModalScreenOptions, SettingsScreenOptions } from './ScreenOptions';
 
 export default function Navigation() {
 
-    const { state } = useSettings();
+    const { state, dispatch } = useSettings();
+
+
+    const fetch = async () => {
+        await fetchSettings(dispatch)
+    }
+
+    useEffect(() => {
+        fetch();
+    }, []);
+    
+
 
     const theme = state.data.appearance.appearance as "light" | "dark";
 

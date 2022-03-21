@@ -18,6 +18,9 @@ export const SettingsProvider = ({ children }: Props) => {
 
     const [state, dispatch] = useReducer(settingsReducer, initialSettingsState );
 
+    console.log("TESt",state);
+    
+
     if(state.data.appearance.fromDevice) {
         state.data.appearance.appearance = Appearance.getColorScheme() as "light" | "dark";
     }
