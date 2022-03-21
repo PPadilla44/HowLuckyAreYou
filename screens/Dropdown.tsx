@@ -4,7 +4,6 @@ import React, { useEffect } from 'react'
 import { StatusBar } from 'expo-status-bar';
 import { RootTabScreenProps } from '../types';
 import ModalForm from '../components/ModalForm';
-import { SettingsIcon } from '../components/UI';
 import OddsList from '../components/OddsList';
 import { useOddsItems } from '../components/contexts/useOddsItems';
 import { fetchOddsList } from '../store/utils/thunkerFunctions';
@@ -15,7 +14,6 @@ const Dropdown = (props: RootTabScreenProps<"Modal">) => {
 
     const { state: oState, dispatch: oDispatch } = useOddsItems();
 
-
     const fetch = async () => {
         await fetchOddsList(oDispatch)
     }
@@ -23,7 +21,6 @@ const Dropdown = (props: RootTabScreenProps<"Modal">) => {
     useEffect(() => {
         fetch();
     }, []);
-
 
     return (
         <View style={styles.container} darkColor="#252525">
@@ -36,8 +33,6 @@ const Dropdown = (props: RootTabScreenProps<"Modal">) => {
                 <OddsList data={oState} />
 
             </ScrollView>
-
-            <SettingsIcon callBack={() => alert("Settings")} />
 
         </View>
     )

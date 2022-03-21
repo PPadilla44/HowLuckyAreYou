@@ -18,7 +18,7 @@ describe('<MainButton', () => {
     });
 
     it('should render correctly', () => {
-        wrapper.getByText("Test Your Luck");
+        wrapper.getByText("What Are The Odds?");
         wrapper.container.findByType(TouchableOpacity)
     });
 

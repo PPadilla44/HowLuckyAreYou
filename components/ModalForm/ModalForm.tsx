@@ -34,7 +34,7 @@ const ModalForm: FC<Props> = ({ navigation }) => {
         title: state.title,
         denominator: `${state.fraction.denominator}`,
         numerator: `${state.fraction.numerator}`,
-        isValid: false,
+        isValid: true,
         multiplier: state.multiplier,
     });
 
@@ -55,41 +55,68 @@ const ModalForm: FC<Props> = ({ navigation }) => {
         return clearedForm;
     }
 
+    const validatePercent = (data: { oddsString: string, title: string }) => {
+        const { oddsString, title } = data;
+
+        if (oddsString.length < 1 || title.length < 1) {
+            return false;
+        }
+        if (isNaN(parseFloat(oddsString))) {
+            return false
+        }
+        if (parseFloat(oddsString) > 100) {
+            return false
+        }
+        if (oddsString[0] === ".") {
+            return false
+        }
+
+        return true
+    }
+
+    const validateFraction = (data: { denominator: string, numerator: string, multiplier: string, title: string }) => {
+        const { denominator, numerator, title } = data;
+
+        if (denominator.length < 1 && numerator.length < 1 && title.length < 1) {
+            return false;
+        }
+        if (isNaN(parseFloat(denominator)) || isNaN(parseFloat(numerator))) {
+            return false;
+        }
+        if (denominator.length >= 5 && numerator.length >= 3) {
+            return false;
+        }
+        return true
+    }
+
     const handleChanges = (data: { oddsString?: string, title?: string }) => {
 
         const tempForm = { ...formData, ...data };
         const { oddsString, title } = tempForm;
 
-        if (oddsString.length > 0 && title.length > 0) {
-            if (isNaN(parseFloat(oddsString)) || parseFloat(oddsString) > 100) {
-                return
-            }
-
+        if (validatePercent(tempForm)) {
             setFormData({ ...tempForm, isValid: true })
         } else {
+            if (parseFloat(oddsString) > 100) {
+                return
+            }
+            if (oddsString[0] === ".") {
+                return
+            }
             setFormData({ ...tempForm, isValid: false })
         }
     }
 
     const handleFractionChanges = (data: { denominator?: string, numerator?: string, multiplier?: string }) => {
-
         const tempForm = { ...formData, ...data };
-        const { denominator, numerator, title } = tempForm;
-
-        if (denominator.length > 0 && numerator.length > 0 && title.length > 0) {
-            if (isNaN(parseFloat(denominator)) || isNaN(parseFloat(numerator))) {
-                return
-            }
-            if (denominator.length < 5 && numerator.length < 3) {
-                setFormData({ ...tempForm, isValid: true })
-            }
-        } else {
-            setFormData({ ...tempForm, isValid: false })
-        }
+        validateFraction(tempForm) ? setFormData({ ...tempForm, isValid: true }) : setFormData({ ...tempForm, isValid: false })
     }
 
     const handleTry = () => {
         if (state.fractionPref) {
+            if (!validateFraction({ denominator: formData.denominator, multiplier: formData.multiplier, numerator: formData.numerator, title: formData.title })) {
+                return
+            }
             const payload = {
                 title: formData.title,
                 denominator: parseFloat(formData.denominator),
@@ -98,6 +125,9 @@ const ModalForm: FC<Props> = ({ navigation }) => {
             }
             dispatch!({ type: "UPDATE_FRACTION", payload })
         } else {
+            if (!validatePercent({ oddsString: formData.oddsString, title: formData.title })) {
+                return
+            }
             const payload = {
                 title: formData.title,
                 oddsString: formData.oddsString,
@@ -105,7 +135,6 @@ const ModalForm: FC<Props> = ({ navigation }) => {
             }
             dispatch!({ type: "UPDATE_PERCENT", payload })
         }
-        setFormData(d => ({ ...d, isValid: false }))
         navigation.goBack();
     }
 
@@ -121,8 +150,14 @@ const ModalForm: FC<Props> = ({ navigation }) => {
             fractionPref: "1",
         }
         if (state.fractionPref) {
+            if (!validateFraction({ denominator: formData.denominator, multiplier: formData.multiplier, numerator: formData.numerator, title: formData.title })) {
+                return
+            }
             await addItem(oState, oDispatch, payload)
         } else {
+            if (!validatePercent({ oddsString: formData.oddsString, title: formData.title })) {
+                return
+            }
             await addItem(oState, oDispatch, {
                 ...payload,
                 fraction: undefined,
