@@ -20,8 +20,8 @@ yarn run start
 ## Screen Shots
 <div style="display: flex; justify-content: space-around; flex-wrap: wrap ">
   <img alt="Main Dark" src=".github/Main_Dark.png" width="200px" height="450px" />
-  <img alt="Main Light" src=".github/Main_Light.png" width="200px" height="450px" />
   <img alt="Modal Dark" src=".github/Modal_Dark.png" width="200px" height="450px" />
+  <img alt="Main Light" src=".github/Main_Light.png" width="200px" height="450px" />
   <img alt="Modal Light" src=".github/Modal_Light.png" width="200px" height="450px" />
 </div>
 
