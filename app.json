@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "What-Are-The-Odds",
+    "name": "What Are The Odds",
     "slug": "What-Are-The-Odds",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -18,7 +18,8 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.ppadilla44.WhatAreTheOdds"
     },
     "android": {
       "adaptiveIcon": {
